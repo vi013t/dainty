@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "minecraft:block/birch_planks",
+    "east": "minecraft:block/fletching_table_side_flintarrow",
+    "north": "minecraft:block/fletching_table_front_flintarrow",
+    "particle": "minecraft:block/fletching_table_front_flintarrow",
+    "south": "minecraft:block/fletching_table_front_flintarrow",
+    "up": "minecraft:block/fletching_table_top",
+    "west": "minecraft:block/fletching_table_side_flintarrow"
+  }
+}

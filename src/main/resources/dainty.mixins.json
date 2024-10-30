@@ -1,0 +1,20 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "violet.dainty.features.carryon.mixin",
+	"compatibilityLevel": "JAVA_21",
+  	"mixins": [
+    	"EntityMixin",
+    	"InventoryMixin",
+    	"PlayerMixin"
+  	],
+  	"client": [
+  	],
+  	"server": [
+  	],
+  	"plugin": "tschipp.carryon.mixin.CarryOnMixinConfigPlugin",
+  	"injectors": {
+    	"defaultRequire": 1
+  	},
+  	"refmap": "${refmap_target}refmap.json"
+}

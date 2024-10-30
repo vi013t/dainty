@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "dainty:warden_heart"
+		}
+	],
+	"result": {
+		"count": 16,
+		"id": "minecraft:echo_shard"
+	}
+}
