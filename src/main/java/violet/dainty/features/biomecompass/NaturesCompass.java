@@ -10,10 +10,12 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.server.permission.events.PermissionGatherEvent;
@@ -24,6 +26,7 @@ import violet.dainty.features.biomecompass.items.NaturesCompassItem;
 import violet.dainty.features.biomecompass.network.SearchPacket;
 import violet.dainty.features.biomecompass.network.SyncPacket;
 import violet.dainty.features.biomecompass.network.TeleportPacket;
+import violet.dainty.item.DaintyItems;
 
 public class NaturesCompass {
 
@@ -49,6 +52,7 @@ public class NaturesCompass {
 		instance = this;
 
 		modContainer.getEventBus().addListener(this::preInit);
+		modContainer.getEventBus().addListener(this::buildCreativeTabContents);
 		modContainer.getEventBus().addListener(this::registerPayloads);
 
 		NeoForge.EVENT_BUS.register(this);
@@ -64,6 +68,12 @@ public class NaturesCompass {
 	    registrar.playToServer(SearchPacket.TYPE, SearchPacket.CODEC, SearchPacket::handle);
 	    registrar.playToServer(TeleportPacket.TYPE, TeleportPacket.CODEC, TeleportPacket::handle);
 	    registrar.playToClient(SyncPacket.TYPE, SyncPacket.CODEC, SyncPacket::handle);
+	}
+
+	private void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
+		if (event.getTab() == DaintyItems.CREATIVE_TAB.get()) {
+			event.accept(new ItemStack(naturesCompass));
+		}
 	}
 
 	@SubscribeEvent

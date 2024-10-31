@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import violet.dainty.Dainty;
@@ -30,19 +31,17 @@ public class DaintyItems {
 	public static final DeferredItem<Bag> IRON_BAG = item("iron_bag", Bag.create(Bag.Tier.IRON));
 	public static final DeferredItem<Item> WARDEN_HEART = item("warden_heart", WardenHeart::new);
 
-	static {
-		CREATIVE_TABS.register("mining", () -> CreativeModeTab
-			.builder()
-			.title(Component.translatable("itemGroup." + Dainty.MODID))
-			.icon(() -> BAG.get().getDefaultInstance())
-			.displayItems((parameters, output) -> {
-				for (DeferredItem<? extends Item> item : CREATIVE_TAB_ITEMS) {
-					output.accept(item.get().getDefaultInstance());
-				}
-			})
-			.build()
-		);
-	}
+	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATIVE_TAB = CREATIVE_TABS.register("dainty", () -> CreativeModeTab
+		.builder()
+		.title(Component.translatable("itemGroup." + Dainty.MODID))
+		.icon(() -> BAG.get().getDefaultInstance())
+		.displayItems((parameters, output) -> {
+			for (DeferredItem<? extends Item> item : CREATIVE_TAB_ITEMS) {
+				output.accept(item.get().getDefaultInstance());
+			}
+		})
+		.build()
+	);
 
 	public static <T extends Item> DeferredItem<T> item(String id, Supplier<T> supplier) {
 		DeferredItem<T> deferredItem = ITEMS.register(id, supplier);

@@ -27,4 +27,4 @@ A Minecraft mod that adds in a bunch of small quality of life changes. Some are 
 - Texture changes provided by [Vanilla Tweaks](https://vanillatweaks.net/) under [their custom license](https://vanillatweaks.net/terms/)
 - Fence jumping functionality provided by [Jump Over Fences](https://gitlab.com/kreezxil/jump-over-fences/) under [their custom license](https://gitlab.com/kreezxil/jump-over-fences/-/blob/1.16.4/README.md?ref_type=heads&plain=1#L13)
 - Right-click crop harvest functionality provided by [Right Click Harvest](https://github.com/JamCoreModding/right-click-harvest/tree/main?tab=MIT-1-ov-file) under [MIT](https://opensource.org/license/mit)
-- Biome compass texture and functionality provided by [Nature's Compass](https://github.com/MattCzyr/NaturesCompass) under [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)
+- Biome compass texture and functionality provided by [Nature's Compass](https://github.com/MattCzyr/NaturesCompass/tree/neoforge-1.21.1) under [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)
