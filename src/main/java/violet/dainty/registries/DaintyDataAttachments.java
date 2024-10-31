@@ -1,4 +1,4 @@
-package violet.dainty.data;
+package violet.dainty.registries;
 
 import com.mojang.serialization.Codec;
 

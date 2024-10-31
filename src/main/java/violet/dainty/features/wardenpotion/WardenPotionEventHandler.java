@@ -19,8 +19,8 @@ import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import net.neoforged.neoforge.client.event.sound.PlaySoundEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import violet.dainty.Dainty;
-import violet.dainty.effects.DaintyPotions;
-import violet.dainty.item.DaintyItems;
+import violet.dainty.registries.DaintyItems;
+import violet.dainty.registries.DaintyPotions;
 
 @EventBusSubscriber(modid = Dainty.MODID)
 public class WardenPotionEventHandler {

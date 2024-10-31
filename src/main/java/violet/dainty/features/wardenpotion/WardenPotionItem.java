@@ -13,7 +13,7 @@ import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionContents;
-import violet.dainty.effects.DaintyPotions;
+import violet.dainty.registries.DaintyPotions;
 
 public class WardenPotionItem extends PotionItem {
 

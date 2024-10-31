@@ -1,4 +1,4 @@
-package violet.dainty.item;
+package violet.dainty.registries;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,13 +7,13 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import violet.dainty.data.DaintyDataAttachments;
-import violet.dainty.data.DaintyDataComponents;
-import violet.dainty.effects.DaintyPotions;
 import violet.dainty.features.biomecompass.NaturesCompass;
 import violet.dainty.features.carryon.CarryOn;
 import violet.dainty.features.structurecompass.StructureCompass;
-import violet.dainty.item.DaintyItems;
+import violet.dainty.registries.DaintyDataAttachments;
+import violet.dainty.registries.DaintyDataComponents;
+import violet.dainty.registries.DaintyItems;
+import violet.dainty.registries.DaintyPotions;
 
 @Mod(Dainty.MODID)
 public class Dainty {

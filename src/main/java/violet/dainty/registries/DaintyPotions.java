@@ -1,4 +1,4 @@
-package violet.dainty.effects;
+package violet.dainty.registries;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;

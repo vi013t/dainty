@@ -26,7 +26,7 @@ import violet.dainty.features.structurecompass.items.NaturesCompassItem;
 import violet.dainty.features.structurecompass.network.SearchPacket;
 import violet.dainty.features.structurecompass.network.SyncPacket;
 import violet.dainty.features.structurecompass.network.TeleportPacket;
-import violet.dainty.item.DaintyItems;
+import violet.dainty.registries.DaintyItems;
 
 public class StructureCompass {
 

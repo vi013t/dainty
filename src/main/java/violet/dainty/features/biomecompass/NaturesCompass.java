@@ -26,7 +26,7 @@ import violet.dainty.features.biomecompass.items.NaturesCompassItem;
 import violet.dainty.features.biomecompass.network.SearchPacket;
 import violet.dainty.features.biomecompass.network.SyncPacket;
 import violet.dainty.features.biomecompass.network.TeleportPacket;
-import violet.dainty.item.DaintyItems;
+import violet.dainty.registries.DaintyItems;
 
 public class NaturesCompass {
 

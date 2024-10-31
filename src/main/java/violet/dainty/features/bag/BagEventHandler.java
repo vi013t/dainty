@@ -13,7 +13,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import violet.dainty.Dainty;
-import violet.dainty.data.DaintyDataComponents;
+import violet.dainty.registries.DaintyDataComponents;
 
 @EventBusSubscriber(modid = Dainty.MODID)
 public class BagEventHandler {

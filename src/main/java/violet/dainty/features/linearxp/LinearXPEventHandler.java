@@ -5,7 +5,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
 import violet.dainty.Dainty;
-import violet.dainty.data.DaintyDataAttachments;
+import violet.dainty.registries.DaintyDataAttachments;
 
 @EventBusSubscriber(modid = Dainty.MODID)
 public class LinearXPEventHandler {

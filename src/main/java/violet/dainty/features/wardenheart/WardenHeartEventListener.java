@@ -8,7 +8,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import violet.dainty.Dainty;
 import violet.dainty.DaintyConfig;
-import violet.dainty.item.DaintyItems;
+import violet.dainty.registries.DaintyItems;
 
 @EventBusSubscriber(modid = Dainty.MODID)
 public class WardenHeartEventListener {

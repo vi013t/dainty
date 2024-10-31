@@ -12,7 +12,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import violet.dainty.data.DaintyDataComponents;
+import violet.dainty.registries.DaintyDataComponents;
 
 public class Bag extends Item {
 
