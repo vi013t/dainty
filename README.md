@@ -18,6 +18,7 @@ A Minecraft mod that adds in a bunch of small quality of life changes. Some are 
 | ![image](./docs/reinforcer.png) | <center> **Reinforcer item** <br/> Adds a late-game item that can be used in an anvil with any other item to make it unbreakable and unburnable. </center> | `reinforcerItem: boolean = true` |
 | ![image](./docs/warden_heart.png) | <center> **Warden Heart** <br/> Adds a boss drop from Wardens that can be used to craft various strong or later-game items. </center> | `wardenHeartDropChance: float = 1` |
 | ![image](./docs/resource_changes.png) | <center> **Resource Fixes** <br/> Fixes and improves a number of vanilla textures and resources in small ways. </center> |  |
+| ![image](./docs/biome_compass.png) | <center> **Biome Compass** <br/> Adds a compass that can search for specific biomes. </center> | `enableBiomeCompassItem: boolean = true`  |
 
 ## Credits
 
@@ -25,4 +26,5 @@ A Minecraft mod that adds in a bunch of small quality of life changes. Some are 
 - Warden heart texture provided by [Deeper and Darker](https://github.com/KyaniteMods/DeeperAndDarker/tree/neoforge-1.21) under [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.en.html)
 - Texture changes provided by [Vanilla Tweaks](https://vanillatweaks.net/) under [their custom license](https://vanillatweaks.net/terms/)
 - Fence jumping functionality provided by [Jump Over Fences](https://gitlab.com/kreezxil/jump-over-fences/) under [their custom license](https://gitlab.com/kreezxil/jump-over-fences/-/blob/1.16.4/README.md?ref_type=heads&plain=1#L13)
-- Right-click crop harvest functionality provided by [Right Click Harvest](https://github.com/JamCoreModding/right-click-harvest/tree/main?tab=MIT-1-ov-file) under [MIT](https://github.com/JamCoreModding/right-click-harvest/tree/main?tab=MIT-1-ov-file)
+- Right-click crop harvest functionality provided by [Right Click Harvest](https://github.com/JamCoreModding/right-click-harvest/tree/main?tab=MIT-1-ov-file) under [MIT](https://opensource.org/license/mit)
+- Biome compass texture and functionality provided by [Nature's Compass](https://github.com/MattCzyr/NaturesCompass) under [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)

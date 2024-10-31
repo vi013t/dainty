@@ -1,0 +1,38 @@
+package violet.dainty.features.biomecompass.sorting;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.world.level.biome.Biome;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import violet.dainty.features.biomecompass.util.BiomeUtils;
+
+@OnlyIn(Dist.CLIENT)
+public class SourceSorting implements ISorting<String> {
+	
+	private static final Minecraft mc = Minecraft.getInstance();
+
+	@Override
+	public int compare(Biome biome1, Biome biome2) {
+		return getValue(biome1).compareTo(getValue(biome2));
+	}
+
+	@Override
+	public String getValue(Biome biome) {
+		if (mc.level != null) {
+			return BiomeUtils.getBiomeSource(mc.level, biome);
+		}
+		return null;
+	}
+
+	@Override
+	public ISorting<?> next() {
+		return new TagsSorting();
+	}
+
+	@Override
+	public String getLocalizedName() {
+		return I18n.get("string.naturescompass.source");
+	}
+
+}
