@@ -178,13 +178,9 @@ public class PlacementHandler {
 
 		Level level = player.level();
 		Entity entityHeld;
-		if (carry.isCarrying(CarryType.ENTITY))
-			entityHeld = carry.getEntity(level);
-		else
-			entityHeld = player.getFirstPassenger();
+		if (carry.isCarrying(CarryType.ENTITY)) entityHeld = carry.getEntity(level);
+		else entityHeld = player.getFirstPassenger();
 
-
-		@SuppressWarnings("null")
 		double sizeHeldEntity = entityHeld.getBbHeight() * entityHeld.getBbWidth();
 		double distance = entityClicked.blockPosition().distSqr(player.blockPosition());
 		Entity lowestEntity = entityClicked.getRootVehicle();
@@ -197,8 +193,7 @@ public class PlacementHandler {
 			if (ListHandler.isStackingPermitted(topEntity)) {
 				double sizeEntity = topEntity.getBbHeight() * topEntity.getBbWidth();
 				if (sizeHeldEntity <= sizeEntity) {
-					if (topEntity instanceof Horse horse)
-						horse.setTamed(true);
+					if (topEntity instanceof Horse horse) horse.setTamed(true);
 
 					if (distance < 6) {
 						double tempX = entityClicked.getX();

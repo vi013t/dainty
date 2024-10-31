@@ -2,6 +2,7 @@ package violet.dainty.features.carryon;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
+import violet.dainty.features.carryon.client.CarryOnKeybinds;
 
 public class CarryOnCommonClient {
 

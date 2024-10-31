@@ -17,7 +17,7 @@ public class LinearXPEventHandler {
 
 		// Add whole levels
 		float nextLevelPercent = event.getEntity().getData(DaintyDataAttachments.LINEAR_EXPERIENCE_ATTACHMENT_TYPE);
-		float levelsToAdd = nextLevelPercent + ((float) event.getOrb().getValue()) / 46.5f;
+		float levelsToAdd = nextLevelPercent + ((float) event.getOrb().getValue()) / xpDifferencePerLevel();
 		event.getEntity().giveExperienceLevels((int) Math.floor(levelsToAdd));
 
 		// Store & display fractional levels
@@ -31,5 +31,18 @@ public class LinearXPEventHandler {
 
 		// Play sound
         event.getEntity().level().playSound(null, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, event.getEntity().getSoundSource(), 1, (float) (0.8 + 0.4 * Math.random()));
+	}
+
+	private static float xpDifferencePerLevel() {
+		int unchangedLevel = 30;
+		return totalVanillaXp(unchangedLevel) / unchangedLevel;
+	}
+
+	private static float totalVanillaXp(int level) {
+		return (float) (
+			level < 17 ? Math.pow(level, 2) + 6 * level 
+			: level < 32 ? 2.5 * Math.pow(level, 2) - 40.5 * level + 360 
+			: 4.5 * Math.pow(level, 2) - 162.5 * level - 2220
+		);
 	}
 }

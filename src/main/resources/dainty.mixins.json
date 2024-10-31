@@ -9,10 +9,12 @@
     	"PlayerMixin"
   	],
   	"client": [
+		"HumanoidModelMixin",
+		"MinecraftMixin"
   	],
   	"server": [
   	],
-  	"plugin": "tschipp.carryon.mixin.CarryOnMixinConfigPlugin",
+  	"plugin": "violet.dainty.features.carryon.mixin.CarryOnMixinConfigPlugin",
   	"injectors": {
     	"defaultRequire": 1
   	},

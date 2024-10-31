@@ -6,7 +6,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import violet.dainty.Dainty;
-import violet.dainty.features.carryon.CarryOnKeybinds;
+import violet.dainty.features.carryon.client.CarryOnKeybinds;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = Dainty.MODID, value = Dist.CLIENT)
 public class CarryonModClientEventHandler {
