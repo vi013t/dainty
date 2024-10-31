@@ -1,6 +1,7 @@
 {
   "java.compile.nullAnalysis.mode": "automatic",
   "cSpell.words": [
+	"AABB",
 	"amecsapi",
 	"blockpos",
 	"Clientbound",
@@ -32,10 +33,13 @@
 	"nofarmlandtrample",
 	"nophantoms",
 	"objectweb",
+	"openchest",
+	"Piglin",
 	"Quaternionf",
 	"realcamera",
 	"refmap",
 	"registryaccess",
+	"retextured",
 	"Retextures",
 	"Serverbound",
 	"syncher",
