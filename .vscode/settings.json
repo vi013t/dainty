@@ -48,12 +48,17 @@
 	"retextured",
 	"Retextures",
 	"Serverbound",
+	"structurecompass",
+	"structuresearch",
+	"structuresync",
 	"syncher",
+	"teleportstructure",
 	"unburnable",
 	"Unobstruction",
 	"unupdated",
 	"Voxel",
 	"wardenheart",
+	"wardenpotion",
 	"witherskulls"
 ],
   "java.configuration.updateBuildConfiguration": "automatic"
