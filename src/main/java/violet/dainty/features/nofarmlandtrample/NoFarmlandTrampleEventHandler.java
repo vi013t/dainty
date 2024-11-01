@@ -17,7 +17,7 @@ public class NoFarmlandTrampleEventHandler {
 	 */
 	@SubscribeEvent
 	public static void removeFarmlandTrampling(BlockEvent.FarmlandTrampleEvent event) {
-		if (DaintyConfig.disableFarmlandTrampling()) {
+		if (DaintyConfig.enableNoFarmlandTrampling()) {
 			event.setCanceled(true);
 		}
 	}

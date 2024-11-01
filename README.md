@@ -6,9 +6,9 @@ A Minecraft mod that adds in a bunch of small quality of life changes. Some are 
 
 |Image | Description | Configuration |
 |------|-------------|---------------|
-| ![image](./docs/disable_farmland_trampling.png) | <center> **No Farmland Trampling** <br/> Removes farmland trampling entirely from all entities (players, animals, mobs, etc.). Farmland can be converted back into dirt by breaking and replacing it. </center> | `disableFarmlandTrampling: boolean = true` |
-| ![image](./docs/jump_on_fences.png) | <center> **Jump On Fences** <br/> Allows players to jump onto fences. Mobs cannot jump onto fences. Non-fence jump height is unchanged; i.e., Players still cannot jump onto blocks with slabs on top. </center> | `allowJumpingOnFences: boolean = true` |
-| ![image](./docs/crops.png) | <center> **Right-Click Crop Harvest** <br/> Allows crops to be harvested and replanted by right-clicking on a mature crop. </center> | `allowRightClickHarvesting: boolean = true` |
+| ![image](./docs/disable_farmland_trampling.png) | <center> **No Farmland Trampling** <br/> Removes farmland trampling entirely from all entities (players, animals, mobs, etc.). Farmland can be converted back into dirt by breaking and replacing it. </center> | `enableNoFarmlandTrampling: boolean = true` |
+| ![image](./docs/jump_on_fences.png) | <center> **Jump On Fences** <br/> Allows players to jump onto fences. Mobs cannot jump onto fences. Non-fence jump height is unchanged; i.e., Players still cannot jump onto blocks with slabs on top. </center> | `enableJumpingOnFences: boolean = true` |
+| ![image](./docs/crops.png) | <center> **Right-Click Crop Harvest** <br/> Allows crops to be harvested and replanted by right-clicking on a mature crop. </center> | `enableRightClickCropHarvest: boolean = true` |
 | ![image](./docs/no_phantoms.jpg) | <center> **Remove Phantoms** <br/> Disables phantom spawning. Phantom membrane is added as a (configurable) 50% drop from endermen, is retextured to be fitting for an enderman, and is renamed to "Ender Membrane". Phantom's can still be spawned with commands or spawn eggs; They just won't spawn naturally. </center> | `disablePhantoms: boolean = true` <br/> `endermanPhantomMembraneDropChance: float = 0.5` |
 | ![image](./docs/carryon.png) | <center> **Carry On** <br/> Allows picking up animals and block entities (chests, barrels, etc.) by holding a keybinding (left shift by default) and right-clicking them. The NBT data (chest contents, animal properties, etc.) will be retained after moving them. </center> | `allowPickingUpAnimals: boolean = true` <br/> `allowPickingUpBlockEntities: boolean = true` |
 | ![image](./docs/linear_xp.png) | <center> **Linear XP** <br/> Linearizes experience gain. For example, spending 3 levels at level 1000 is the same as spending 3 levels at level 6. </center> | `linearizeExperience: boolean = true` |
@@ -30,3 +30,14 @@ A Minecraft mod that adds in a bunch of small quality of life changes. Some are 
 - Fence jumping functionality provided by [Jump Over Fences](https://gitlab.com/kreezxil/jump-over-fences/) under [their custom license](https://gitlab.com/kreezxil/jump-over-fences/-/blob/1.16.4/README.md?ref_type=heads&plain=1#L13)
 - Right-click crop harvest functionality provided by [Right Click Harvest](https://github.com/JamCoreModding/right-click-harvest/tree/main?tab=MIT-1-ov-file) under [MIT](https://opensource.org/license/mit)
 - Biome compass texture and functionality provided by [Nature's Compass](https://github.com/MattCzyr/NaturesCompass/tree/neoforge-1.21.1) under [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)
+
+## Contributing
+
+Dainty is accepting contributions. The mod is well-documented; Start by checking out `package-info.java` files if you're unsure where to begin. Please read on for project conventions.
+
+### Conventions
+
+Below are some conventions to follow when contributing:
+
+- Document like crazy. Seriously, you can't over-document. Every field, every method, every class, every package, if you can. Don't just say what it is, but say how it does what it does, where it's used, why it does something a certain way, etc. Remember that code is harder to read than to write, and you're writing for people who've never seen your code before. Particularly document the less-obvious things; It's more important to document some obscure reflection-based obfuscated method call than a field called `isAlive` on an entity. Things like hacky workarounds or strange behavior exploits should be noted, because they're often confusing to understand or read in code.
+- Follow the existing file organizational structure. It should be pretty obvious and intuitive, but if not, read the `package-info.java` files for more information on the project's structure.

@@ -11,6 +11,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import violet.dainty.Dainty;
 import violet.dainty.features.bag.BagDataComponent;
+import violet.dainty.features.wardenheart.CanSummonWardenDataComponent;
 
 public class DaintyDataComponents {
 
@@ -24,6 +25,15 @@ public class DaintyDataComponents {
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<BagDataComponent>> BAG_DATA_COMPONENT = DAINTY_DATA_COMPONENTS.registerComponentType(
 		"basic",
 		builder -> builder.persistent(BAG_DATA_CODEC)
+	);	
+
+	private static final Codec<CanSummonWardenDataComponent> CAN_SUMMON_WARDEN_DATA_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+		Codec.BOOL.fieldOf("canSummonWarden").forGetter(CanSummonWardenDataComponent::canSummonWarden)
+	).apply(instance, CanSummonWardenDataComponent::new));
+
+	public static final DeferredHolder<DataComponentType<?>, DataComponentType<CanSummonWardenDataComponent>> CAN_SUMMON_WARDEN_DATA_COMPONENT = DAINTY_DATA_COMPONENTS.registerComponentType(
+		"can_summon_warden",
+		builder -> builder.persistent(CAN_SUMMON_WARDEN_DATA_CODEC)
 	);	
 
 	public static void register(IEventBus eventBus) {

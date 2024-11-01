@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"E E",
+		"EHE",
+		"SSS"
+	],
+	"key": {
+		"S": {
+			"item": "minecraft:sculk"
+		},
+		"H": {
+			"item": "dainty:warden_heart"
+		},
+		"E": {
+			"item": "minecraft:end_stone"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "minecraft:sculk_shrieker"
+	}
+}

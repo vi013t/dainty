@@ -18,6 +18,8 @@ public class WitherSkullEventHandler {
 
 	@SubscribeEvent
 	public static void onWitherSkeletonKill(LivingDropsEvent event) {
+		if (DaintyConfig.witherSkeletonKillsPerGuaranteedSkull() == 0) return;
+
 		if (event.getSource().getEntity() instanceof ServerPlayer player && event.getEntity() instanceof WitherSkeleton) {
 			int amountKilled = player.getStats().getValue(Stats.ENTITY_KILLED.get(EntityType.WITHER_SKELETON));
 			if (amountKilled != 0 && amountKilled % DaintyConfig.witherSkeletonKillsPerGuaranteedSkull() == 0) {
