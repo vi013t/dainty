@@ -23,10 +23,14 @@ import violet.dainty.features.carryon.ClientboundStartRidingPacket;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-	@Shadow
-	public boolean hasPassenger(Entity pEntity) {throw new IllegalStateException("EntityMixin application failed");}
 
-	@Shadow public abstract void onPassengerTurned(Entity $$0);
+	@Shadow
+	public boolean hasPassenger(Entity pEntity) {
+		throw new IllegalStateException("EntityMixin application failed");
+	}
+
+	@Shadow 
+	public abstract void onPassengerTurned(Entity $$0);
 
 	@Inject(method = "positionRider(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity$MoveFunction;)V", at = @At("HEAD"), cancellable = true)
 	private void onPositionPassenger(Entity entity, MoveFunction move, CallbackInfo ci) {

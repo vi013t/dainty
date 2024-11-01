@@ -2,8 +2,7 @@ package violet.dainty.registries;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -38,6 +37,13 @@ public class DaintyItems {
 
 	public static final DeferredItem<Bag> BAG = item("bag", Bag.create(Bag.Tier.BASIC));
 	public static final DeferredItem<Bag> IRON_BAG = item("iron_bag", Bag.create(Bag.Tier.IRON));
+	
+	/**
+	 * The reinforcer item. This is an item that can be combined with any other item in an anvil to make it unbreakable.
+	 * The anvil recipe logic is handled in 
+	 * {@link violet.dainty.features.reinforcer.ReinforcerEventHandler#createAnvilResult(net.neoforged.neoforge.event.AnvilUpdateEvent)
+	 * the corresponding part of the reinforcer event handler}.
+	 */
 	public static final DeferredItem<Reinforcer> REINFORCER = item("reinforcer", Reinforcer::new);
 
 	/**
@@ -50,6 +56,9 @@ public class DaintyItems {
 	 */
 	public static final DeferredItem<WardenHeart> WARDEN_HEART = item("warden_heart", WardenHeart::new);
 
+	/**
+	 * The single creative tab for items from the Dainty mod. All custom items added by the mod are stored in this creative tab.
+	 */
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATIVE_TAB = CREATIVE_TABS.register("dainty", () -> CreativeModeTab
 		.builder()
 		.title(Component.translatable("itemGroup." + Dainty.MODID))
@@ -62,12 +71,29 @@ public class DaintyItems {
 		.build()
 	);
 
+	/**
+	 * Creates a deferred item by registering it with {@link #ITEMS the Dainty item registry}.
+	 * 
+	 * @param <T> The type of item being created
+	 * 
+	 * @param id The item ID; This must be unique to all other items in the mod
+	 * @param supplier A function that produces a new instance of the item
+	 * 
+	 * @return The item as a registered deferred item.
+	 */
 	private static <T extends Item> DeferredItem<T> item(String id, Supplier<T> supplier) {
 		DeferredItem<T> deferredItem = ITEMS.register(id, supplier);
 		CREATIVE_TAB_ITEMS.add(deferredItem);
 		return deferredItem;
 	}
 
+	/**
+	 * Registers the mod's custom items. This should be called exactly once during 
+	 * {@link violet.dainty.Dainty#Dainty(IEventBus, net.neoforged.fml.ModContainer) the main class's constructor} at
+	 * the time of mod initialization.
+	 * 
+	 * @param eventBus The event bus supplied by Neoforge.
+	 */
 	public static void register(IEventBus eventBus) {
 		ITEMS.register(eventBus);
 		CREATIVE_TABS.register(eventBus);

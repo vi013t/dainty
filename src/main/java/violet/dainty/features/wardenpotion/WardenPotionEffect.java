@@ -8,7 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 public class WardenPotionEffect extends MobEffect {
 
 	public WardenPotionEffect() {
-		super(MobEffectCategory.BENEFICIAL, 0x336666);
+		super(MobEffectCategory.BENEFICIAL, 0x336677);
 	}
 
 	@Override

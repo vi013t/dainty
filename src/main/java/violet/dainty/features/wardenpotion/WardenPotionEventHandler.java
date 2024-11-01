@@ -31,7 +31,7 @@ public class WardenPotionEventHandler {
 		builder.addMix(
 			Potions.AWKWARD,
 			DaintyItems.WARDEN_HEART.get(),
-			DaintyPotions.WARDEN_POTION
+			DaintyPotions.SILENT_SIGHT_POTION
 		);
 	}
 
@@ -53,7 +53,7 @@ public class WardenPotionEventHandler {
 			.stream()
 			.map(effect -> effect.getEffect().value())
 			.toList();
-		if (effects.contains(DaintyPotions.WARDEN_EFFECT.get())) {
+		if (effects.contains(DaintyPotions.SILENT_SIGHT_EFFECT.get())) {
 			event.getTooltipElements().set(0, Either.left(FormattedText.of(event.getTooltipElements().get(0).left().get().getString(), Style.EMPTY.withColor(ChatFormatting.AQUA))));
 		}
 	}	

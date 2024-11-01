@@ -15,7 +15,7 @@
     "item.minecraft.lingering_potion.effect.warden_potion_long": "Lingering Potion of the Deep Dark",
     "item.minecraft.tipped_arrow.effect.warden_potion": "Arrow of the Deep Dark",
     "item.minecraft.tipped_arrow.effect.warden_potion_long": "Arrow of the Deep Dark",
-	"effect.dainty.warden_potion_effect": "Silent Sight",
+	"effect.dainty.silent_sight": "Silent Sight",
 
     "string.naturescompass.back": "Back",
     "string.naturescompass.info": "Info",

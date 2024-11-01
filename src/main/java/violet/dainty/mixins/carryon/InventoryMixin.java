@@ -18,8 +18,8 @@ import net.minecraft.world.level.block.Blocks;
 import violet.dainty.features.carryon.CarryOnDataManager;
 
 @Mixin(Inventory.class)
-public class InventoryMixin
-{
+public class InventoryMixin {
+
 	@Unique
 	private static final ItemStack DUMMY_STACK = new ItemStack(Blocks.COBBLESTONE, 1);
 
@@ -33,34 +33,23 @@ public class InventoryMixin
 	public NonNullList<ItemStack> items;
 
 	@WrapOperation(method = "getFreeSlot()I", at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/core/NonNullList;get(I)Ljava/lang/Object;"))
-	private Object getFreeSlotEmptyCheck(NonNullList<Object> instance, int slot, Operation<Object> original)
-	{
-		if(slot == selected && CarryOnDataManager.getCarryData(player).isCarrying())
-		{
-			return DUMMY_STACK;
-		}
-		else
-			return original.call(instance, slot);
+	private Object getFreeSlotEmptyCheck(NonNullList<Object> instance, int slot, Operation<Object> original) {
+		if (slot == selected && CarryOnDataManager.getCarryData(player).isCarrying()) return DUMMY_STACK;
+		return original.call(instance, slot);
 	}
 
 	@Inject(method = "setPickedItem(Lnet/minecraft/world/item/ItemStack;)V", at = @At("HEAD"), cancellable = true)
-	private void onPickBlock(CallbackInfo info)
-	{
-		if(CarryOnDataManager.getCarryData(player).isCarrying())
-			info.cancel();
+	private void onPickBlock(CallbackInfo info) {
+		if (CarryOnDataManager.getCarryData(player).isCarrying()) info.cancel();
 	}
 
 	@Inject(method = "pickSlot(I)V", at = @At("HEAD"), cancellable = true)
-	private void onPickSlot(int slot, CallbackInfo info)
-	{
-		if(CarryOnDataManager.getCarryData(player).isCarrying())
-			info.cancel();
+	private void onPickSlot(int slot, CallbackInfo info) {
+		if (CarryOnDataManager.getCarryData(player).isCarrying()) info.cancel();
 	}
 
 	@Inject(method = "swapPaint(D)V", at = @At("HEAD"), cancellable = true)
-	private void onSwapPaint(double direction, CallbackInfo info)
-	{
-		if(CarryOnDataManager.getCarryData(player).isCarrying())
-			info.cancel();
+	private void onSwapPaint(double direction, CallbackInfo info) {
+		if (CarryOnDataManager.getCarryData(player).isCarrying()) info.cancel();
 	}
 }
