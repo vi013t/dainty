@@ -19,6 +19,8 @@ A Minecraft mod that adds in a bunch of small quality of life changes. Some are 
 | ![image](./docs/warden_heart.png) | <center> **Warden Heart** <br/> Adds a boss drop from Wardens that can be used to craft various strong or later-game items. </center> | `wardenHeartDropChance: float = 1` |
 | ![image](./docs/resource_changes.png) | <center> **Resource Fixes** <br/> Fixes and improves a number of vanilla textures and resources in small ways. </center> |  |
 | ![image](./docs/biome_compass.png) | <center> **Biome Compass** <br/> Adds a compass that can search for specific biomes. </center> | `enableBiomeCompassItem: boolean = true`  |
+| ![image](./docs/warden_potion.png) | <center> **Potion of the Deep Dark** <br/> Adds a potion brewable from a Warden Heart that gives "Silent Sight", an effect making you immune to Darkness and making your footsteps silent. </center> | `enablePotionOfTheDeepDark: boolean = true`  |
+| ![image](./docs/fast_leaf_decay.png) | <center> **Fast Leaf Decay** <br/> Makes leaves decay significantly faster. </center> | `enableFastLeafDecay: boolean = true`  |
 
 ## Credits
 

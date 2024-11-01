@@ -1,20 +1,21 @@
 {
 	"required": true,
 	"minVersion": "0.8",
-	"package": "violet.dainty.features.carryon.mixin",
+	"package": "violet.dainty.mixins",
 	"compatibilityLevel": "JAVA_21",
   	"mixins": [
-    	"EntityMixin",
-    	"InventoryMixin",
-    	"PlayerMixin"
+    	"carryon.EntityMixin",
+    	"carryon.InventoryMixin",
+    	"carryon.PlayerMixin",
+		"leafdecay.LeafMixin"
   	],
   	"client": [
-		"HumanoidModelMixin",
-		"MinecraftMixin"
+		"carryon.HumanoidModelMixin",
+		"carryon.MinecraftMixin"  
   	],
   	"server": [
   	],
-  	"plugin": "violet.dainty.features.carryon.mixin.CarryOnMixinConfigPlugin",
+  	"plugin": "violet.dainty.mixins.carryon.CarryOnMixinConfigPlugin",
   	"injectors": {
     	"defaultRequire": 1
   	},
