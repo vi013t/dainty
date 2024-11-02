@@ -37,6 +37,9 @@ public class DaintyItems {
 
 	public static final DeferredItem<Bag> BAG = item("bag", Bag.create(Bag.Tier.BASIC));
 	public static final DeferredItem<Bag> IRON_BAG = item("iron_bag", Bag.create(Bag.Tier.IRON));
+	public static final DeferredItem<Bag> GOLD_BAG = item("gold_bag", Bag.create(Bag.Tier.GOLD));
+	public static final DeferredItem<Bag> DIAMOND_BAG = item("diamond_bag", Bag.create(Bag.Tier.DIAMOND));
+	public static final DeferredItem<Bag> NETHERITE_BAG = item("netherite_bag", Bag.create(Bag.Tier.NETHERITE));
 	
 	/**
 	 * The reinforcer item. This is an item that can be combined with any other item in an anvil to make it unbreakable.

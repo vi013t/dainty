@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -18,10 +18,9 @@ import violet.dainty.registries.DaintyDataComponents;
 @EventBusSubscriber(modid = Dainty.MODID)
 public class BagEventHandler {
 	
+	@SuppressWarnings({ "null", "resource" })
 	@SubscribeEvent
-	@SuppressWarnings("resource")
 	public static void onItemPickup(final ItemEntityPickupEvent.Pre event) {
-		if (event.getPlayer().level().isClientSide) return;
 		if (event.getItemEntity().tickCount < 40) return;
 
 		final List<ItemStack> bags = new ArrayList<>();
@@ -35,20 +34,30 @@ public class BagEventHandler {
 
 		for (ItemStack bagItemStack : bags) {
 			BagDataComponent bagData = bagItemStack.get(DaintyDataComponents.BAG_DATA_COMPONENT);
-			ImmutablePair<BagDataComponent, Integer> result = bagData.addAsManyAsPossible(itemStack);
+			ImmutablePair<BagDataComponent, Integer> result = bagData.addItemAlreadyInBag(itemStack);
 			BagDataComponent newBagData = result.getLeft();
 			int amountConsumed = result.getRight();
 			if (amountConsumed > 0) {
+
+				// Update item stack data
 				bagItemStack.set(DaintyDataComponents.BAG_DATA_COMPONENT, newBagData);
+
+				// Item stack not fully consumed
 				if (amountConsumed < bagItemStack.getCount()) {
 					itemStack.setCount(itemStack.getCount() - amountConsumed);
-				} else {
+				} 
+
+				// Item stack fully consumed
+				else {
 					event.setCanPickup(TriState.FALSE);
 					event.getItemEntity().kill();
-					event.getPlayer().level().playSound(event.getPlayer(), event.getPlayer().blockPosition(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
+					if (Minecraft.getInstance().player != null) {
+						Minecraft.getInstance().player.playSound(SoundEvents.ITEM_PICKUP, 1, 1);
+					}
 					break;
 				}
 			}
+			
 		}
 	}
 }
