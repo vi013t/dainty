@@ -7,12 +7,18 @@
     	"carryon.EntityMixin",
     	"carryon.InventoryMixin",
     	"carryon.PlayerMixin",
-		"leafdecay.LeafMixin"
+		"leafdecay.LeafMixin",
+		"blocktooltips.AbstractFurnaceBlockEntityAccess",
+		"blocktooltips.CanItemPerformAbilityAccess",
+		"blocktooltips.EntityAccess"
   	],
   	"client": [
 		"carryon.HumanoidModelMixin",
 		"carryon.MinecraftMixin",
-		"inventorysorting.ScreenMixin"
+		"inventorysorting.ScreenMixin",
+		"blocktooltips.FontMixin",
+		"blocktooltips.SessionSearchTreesMixin",
+		"blocktooltips.StringRenderOutputMixin"
   	],
   	"server": [
   	],
