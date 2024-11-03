@@ -1,35 +1,32 @@
 package violet.dainty.features.structurecompass.sorting;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.world.level.biome.Biome;
-import violet.dainty.features.structurecompass.util.BiomeUtils;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import violet.dainty.features.structurecompass.util.StructureUtils;
 
-public class NameSorting implements ISorting<String> {
-	
-	private static final Minecraft mc = Minecraft.getInstance();
+@OnlyIn(Dist.CLIENT)
+public class NameSorting implements ISorting {
 
 	@Override
-	public int compare(Biome biome1, Biome biome2) {
-		return getValue(biome1).compareTo(getValue(biome2));
+	public int compare(ResourceLocation key1, ResourceLocation key2) {
+		return StructureUtils.getPrettyStructureName(key1).compareTo(StructureUtils.getPrettyStructureName(key2));
 	}
 
 	@Override
-	public String getValue(Biome biome) {
-		if (mc.level != null) {
-			return BiomeUtils.getBiomeName(mc.level, biome);
-		}
-		return "";
+	public Object getValue(ResourceLocation key) {
+		return StructureUtils.getPrettyStructureName(key);
 	}
 
 	@Override
-	public ISorting<?> next() {
+	public ISorting next() {
 		return new SourceSorting();
 	}
 
 	@Override
 	public String getLocalizedName() {
-		return I18n.get("string.naturescompass.name");
+		return I18n.get("string.dainty.name");
 	}
 
 }

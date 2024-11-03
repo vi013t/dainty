@@ -11,7 +11,8 @@
   	],
   	"client": [
 		"carryon.HumanoidModelMixin",
-		"carryon.MinecraftMixin"  
+		"carryon.MinecraftMixin",
+		"inventorysorting.ScreenMixin"
   	],
   	"server": [
   	],

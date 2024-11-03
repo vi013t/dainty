@@ -47,7 +47,7 @@ public class TransparentTextField extends EditBox {
 			boolean flag = j >= 0 && j <= s.length();
 			boolean flag1 = isFocused() && (Util.getMillis() - pseudoFocusedTime) / 300L % 2L == 0L && flag;
 			int l = pseudoEnableBackgroundDrawing ? getX() + 4 : getX();
-			int i1 = pseudoEnableBackgroundDrawing ? getY() + (height - 8) / 2 : getY();
+			int i1 = pseudoEnableBackgroundDrawing ? getY() + (getHeight() - 8) / 2 : getY();
 			int j1 = l;
 
 			if (k > s.length()) {
@@ -56,7 +56,7 @@ public class TransparentTextField extends EditBox {
 
 			if (!s.isEmpty()) {
 				String s1 = flag ? s.substring(0, j) : s;
-				j1 = guiGraphics.drawString(font, s1, l, i1, i, true);
+				j1 = guiGraphics.drawString(font, s1, (float) l, (float) i1, i, true);
 			}
 
 			boolean flag2 = getCursorPosition() < getValue().length() || getValue().length() >= pseudoMaxStringLength;
@@ -70,14 +70,14 @@ public class TransparentTextField extends EditBox {
 			}
 
 			if (!s.isEmpty() && flag && j < s.length()) {
-				j1 = guiGraphics.drawString(font, s.substring(j), j1, i1, i, true);
+				j1 = guiGraphics.drawString(font, s.substring(j), (float) j1, (float) i1, i, true);
 			}
 
 			if (flag1) {
 				if (flag2) {
 					guiGraphics.fill(RenderType.guiOverlay(), k1, i1 - 1, k1 + 1, i1 + 1 + font.lineHeight, -3092272);
 				} else {
-					guiGraphics.drawString(font, "_", k1, i1, i, true);
+					guiGraphics.drawString(font, "_", (float) k1, (float) i1, i, true);
 				}
 			}
 
@@ -174,12 +174,12 @@ public class TransparentTextField extends EditBox {
 			endY = j;
 		}
 
-		if (endX > getX() + width) {
-			endX = getX() + width;
+		if (endX > getX() + getWidth()) {
+			endX = getX() + getWidth();
 		}
 
-		if (startX > getX() + width) {
-			startX = getX() + width;
+		if (startX > getX() + getWidth()) {
+			startX = getX() + getWidth();
 		}
 
 		guiGraphics.fill(RenderType.guiTextHighlight(), startX, startY, endX, endY, -16776961);

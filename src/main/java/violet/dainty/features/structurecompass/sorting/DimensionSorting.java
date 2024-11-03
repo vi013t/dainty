@@ -1,42 +1,33 @@
 package violet.dainty.features.structurecompass.sorting;
 
-import java.util.Optional;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.biome.Biome;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import violet.dainty.features.structurecompass.StructureCompass;
-import violet.dainty.features.structurecompass.util.BiomeUtils;
+import violet.dainty.features.structurecompass.util.StructureUtils;
 
-public class DimensionSorting implements ISorting<String> {
+@OnlyIn(Dist.CLIENT)
+public class DimensionSorting implements ISorting {
 	
-	private static final Minecraft mc = Minecraft.getInstance();
-
 	@Override
-	public int compare(Biome biome1, Biome biome2) {
-		return getValue(biome1).compareTo(getValue(biome2));
+	public int compare(ResourceLocation key1, ResourceLocation key2) {
+		return StructureUtils.dimensionKeysToString(StructureCompass.dimensionKeysForAllowedStructureKeys.get(key1)).compareTo(StructureUtils.dimensionKeysToString(StructureCompass.dimensionKeysForAllowedStructureKeys.get(key2)));
 	}
 
 	@Override
-	public String getValue(Biome biome) {
-		if (mc.level != null) {
-			Optional<ResourceLocation> optionalBiomeKey = BiomeUtils.getKeyForBiome(mc.level, biome);
-			if (optionalBiomeKey.isPresent()) {
-				return BiomeUtils.dimensionKeysToString(StructureCompass.dimensionKeysForAllowedBiomeKeys.get(optionalBiomeKey.get()));
-			}
-		}
-		return "";
+	public Object getValue(ResourceLocation key) {
+		return StructureUtils.dimensionKeysToString(StructureCompass.dimensionKeysForAllowedStructureKeys.get(key));
 	}
 
 	@Override
-	public ISorting<?> next() {
-		return new RainfallSorting();
+	public ISorting next() {
+		return new GroupSorting();
 	}
 
 	@Override
 	public String getLocalizedName() {
-		return I18n.get("string.naturescompass.dimension");
+		return I18n.get("string.dainty.dimension");
 	}
 
 }

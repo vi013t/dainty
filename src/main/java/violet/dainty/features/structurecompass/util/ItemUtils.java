@@ -7,8 +7,8 @@ import violet.dainty.features.structurecompass.StructureCompass;
 
 public class ItemUtils {
 
-	public static ItemStack getHeldNatureCompass(Player player) {
-		return getHeldItem(player, StructureCompass.naturesCompass);
+	public static boolean isCompass(ItemStack stack) {
+		return !stack.isEmpty() && stack.getItem() == StructureCompass.explorersCompass;
 	}
 
 	public static ItemStack getHeldItem(Player player, Item item) {

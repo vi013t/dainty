@@ -1,0 +1,41 @@
+{
+	"type": "crafting_shaped",
+	"group": "tools",
+	"pattern": [
+		"BSD",
+		"NCM",
+		"PGF"
+	],
+	"key": {
+		"C":{
+			"item": "minecraft:compass"
+		},
+		"S":{
+			"item": "minecraft:sandstone"
+		},
+		"D":{
+			"item": "minecraft:dark_oak_planks"
+		},
+		"N":{
+			"item": "minecraft:snow_block"
+		},
+		"M":{
+			"item": "minecraft:mossy_cobblestone"
+		},
+		"P":{
+			"item": "minecraft:prismarine"
+		},
+		"G":{
+			"item": "minecraft:gilded_blackstone"
+		},
+		"F":{
+			"item": "minecraft:nether_bricks"
+		},
+		"B":{
+			"item": "minecraft:cracked_stone_bricks"
+		}
+	},
+	"result": {
+		"id": "dainty:explorerscompass"
+	}
+}

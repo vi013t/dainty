@@ -2,19 +2,19 @@ package violet.dainty.features.structurecompass.sorting;
 
 import java.util.Comparator;
 
-import net.minecraft.world.level.biome.Biome;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public interface ISorting<T> extends Comparator<Biome> {
+public interface ISorting extends Comparator<ResourceLocation> {
 
 	@Override
-	public int compare(Biome biome1, Biome biome2);
+	public int compare(ResourceLocation key1, ResourceLocation key2);
 
-	public T getValue(Biome biome);
+	public Object getValue(ResourceLocation key);
 
-	public ISorting<?> next();
+	public ISorting next();
 
 	public String getLocalizedName();
 

@@ -56,7 +56,7 @@ public class Dainty {
 	 */
     public Dainty(final IEventBus modEventBus, final ModContainer modContainer) {
 		DaintyConfig.register(modContainer);
-		DaintyFeatures.register(modContainer);
+		DaintyFeatures.register(modEventBus, modContainer);
 		DaintyDataComponents.register(modEventBus);
 		DaintyDataAttachments.register(modEventBus);
 		DaintyItems.register(modEventBus);

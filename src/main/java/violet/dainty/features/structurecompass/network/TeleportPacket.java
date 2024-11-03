@@ -11,35 +11,37 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import violet.dainty.Dainty;
-import violet.dainty.features.structurecompass.items.NaturesCompassItem;
+import violet.dainty.features.structurecompass.StructureCompass;
+import violet.dainty.features.structurecompass.items.ExplorersCompassItem;
 import violet.dainty.features.structurecompass.util.CompassState;
 import violet.dainty.features.structurecompass.util.ItemUtils;
 import violet.dainty.features.structurecompass.util.PlayerUtils;
 
 public record TeleportPacket() implements CustomPacketPayload {
-
-	public static final Type<TeleportPacket> TYPE = new Type<TeleportPacket>(ResourceLocation.fromNamespaceAndPath(Dainty.MODID, "structureteleport"));
+	
+public static final Type<TeleportPacket> TYPE = new Type<TeleportPacket>(ResourceLocation.fromNamespaceAndPath(Dainty.MODID, "structureteleport"));
 	
 	public static final StreamCodec<FriendlyByteBuf, TeleportPacket> CODEC = StreamCodec.ofMember(TeleportPacket::write, TeleportPacket::read);
-	
+
 	public static TeleportPacket read(FriendlyByteBuf buf) {
 		return new TeleportPacket();
 	}
 
-	public void write(FriendlyByteBuf buf) {}
+	public void write(FriendlyByteBuf buf) {
+	}
 
 	public static void handle(TeleportPacket packet, IPayloadContext context) {
 		if (context.flow().isServerbound()) {
 			context.enqueueWork(() -> {
-				final ItemStack stack = ItemUtils.getHeldNatureCompass(context.player());
+				final ItemStack stack = ItemUtils.getHeldItem(context.player(), StructureCompass.explorersCompass);
 				if (!stack.isEmpty()) {
-					final NaturesCompassItem natureCompass = (NaturesCompassItem) stack.getItem();
+					final ExplorersCompassItem explorersCompass = (ExplorersCompassItem) stack.getItem();
 					final ServerPlayer player = (ServerPlayer) context.player();
 					if (PlayerUtils.canTeleport(player.getServer(), player)) {
-						if (natureCompass.getState(stack) == CompassState.FOUND) {
-							final int x = natureCompass.getFoundBiomeX(stack);
-							final int z = natureCompass.getFoundBiomeZ(stack);
-							final int y = packet.findValidTeleportHeight(context.player().level(), x, z);
+						if (explorersCompass.getState(stack) == CompassState.FOUND) {
+							final int x = explorersCompass.getFoundStructureX(stack);
+							final int z = explorersCompass.getFoundStructureZ(stack);
+							final int y = packet.findValidTeleportHeight(player.level(), x, z);
 	
 							player.stopRiding();
 							player.connection.teleport(x, y, z, player.getYRot(), player.getXRot());
@@ -55,6 +57,11 @@ public record TeleportPacket() implements CustomPacketPayload {
 				}
 			});
 		}
+	}
+	
+	@Override
+	public Type<TeleportPacket> type() {
+		return TYPE;
 	}
 	
 	private int findValidTeleportHeight(Level level, int x, int z) {
@@ -79,14 +86,8 @@ public record TeleportPacket() implements CustomPacketPayload {
 		return isFree(level, pos) && isFree(level, pos.above()) && !isFree(level, pos.below());
 	}
 	
-	@SuppressWarnings("deprecation")
 	private boolean isFree(Level level, BlockPos pos) {
 		return level.getBlockState(pos).isAir() || level.getBlockState(pos).is(BlockTags.FIRE) || level.getBlockState(pos).liquid() || level.getBlockState(pos).canBeReplaced();
-	}
-	
-	@Override
-	public Type<TeleportPacket> type() {
-		return TYPE;
 	}
 
 }

@@ -17,7 +17,7 @@ public class RenderUtils {
 	}
 
 	public static void drawStringRight(GuiGraphics guiGraphics, String string, Font font, int x, int y, int color) {
-		guiGraphics.drawString(font, string, x - font.width(string), y, color);
+		guiGraphics.drawString(font, string, x - font.width(string), y, color, true);
 	}
 
 	public static void drawConfiguredStringOnHUD(GuiGraphics guiGraphics, String string, int xOffset, int yOffset, int color, int relLineOffset) {

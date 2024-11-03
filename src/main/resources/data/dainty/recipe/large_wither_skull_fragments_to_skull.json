@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SSS",
+		"SSS",
+		"SSS"
+	],
+	"key": {
+		"S": {
+			"item": "dainty:wither_skull_fragment_large"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "minecraft:wither_skeleton_skull"
+	}
+}

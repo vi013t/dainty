@@ -8,6 +8,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import violet.dainty.Dainty;
+import violet.dainty.features.inventorysorting.SortBy;
+import violet.dainty.features.inventorysorting.SortPosition;
 import violet.dainty.features.veinmine.VeinMineSettings;
 
 /**
@@ -39,6 +41,14 @@ public class DaintyDataAttachments {
 
 	public static final DeferredHolder<AttachmentType<?>, AttachmentType<VeinMineSettings>> VEIN_MINE_SETTINGS_ATTACHMENT_TYPE = DATA_ATTACHMENTS.register(
 		"vein_mine_settings", () -> AttachmentType.builder(() -> VeinMineSettings.DEFAULT).serialize(VeinMineSettings.CODEC).build()
+	);
+
+	public static final DeferredHolder<AttachmentType<?>, AttachmentType<SortPosition>> SORT_INVENTORY_ATTACHMENT_TYPE = DATA_ATTACHMENTS.register(
+		"sort_inventory", () -> AttachmentType.builder(SortPosition::error).serialize(SortPosition.CODEC).build()
+	);
+
+	public static final DeferredHolder<AttachmentType<?>, AttachmentType<SortBy>> SORT_ORDER = DATA_ATTACHMENTS.register(
+		"sort_order", () -> AttachmentType.builder(SortBy::defaultSorting).serialize(SortBy.CODEC).build()
 	);
 
 	/**

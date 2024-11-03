@@ -1,16 +1,10 @@
 package violet.dainty.features.veinmine;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.InputEvent.MouseScrollingEvent;
@@ -33,21 +27,10 @@ public class VeinMineEventHandler {
 
 		// Carve out the necessary blocks
 		BlockPos[] blocksToCarve = settings.carve(level, event.getPos(), event.getPlayer().getDirection());
-		List<ItemStack> drops = new ArrayList<>();
 		for (BlockPos position : blocksToCarve) {
 			BlockState blockToBreak = level.getBlockState(position);
-			drops.addAll(blockToBreak.getDrops(new LootParams.Builder(level)
-				.withParameter(LootContextParams.TOOL, event.getPlayer().getMainHandItem())
-				.withParameter(LootContextParams.ORIGIN, position.getCenter())
-			));
+			if (!event.getPlayer().isCreative()) Block.dropResources(blockToBreak, level, position);
 			event.getLevel().removeBlock(position, false);
-		}
-
-		// Drop items
-		if (!event.getPlayer().isCreative()) {
-			for (ItemStack drop : drops) {
-				level.addFreshEntity(new ItemEntity(level, event.getPlayer().getX(), event.getPlayer().getY(), event.getPlayer().getZ(), drop));
-			}
 		}
 
 		// Take food points

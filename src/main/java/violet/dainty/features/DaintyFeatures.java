@@ -1,5 +1,6 @@
 package violet.dainty.features;
 
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import violet.dainty.features.biomecompass.NaturesCompass;
 import violet.dainty.features.carryon.CarryOn;
@@ -17,7 +18,7 @@ public class DaintyFeatures {
 	 * 
 	 * @param modContainer The mod's container supplied by Neoforge at the time of the mod's construction.
 	 */
-	public static void register(ModContainer modContainer) {
+	public static void register(IEventBus modEventBus, ModContainer modContainer) {
 		new CarryOn(modContainer);
 		new NaturesCompass(modContainer);
 		new StructureCompass(modContainer);

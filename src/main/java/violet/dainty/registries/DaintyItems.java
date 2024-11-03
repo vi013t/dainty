@@ -16,6 +16,7 @@ import violet.dainty.Dainty;
 import violet.dainty.features.bag.Bag;
 import violet.dainty.features.reinforcer.Reinforcer;
 import violet.dainty.features.wardenheart.WardenHeart;
+import violet.dainty.features.witherskulls.WitherSkullFragmentItem;
 
 /**
  * Class that holds the custom items (and corresponding registries) added by Dainty. All items that are added into the mod are created here and referenced from here.
@@ -40,6 +41,8 @@ public class DaintyItems {
 	public static final DeferredItem<Bag> GOLD_BAG = item("gold_bag", Bag.create(Bag.Tier.GOLD));
 	public static final DeferredItem<Bag> DIAMOND_BAG = item("diamond_bag", Bag.create(Bag.Tier.DIAMOND));
 	public static final DeferredItem<Bag> NETHERITE_BAG = item("netherite_bag", Bag.create(Bag.Tier.NETHERITE));
+	public static final DeferredItem<WitherSkullFragmentItem> SMALL_WITHER_SKULL_FRAGMENT = item("wither_skull_fragment_small", WitherSkullFragmentItem.create());
+	public static final DeferredItem<WitherSkullFragmentItem> LARGE_WITHER_SKULL_FRAGMENT = item("wither_skull_fragment_large", WitherSkullFragmentItem.create());
 	
 	/**
 	 * The reinforcer item. This is an item that can be combined with any other item in an anvil to make it unbreakable.
