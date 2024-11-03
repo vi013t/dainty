@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "dainty:block/gravestone" },
+        "facing=south": { "model": "dainty:block/gravestone", "y": 180 },
+        "facing=west":  { "model": "dainty:block/gravestone", "y": 270 },
+        "facing=east":  { "model": "dainty:block/gravestone", "y": 90 }
+    }
+}
