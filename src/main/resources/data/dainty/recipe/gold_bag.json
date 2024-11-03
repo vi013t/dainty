@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"IBI",
+		"BGB",
+		"IBI"
+	],
+	"key": {
+		"I": {
+			"item": "minecraft:gold_ingot"
+		},
+		"B": {
+			"item": "minecraft:gold_block"
+		},
+		"G": {
+			"item": "dainty:iron_bag"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "dainty:gold_bag"
+	}
+}

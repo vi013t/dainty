@@ -8,6 +8,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import violet.dainty.Dainty;
+import violet.dainty.features.veinmine.VeinMineSettings;
 
 /**
  * Class for creating and registering custom data attachments added by the Dainty mod. Data attachments are a system added by Neoforge
@@ -34,6 +35,10 @@ public class DaintyDataAttachments {
 
 	public static final DeferredHolder<AttachmentType<?>, AttachmentType<Float>> LINEAR_EXPERIENCE_ATTACHMENT_TYPE = DATA_ATTACHMENTS.register(
 		"linear_experience", () -> AttachmentType.builder(() -> 0f).serialize(Codec.FLOAT).build()
+	);
+
+	public static final DeferredHolder<AttachmentType<?>, AttachmentType<VeinMineSettings>> VEIN_MINE_SETTINGS_ATTACHMENT_TYPE = DATA_ATTACHMENTS.register(
+		"vein_mine_settings", () -> AttachmentType.builder(() -> VeinMineSettings.DEFAULT).serialize(VeinMineSettings.CODEC).build()
 	);
 
 	/**

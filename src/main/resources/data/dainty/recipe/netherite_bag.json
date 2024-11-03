@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SNS",
+		"NBN",
+		"SNS"
+	],
+	"key": {
+		"S": {
+			"item": "minecraft:netherite_scrap"
+		},
+		"N": {
+			"item": "minecraft:netherite_ingot"
+		},
+		"B": {
+			"item": "dainty:diamond_bag"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "dainty:netherite_bag"
+	}
+}

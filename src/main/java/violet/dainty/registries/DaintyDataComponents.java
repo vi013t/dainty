@@ -50,6 +50,7 @@ public class DaintyDataComponents {
 		DataComponentPatch.CODEC
 			.optionalFieldOf("components", DataComponentPatch.EMPTY)
 			.forGetter(itemStack -> {
+				// This function is a workaround because ItemStack.components is private
 				var components = itemStack.getComponents();
 				if (!components.isEmpty()) return ((PatchedDataComponentMap) components).asPatch();
 				return DataComponentPatch.EMPTY;
@@ -64,19 +65,31 @@ public class DaintyDataComponents {
 	 */
 	private static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Dainty.MODID);
 
+	/**
+	 * The bag data codec. This is a {@link Codec} that's used to write {@link #BAG_DATA_COMPONENT bag data} to disk.
+	 */
 	private static final Codec<BagDataComponent> BAG_DATA_CODEC = RecordCodecBuilder.create(instance -> instance.group(
 		Codec.INT.fieldOf("capacity").forGetter(BagDataComponent::capacity),
 		Codec.INT.fieldOf("types").forGetter(BagDataComponent::types),
 		Codec.list(ITEM_STACK_CODEC).fieldOf("items").forGetter(BagDataComponent::itemList)
 	).apply(instance, BagDataComponent::fromItemList));
 
-	public static final StreamCodec<RegistryFriendlyByteBuf, BagDataComponent> BAG_STREAM_CODEC = StreamCodec.composite(
+	/**
+	 * The bag stream codec. This is a {@link StreamCodec stream codec} that's used to synchronize the 
+	 * {@link #BAG_DATA_COMPONENT bag data component} across the network.
+	 */
+	private static final StreamCodec<RegistryFriendlyByteBuf, BagDataComponent> BAG_STREAM_CODEC = StreamCodec.composite(
 		ByteBufCodecs.INT, BagDataComponent::capacity,
 		ByteBufCodecs.INT, BagDataComponent::types,
 		ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()), BagDataComponent::itemList,
 		BagDataComponent::fromItemList
 	);
 
+	/**
+	 * The bag data component type. This data component type is applied to {@link violet.dainty.registries.DaintyItems#BAG the bag item}
+	 * to keep track of the items held inside of the bag. It's written to disk with {@link #BAG_DATA_CODEC the bag codec} and
+	 * synchronized over the network with {@link #BAG_STREAM_CODEC the bag stream codec}.
+	 */
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<BagDataComponent>> BAG_DATA_COMPONENT = DATA_COMPONENTS.registerComponentType(
 		"bag",
 		builder -> builder.persistent(BAG_DATA_CODEC).networkSynchronized(BAG_STREAM_CODEC)

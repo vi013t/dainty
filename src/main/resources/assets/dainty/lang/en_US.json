@@ -1,8 +1,13 @@
 {
 	"itemGroup.dainty": "Dainty",
+	"key.dainty.category": "Dainty",
+	"key.carry.desc": "Carry",
 
 	"item.dainty.bag": "Bag",
 	"item.dainty.iron_bag": "Bag",
+	"item.dainty.gold_bag": "Bag",
+	"item.dainty.diamond_bag": "Bag",
+	"item.dainty.netherite_bag": "Bag",
 	"item.dainty.reinforcer": "Reinforcer",
 	"item.dainty.warden_heart": "Warden Heart",
 

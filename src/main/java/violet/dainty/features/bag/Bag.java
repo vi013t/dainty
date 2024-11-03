@@ -1,25 +1,32 @@
 package violet.dainty.features.bag;
 
+import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Optional;
 
 import com.google.common.base.Supplier;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import violet.dainty.registries.DaintyDataComponents;
 
+/**
+ * Class for creating {@link violet.dainty.registries.DaintyItems#BAG bag items}. Bags are basically inverse bundles;
+ * They can only hold a very small amount of different types of items, but can hold mass quantities of those items.
+ */
 public class Bag extends Item {
 
 	/** 
@@ -50,6 +57,24 @@ public class Bag extends Item {
 	}
 
 	/**
+	 * Returns a custom tooltip image for this item. For bags, this shows the items inside the bag
+	 * using the vanilla bundle tooltip rendering; See {@link BagDataComponent#tooltip()} for more
+	 * information. This code uses {@link net.minecraft.world.item.BundleItem#getTooltipImage(ItemStack)
+	 * the equivalent method in the vanilla bundle class} as a reference.
+	 * 
+	 * @param stack The item stack containing the bag item.
+	 * 
+	 * @return The tooltip image of the bag's contents.
+	 */
+    @Override
+    public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+        if (stack.has(DataComponents.HIDE_TOOLTIP) || stack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP)) return Optional.empty();
+		BagDataComponent bagData = stack.get(DaintyDataComponents.BAG_DATA_COMPONENT);
+		if (bagData.isEmpty()) return Optional.empty();
+        return Optional.of(bagData.tooltip());
+    }
+
+	/**
 	 * Renders the tooltip when hovering over this item in an inventory. Overridden to add special bag information to the tooltip,
 	 * such as the space remaining and the items currently stored.
 	 * 
@@ -62,37 +87,26 @@ public class Bag extends Item {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
 
+		// Description
+		tooltipComponents.add(
+			Component.literal(this.tier.toString()).withStyle(Style.EMPTY.withColor(this.tier.color()).withBold(true))
+			.append(Component.literal(" tier: Holds ").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withBold(false)))
+			.append(Component.literal(Integer.toString(tier.capacity())).withStyle(Style.EMPTY.withColor(this.tier.color()).withBold(true)))
+			.append(Component.literal(" items of ").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withBold(false)))
+			.append(Component.literal(Integer.toString(tier.types())).withStyle(Style.EMPTY.withColor(this.tier.color()).withBold(true)))
+			.append(Component.literal(" types").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withBold(false)))
+		);
+
 		// Shift down - show full information
 		if (Screen.hasShiftDown()) {
-
-			// Item description
-			tooltipComponents.add(
-				Component.literal("Holds up to ")
-				.append(Component.literal(Integer.toString(this.tier.capacity() / 64)).withColor(this.tier.color()))
-				.append(Component.literal(" stacks of "))
-				.append(Component.literal(Integer.toString(this.tier.maxItemVariants())).withColor(this.tier.color()))
-				.append(Component.literal(" types of items."))
-			);
-
-			// Spacing + "empty" if no items inside
 			BagDataComponent bagData = stack.get(DaintyDataComponents.BAG_DATA_COMPONENT);
-			tooltipComponents.add(Component.literal(""));
-			if (bagData.items().length == 0) {
-				tooltipComponents.add(Component.literal("Empty").withStyle(ChatFormatting.GRAY));
-			}
-
-			// Show items stored
-			for (ItemStack storedItem : bagData.items()) {
-				tooltipComponents.add(Component.literal(storedItem.getCount() + "x ").append(((MutableComponent) storedItem.getDisplayName()).withStyle(ChatFormatting.AQUA)));
-			}
-
-			// Show items remaining
-			tooltipComponents.add(Component.literal(""));
+			float stacks = (float) bagData.capacityRemaining() / 64f;
 			tooltipComponents.add(
 				Component.literal(Integer.toString(bagData.capacityRemaining())).withColor(this.tier.color())
-				.append(Component.literal(" items remaining"))
+				.append(Component.literal(" items remaining (").withStyle(ChatFormatting.GRAY))
+				.append(Component.literal(stacks == Math.floor(stacks) ? Integer.toString((int) stacks) : new DecimalFormat("##.0").format(stacks)).withColor(tier.color()))
+				.append(Component.literal(" stacks)").withStyle(ChatFormatting.GRAY))
 			);
-
 		} 
 		
 		// Shift not held - show "hold shift for more information"
@@ -101,11 +115,28 @@ public class Bag extends Item {
 		}
 	}
 
-	@Override
-    public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction action, Player player) {
-        return false;
-    }
-
+	/**
+	 * Called when the player clicks on a bag item in their inventory, while (possibly) holding another item on their cursor.
+	 * This is used to insert items into the bag, as well as take items out in the case that the cursor isn't holding
+	 * any items.
+	 * 
+	 * <br/><br/>
+	 * 
+	 * For another example implementation of this method, see 
+	 * {@link net.minecraft.world.item.BundleItem#overrideOtherStackedOnMe(ItemStack, ItemStack, Slot, ClickAction, Player, SlotAccess)
+	 * the vanilla bundle implementation}.
+	 * 
+	 * @param bag The bag item stack being clicked on
+	 * @param carried The item stack being carried by the cursor when clicking on the bag; This might be empty.
+	 * @param slot The inventory slot the bag is in
+	 * @param action The click action, which provides information about whether this was a left or right click
+	 * @param player The player clicking on the bag
+	 * @param access The slot access information.
+	 * 
+	 * @return Whether to cancel the item swap; i.e., if {@code false}, A standard item swap will occur where the item on
+	 * the player's cursor is placed in the inventory slot the player is clicking on, and the item in the player's inventory
+	 * will be picked up by their cursor.
+	 */
 	@Override
 	@SuppressWarnings("resource")
     public boolean overrideOtherStackedOnMe(ItemStack bag, ItemStack carried, Slot slot, ClickAction action, Player player, SlotAccess access) {
@@ -133,6 +164,7 @@ public class Bag extends Item {
 			if (!stackTaken.isEmpty()) {
 				bag.set(DaintyDataComponents.BAG_DATA_COMPONENT, newBagData);
 				access.set(stackTaken);
+				if (player.level().isClientSide) player.playSound(SoundEvents.BUNDLE_REMOVE_ONE, 1, 1);
 				return true;
 			}
 		}
@@ -184,7 +216,7 @@ public class Bag extends Item {
 		 * 
 		 * @return The number of different item types that can be held by a bag of this tier.
 		 */
-		public int maxItemVariants() {
+		public int types() {
 			return switch(this) {
 				case BASIC -> 1;
 				case IRON -> 1;
@@ -206,8 +238,13 @@ public class Bag extends Item {
 				case IRON -> 0xDDDDDD;
 				case GOLD -> 0xFFFF99;
 				case DIAMOND -> 0x99FFFF;
-				case NETHERITE -> 0x333344;
+				case NETHERITE -> 0x554444;
 			};
+		}
+
+		@Override
+		public String toString() {
+			return this.name().charAt(0) + this.name().substring(1).toLowerCase();
 		}
 	}
 }

@@ -1,13 +1,13 @@
 modLoader = "javafml"
 loaderVersion = "${loader_version_range}"
-license = "${mod_license}"
+license = "GPL-3.0"
 
 [[mods]]
 modId = "dainty"
 version = "1.0.0"
-displayName = "${mod_name}"
-authors = "${mod_authors}"
-description = '''${mod_description}'''
+displayName = "Dainty"
+authors = "Violet"
+description = '''Adds a bunch of quality-of-life changes to Minecraft.'''
 
 [[mixins]]
 config = "dainty.mixins.json"
