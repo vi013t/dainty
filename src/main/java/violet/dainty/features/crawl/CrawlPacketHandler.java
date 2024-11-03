@@ -9,7 +9,6 @@ public class CrawlPacketHandler implements IPayloadHandler<CrawlPacket> {
 	@Override
 	public void handle(CrawlPacket payload, IPayloadContext context) {
 		context.player().setForcedPose(payload.crawl() ?  Pose.SWIMMING : null);
-		System.out.println(context.player().getForcedPose());
 	}
 	
 }

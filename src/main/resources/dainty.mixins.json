@@ -10,7 +10,8 @@
 		"leafdecay.LeafMixin",
 		"blocktooltips.AbstractFurnaceBlockEntityAccess",
 		"blocktooltips.CanItemPerformAbilityAccess",
-		"blocktooltips.EntityAccess"
+		"blocktooltips.EntityAccess",
+		"friendlyberries.BerryBushMixin"
   	],
   	"client": [
 		"carryon.HumanoidModelMixin",
