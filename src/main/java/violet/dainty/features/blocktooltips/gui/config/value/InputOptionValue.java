@@ -15,6 +15,7 @@ public class InputOptionValue<T> extends OptionValue<T> {
 	private final EditBox textField;
 	private final Predicate<String> validator;
 
+	@SuppressWarnings("null")
 	public InputOptionValue(Runnable responder, String optionName, Supplier<T> getter, Consumer<T> setter, Predicate<String> validator) {
 		super(optionName, getter, setter);
 		this.validator = validator;
@@ -31,6 +32,7 @@ public class InputOptionValue<T> extends OptionValue<T> {
 		addWidget(textField, 0);
 	}
 
+	@SuppressWarnings({ "unused", "unchecked" })
 	private void setValue(String text) {
 		if (value instanceof String) {
 			value = (T) text;

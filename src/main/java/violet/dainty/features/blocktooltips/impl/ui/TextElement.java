@@ -27,6 +27,7 @@ public class TextElement extends Element implements ITextElement {
 
 	@Override
 	public Vec2 getSize() {
+		@SuppressWarnings("resource")
 		Font font = Minecraft.getInstance().font;
 		return new Vec2(font.width(text), font.lineHeight - 1);
 	}

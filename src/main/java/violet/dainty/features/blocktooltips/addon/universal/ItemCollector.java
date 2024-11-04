@@ -25,6 +25,7 @@ public class ItemCollector<T> {
 		if (stack.has(DataComponents.CUSTOM_MODEL_DATA)) {
 			CustomData customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
 			//noinspection deprecation
+			@SuppressWarnings("deprecation")
 			CompoundTag tag = customData.getUnsafe();
 			for (String key : tag.getAllKeys()) {
 				if (key.toLowerCase(Locale.ENGLISH).endsWith("clear") && tag.getBoolean(key)) {

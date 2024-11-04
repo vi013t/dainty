@@ -77,6 +77,7 @@ public abstract class RegistryNameProvider implements IToggleableProvider {
 		}
 	}
 
+	@SuppressWarnings("resource")
 	public boolean append(ITooltip tooltip, String id, IPluginConfig config) {
 		Mode mode = config.getEnum(JadeIds.DEBUG_REGISTRY_NAME);
 		if (mode == Mode.OFF) {

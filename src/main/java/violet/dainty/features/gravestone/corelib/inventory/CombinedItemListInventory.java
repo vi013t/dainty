@@ -1,13 +1,15 @@
 package violet.dainty.features.gravestone.corelib.inventory;
 
+import java.util.Arrays;
+import java.util.function.Function;
+
+import javax.annotation.Nonnull;
+
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.Arrays;
-import java.util.function.Function;
 
 /**
  * This class is not yet finished - use at own risk
@@ -19,17 +21,17 @@ public class CombinedItemListInventory implements Container {
     private Runnable onMarkDirty;
     private Function<Player, Boolean> onIsUsableByPlayer;
 
-    public CombinedItemListInventory(Runnable onMarkDirty, Function<Player, Boolean> onIsUsableByPlayer, NonNullList<ItemStack>... items) {
+    public CombinedItemListInventory(Runnable onMarkDirty, Function<Player, Boolean> onIsUsableByPlayer, @SuppressWarnings("unchecked") NonNullList<ItemStack>... items) {
         this.items = items;
         this.onMarkDirty = onMarkDirty;
         this.onIsUsableByPlayer = onIsUsableByPlayer;
     }
 
-    public CombinedItemListInventory(Runnable onMarkDirty, NonNullList<ItemStack>... items) {
+    public CombinedItemListInventory(Runnable onMarkDirty, @SuppressWarnings("unchecked") NonNullList<ItemStack>... items) {
         this(onMarkDirty, null, items);
     }
 
-    public CombinedItemListInventory(NonNullList<ItemStack>... items) {
+    public CombinedItemListInventory(@SuppressWarnings("unchecked") NonNullList<ItemStack>... items) {
         this(null, items);
     }
 
@@ -74,11 +76,11 @@ public class CombinedItemListInventory implements Container {
 
     @Override
     public ItemStack removeItem(int index, int count) {
-        ItemStack itemstack = ContainerHelper.removeItem(items[getListIndex(index)], getLocalIndex(index), count);
-        if (!itemstack.isEmpty()) {
+        ItemStack itemStack = ContainerHelper.removeItem(items[getListIndex(index)], getLocalIndex(index), count);
+        if (!itemStack.isEmpty()) {
             setChanged();
         }
-        return itemstack;
+        return itemStack;
     }
 
     @Override
@@ -87,7 +89,7 @@ public class CombinedItemListInventory implements Container {
     }
 
     @Override
-    public void setItem(int index, ItemStack stack) {
+    public void setItem(int index, @Nonnull ItemStack stack) {
         items[getListIndex(index)].set(getLocalIndex(index), stack);
         if (stack.getCount() > getMaxStackSize()) {
             stack.setCount(getMaxStackSize());
@@ -103,7 +105,7 @@ public class CombinedItemListInventory implements Container {
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@Nonnull Player player) {
         if (onIsUsableByPlayer != null) {
             return onIsUsableByPlayer.apply(player);
         } else {

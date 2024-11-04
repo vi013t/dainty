@@ -86,6 +86,7 @@ public static final Type<TeleportPacket> TYPE = new Type<TeleportPacket>(Resourc
 		return isFree(level, pos) && isFree(level, pos.above()) && !isFree(level, pos.below());
 	}
 	
+	@SuppressWarnings("deprecation")
 	private boolean isFree(Level level, BlockPos pos) {
 		return level.getBlockState(pos).isAir() || level.getBlockState(pos).is(BlockTags.FIRE) || level.getBlockState(pos).liquid() || level.getBlockState(pos).canBeReplaced();
 	}

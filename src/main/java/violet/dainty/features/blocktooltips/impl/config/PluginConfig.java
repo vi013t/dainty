@@ -65,6 +65,7 @@ public class PluginConfig implements IPluginConfig {
 		return key.withPath(key.getPath().substring(0, key.getPath().indexOf('.')));
 	}
 
+	@SuppressWarnings("unchecked")
 	public void addConfig(ConfigEntry<?> entry) {
 		Preconditions.checkArgument(StringUtils.countMatches(entry.getId().getPath(), '.') <= 1);
 		Preconditions.checkArgument(!containsKey(entry.getId()), "Duplicate config key: %s", entry.getId());
@@ -104,6 +105,7 @@ public class PluginConfig implements IPluginConfig {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T extends Enum<T>> T getEnum(ResourceLocation key) {
 		return (T) getEntry(key).getValue();
 	}

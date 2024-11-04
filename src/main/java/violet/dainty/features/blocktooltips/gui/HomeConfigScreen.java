@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.Lists;
 import com.mojang.math.Axis;
 
@@ -97,6 +99,7 @@ public class HomeConfigScreen extends Screen {
 		return dayOfYear >= newYearDayOfYear - 1 && dayOfYear <= newYearDayOfYear + 2;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	protected void init() {
 		Objects.requireNonNull(minecraft);
@@ -183,7 +186,7 @@ public class HomeConfigScreen extends Screen {
 	}
 
 	@Override
-	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		Objects.requireNonNull(minecraft);
 		float deltaTicks = Minecraft.getInstance().getTimer().getRealtimeDeltaTicks();
 		ticks += deltaTicks;
@@ -208,6 +211,7 @@ public class HomeConfigScreen extends Screen {
 			}
 		}
 		super.render(guiGraphics, mouseX, mouseY, partialTicks);
+		@SuppressWarnings("null")
 		boolean smallUI = minecraft.getWindow().getGuiScale() < 3;
 		int left = width / 2 - 105;
 		int top = height / 4 - 20;

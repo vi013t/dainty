@@ -1,5 +1,7 @@
 package violet.dainty.features.gravestone.corelib.helpers;
 
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -7,16 +9,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import java.util.List;
 
 public class WrappedItemStack extends AbstractStack<ItemStack> {
 
     public WrappedItemStack(ItemStack stack) {
         super(stack);
     }
-
-    @OnlyIn(Dist.CLIENT)
-    @Override
+@Override
+	@OnlyIn(Dist.CLIENT)
+    @SuppressWarnings("resource")
     public void render(GuiGraphics guiGraphics, int x, int y) {
         guiGraphics.renderItem(stack, x, y, 0);
         guiGraphics.renderItemDecorations(Minecraft.getInstance().font, stack, x, y);

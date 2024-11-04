@@ -1,5 +1,7 @@
 package violet.dainty.features.gravestone.corelib.inventory;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
@@ -21,7 +23,7 @@ public class LockedSlot extends Slot {
     }
 
     @Override
-    public boolean mayPickup(Player playerIn) {
+    public boolean mayPickup(@Nonnull Player playerIn) {
         if (outputLocked) {
             return false;
         } else {
@@ -30,7 +32,7 @@ public class LockedSlot extends Slot {
     }
 
     @Override
-    public boolean mayPlace(ItemStack stack) {
+    public boolean mayPlace(@Nonnull ItemStack stack) {
         if (inputLocked) {
             return false;
         } else {

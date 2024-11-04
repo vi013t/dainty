@@ -2,6 +2,8 @@ package violet.dainty.features.gravestone.gui;
 
 import java.util.Collections;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.authlib.GameProfile;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -100,7 +102,7 @@ public class ObituaryScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
         int left = (width - TEXTURE_X) / 2;
 
@@ -119,7 +121,8 @@ public class ObituaryScreen extends Screen {
         }
     }
 
-    public void drawFirstPage(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+    @SuppressWarnings("null")
+	public void drawFirstPage(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         drawCentered(guiGraphics, font, Component.translatable("gui.obituary.title").withStyle(ChatFormatting.UNDERLINE), width / 2, 30, ChatFormatting.BLACK.getColor());
 
         int height = 50;
@@ -167,7 +170,8 @@ public class ObituaryScreen extends Screen {
         }
     }
 
-    @Override
+	@Override
+    @SuppressWarnings("null")
     public boolean mouseClicked(double x, double y, int clickType) {
         if (minecraft.options.advancedItemTooltips && page == 0) {
             if (x >= guiLeft + 7 && x <= guiLeft + TEXTURE_X - 7 && y >= 50 && y <= 50 + font.lineHeight) {
@@ -191,15 +195,18 @@ public class ObituaryScreen extends Screen {
         guiGraphics.drawString(fontRenderer, text.getVisualOrderText(), (float) (x - fontRenderer.width(text) / 2), (float) y, color, false);
     }
 
-    public void drawItem(GuiGraphics guiGraphics, MutableComponent string, int height) {
+    @SuppressWarnings("null")
+	public void drawItem(GuiGraphics guiGraphics, MutableComponent string, int height) {
         guiGraphics.drawString(font, string.getVisualOrderText(), guiLeft + ITEM_OFFSET_LEFT, height, ChatFormatting.BLACK.getColor(), false);
     }
 
-    public void drawItemSize(GuiGraphics guiGraphics, MutableComponent string, int height) {
+    @SuppressWarnings("null")
+	public void drawItemSize(GuiGraphics guiGraphics, MutableComponent string, int height) {
         guiGraphics.drawString(font, string.getVisualOrderText(), guiLeft + ITEM_SIZE_OFFSET_LEFT, height, ChatFormatting.BLACK.getColor(), false);
     }
 
-    public void drawLeft(GuiGraphics guiGraphics, MutableComponent string, int height) {
+    @SuppressWarnings("null")
+	public void drawLeft(GuiGraphics guiGraphics, MutableComponent string, int height) {
         guiGraphics.drawString(font, string.getVisualOrderText(), guiLeft + OFFSET_LEFT, height, ChatFormatting.BLACK.getColor(), false);
     }
 
@@ -207,7 +214,8 @@ public class ObituaryScreen extends Screen {
         drawRight(guiGraphics, string, height, 1F);
     }
 
-    public void drawRight(GuiGraphics guiGraphics, MutableComponent string, int height, float scale) {
+    @SuppressWarnings("null")
+	public void drawRight(GuiGraphics guiGraphics, MutableComponent string, int height, float scale) {
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1F);
         float f = 1F / scale;

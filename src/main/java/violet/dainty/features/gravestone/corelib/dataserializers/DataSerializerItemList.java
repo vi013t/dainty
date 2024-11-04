@@ -1,5 +1,7 @@
 package violet.dainty.features.gravestone.corelib.dataserializers;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -11,7 +13,7 @@ public class DataSerializerItemList {
     private static final StreamCodec<RegistryFriendlyByteBuf, NonNullList<ItemStack>> CODEC = new StreamCodec<>() {
 
         @Override
-        public void encode(RegistryFriendlyByteBuf buf, NonNullList<ItemStack> itemStacks) {
+        public void encode(@Nonnull RegistryFriendlyByteBuf buf, @Nonnull NonNullList<ItemStack> itemStacks) {
             buf.writeInt(itemStacks.size());
 
             for (ItemStack itemStack : itemStacks) {
@@ -20,7 +22,7 @@ public class DataSerializerItemList {
         }
 
         @Override
-        public NonNullList<ItemStack> decode(RegistryFriendlyByteBuf itemStacks) {
+        public NonNullList<ItemStack> decode(@Nonnull RegistryFriendlyByteBuf itemStacks) {
             int length = itemStacks.readInt();
             NonNullList<ItemStack> list = NonNullList.withSize(length, ItemStack.EMPTY);
             for (int i = 0; i < list.size(); i++) {
@@ -38,7 +40,7 @@ public class DataSerializerItemList {
             }
 
             @Override
-            public NonNullList<ItemStack> copy(NonNullList<ItemStack> itemStacks) {
+            public NonNullList<ItemStack> copy(@Nonnull NonNullList<ItemStack> itemStacks) {
                 NonNullList<ItemStack> list = NonNullList.withSize(itemStacks.size(), ItemStack.EMPTY);
                 for (int i = 0; i < itemStacks.size(); i++) {
                     list.set(i, itemStacks.get(i).copy());

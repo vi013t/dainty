@@ -116,6 +116,7 @@ public final class ClientProxy {
 				.filter(Predicate.not(Strings::isNullOrEmpty));
 	}
 
+	@SuppressWarnings({ "deprecation", "resource" })
 	public static void init(IEventBus modBus) {
 		NeoForge.EVENT_BUS.addListener(ClientProxy::onEntityJoin);
 		NeoForge.EVENT_BUS.addListener(ClientProxy::onEntityLeave);
@@ -327,6 +328,7 @@ public final class ClientProxy {
 	}
 
 	public static GameType getGameMode() {
+		@SuppressWarnings("resource")
 		MultiPlayerGameMode gameMode = Minecraft.getInstance().gameMode;
 		return gameMode == null ? GameType.SURVIVAL : gameMode.getPlayerMode();
 	}

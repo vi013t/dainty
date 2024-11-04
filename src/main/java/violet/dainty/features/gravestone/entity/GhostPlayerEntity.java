@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.core.NonNullList;
@@ -42,7 +43,7 @@ public class GhostPlayerEntity extends Monster {
     private static final EntityDataAccessor<Optional<UUID>> PLAYER_UUID = SynchedEntityData.defineId(GhostPlayerEntity.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Byte> PLAYER_MODEL = SynchedEntityData.defineId(GhostPlayerEntity.class, EntityDataSerializers.BYTE);
 
-    public GhostPlayerEntity(EntityType type, Level world) {
+    public GhostPlayerEntity(EntityType<? extends Monster> type, Level world) {
         super(type, world);
     }
 
@@ -60,7 +61,7 @@ public class GhostPlayerEntity extends Monster {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+    protected void defineSynchedData(@Nonnull SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(PLAYER_UUID, Optional.empty());
         builder.define(PLAYER_MODEL, (byte) 0);
@@ -114,7 +115,8 @@ public class GhostPlayerEntity extends Monster {
         }
     }
 
-    private void setOverpowered() {
+    @SuppressWarnings("null")
+	private void setOverpowered() {
         getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(35.0D);
         getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.4D);
         getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(20.0D);
@@ -145,7 +147,7 @@ public class GhostPlayerEntity extends Monster {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
+    public void addAdditionalSaveData(@Nonnull CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         getEntityData().get(PLAYER_UUID).ifPresent(uuid -> {
             compound.putUUID("PlayerUUID", uuid);
@@ -154,7 +156,7 @@ public class GhostPlayerEntity extends Monster {
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
+    public void readAdditionalSaveData(@Nonnull CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         if (compound.contains("player_uuid")) { // Compatibility
             String uuidStr = compound.getString("player_uuid");
@@ -170,7 +172,7 @@ public class GhostPlayerEntity extends Monster {
     }
 
     @Override
-    public boolean doHurtTarget(Entity entity) {
+    public boolean doHurtTarget(@Nonnull Entity entity) {
         if (entity.getName().getString().equals("henkelmax") || entity.getUUID().toString().equals("af3bd5f4-8634-4700-8281-e4cc851be180")) {
             return true;
         } else {

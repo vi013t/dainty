@@ -1,12 +1,12 @@
 package violet.dainty.features.gravestone.corelib.tag;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class BlockTag implements Tag<Block> {
 
@@ -21,7 +21,8 @@ public class BlockTag implements Tag<Block> {
         return holderSet.key().location();
     }
 
-    @Override
+	@Override
+    @SuppressWarnings("deprecation")
     public boolean contains(Block block) {
         return block.builtInRegistryHolder().is(holderSet.key());
     }

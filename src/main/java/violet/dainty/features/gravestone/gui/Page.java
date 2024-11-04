@@ -26,7 +26,8 @@ public class Page {
         }
     }
 
-    public void drawPage(GuiGraphics guiGraphics, int page, int pageCount, int mouseX, int mouseY) {
+    @SuppressWarnings("null")
+	public void drawPage(GuiGraphics guiGraphics, int page, int pageCount, int mouseX, int mouseY) {
         gui.drawCentered(guiGraphics, gui.getFontRenderer(), Component.translatable("gui.obituary.title.items").withStyle(ChatFormatting.UNDERLINE), gui.width / 2, 30, ChatFormatting.BLACK.getColor());
         gui.drawCentered(guiGraphics, gui.getFontRenderer(), Component.translatable("gui.obituary.page", page, pageCount), gui.width / 2, 43, ChatFormatting.DARK_GRAY.getColor());
 

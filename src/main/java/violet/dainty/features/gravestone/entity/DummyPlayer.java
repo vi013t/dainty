@@ -1,5 +1,7 @@
 package violet.dainty.features.gravestone.entity; 
 
+import javax.annotation.Nonnull;
+
 import com.mojang.authlib.GameProfile;
 
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -33,7 +35,7 @@ public class DummyPlayer extends RemotePlayer {
     }
 
     @Override
-    public boolean isModelPartShown(PlayerModelPart part) {
+    public boolean isModelPartShown(@Nonnull PlayerModelPart part) {
         return (model & part.getMask()) == part.getMask();
     }
 }

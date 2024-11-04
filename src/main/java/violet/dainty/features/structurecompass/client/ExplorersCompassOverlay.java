@@ -1,5 +1,7 @@
 package violet.dainty.features.structurecompass.client;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -23,7 +25,7 @@ public class ExplorersCompassOverlay implements LayeredDraw.Layer {
 	public static final Minecraft mc = Minecraft.getInstance();
 
 	@Override
-	public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+	public void render(@Nonnull GuiGraphics guiGraphics, @Nonnull DeltaTracker deltaTracker) {
 		if (mc.player != null && mc.level != null && !mc.options.hideGui && !mc.getDebugOverlay().showDebugScreen() && (mc.screen == null || mc.screen instanceof ChatScreen)) {
 			final Player player = mc.player;
 			final ItemStack stack = ItemUtils.getHeldItem(player, StructureCompass.explorersCompass);

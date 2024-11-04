@@ -54,6 +54,7 @@ public class HealthElement extends Element {
 	@Override
 	public Vec2 getSize() {
 		if (showText()) {
+			@SuppressWarnings("resource")
 			Font font = Minecraft.getInstance().font;
 			return new Vec2(font.width(text) + 10, 9);
 		} else {

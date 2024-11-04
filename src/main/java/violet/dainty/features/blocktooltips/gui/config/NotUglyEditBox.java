@@ -5,6 +5,8 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.Util;
@@ -29,6 +31,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.util.StringUtil;
 
+@SuppressWarnings("unused")
 public class NotUglyEditBox extends AbstractWidget implements Renderable {
 	private final Font font;
 	public int paddingLeft;
@@ -230,6 +233,7 @@ public class NotUglyEditBox extends AbstractWidget implements Renderable {
 		this.moveCursorTo(this.value.length());
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public boolean keyPressed(int i, int j, int k) {
 		if (!this.canConsumeInput()) {
@@ -334,11 +338,11 @@ public class NotUglyEditBox extends AbstractWidget implements Renderable {
 	}
 
 	@Override
-	public void playDownSound(SoundManager soundManager) {
+	public void playDownSound(@Nonnull SoundManager soundManager) {
 	}
 
 	@Override
-	public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
+	public void renderWidget(@Nonnull GuiGraphics guiGraphics, int i, int j, float f) {
 		isMouseOverCross = false;
 		if (!this.isVisible()) {
 			return;
@@ -455,7 +459,7 @@ public class NotUglyEditBox extends AbstractWidget implements Renderable {
 
 	@Override
 	@Nullable
-	public ComponentPath nextFocusPath(FocusNavigationEvent focusNavigationEvent) {
+	public ComponentPath nextFocusPath(@Nonnull FocusNavigationEvent focusNavigationEvent) {
 		if (!this.visible || !this.isEditable) {
 			return null;
 		}
@@ -537,7 +541,7 @@ public class NotUglyEditBox extends AbstractWidget implements Renderable {
 	}
 
 	@Override
-	public void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
+	public void updateWidgetNarration(@Nonnull NarrationElementOutput narrationElementOutput) {
 		narrationElementOutput.add(NarratedElementType.TITLE, this.createNarrationMessage());
 		if (isMouseOverCross) {
 			narrationElementOutput.add(NarratedElementType.USAGE, Component.translatable("narration.dainty.clear_content.usage"));

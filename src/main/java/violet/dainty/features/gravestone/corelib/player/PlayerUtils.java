@@ -1,10 +1,10 @@
 package violet.dainty.features.gravestone.corelib.player;
 
-import violet.dainty.features.gravestone.corelib.Logger;
+import java.lang.reflect.Field;
+
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.world.entity.player.Player;
-
-import java.lang.reflect.Field;
+import violet.dainty.features.gravestone.corelib.Logger;
 
 public class PlayerUtils {
 
@@ -14,7 +14,8 @@ public class PlayerUtils {
      * @param player the player
      * @return the model flags
      */
-    public static byte getModel(Player player) {
+    @SuppressWarnings("unchecked")
+	public static byte getModel(Player player) {
         try {
             Field dataPlayerModeCustomisation = Player.class.getDeclaredField("DATA_PLAYER_MODE_CUSTOMISATION");
             dataPlayerModeCustomisation.setAccessible(true);

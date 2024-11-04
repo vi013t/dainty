@@ -1,5 +1,7 @@
 package violet.dainty.features.gravestone.corelib.inventory;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
@@ -30,7 +32,7 @@ public class TileEntityContainerProvider implements MenuProvider {
     }
 
     @Override
-    public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
+    public AbstractContainerMenu createMenu(int i, @Nonnull Inventory playerInventory, @Nonnull Player playerEntity) {
         return container.create(i, playerInventory, playerEntity);
     }
 

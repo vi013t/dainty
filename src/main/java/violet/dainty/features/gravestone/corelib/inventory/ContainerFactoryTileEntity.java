@@ -1,5 +1,7 @@
 package violet.dainty.features.gravestone.corelib.inventory;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -14,8 +16,9 @@ public class ContainerFactoryTileEntity<T extends AbstractContainerMenu, U exten
         this.containerCreator = containerCreator;
     }
 
-    @Override
-    public T create(int windowId, Inventory inv, RegistryFriendlyByteBuf data) {
+	@Override
+    @SuppressWarnings("unchecked")
+    public T create(int windowId, @Nonnull Inventory inv, @Nonnull RegistryFriendlyByteBuf data) {
         BlockEntity te = inv.player.level().getBlockEntity(data.readBlockPos());
         try {
             return containerCreator.create(windowId, inv, (U) te);

@@ -61,6 +61,7 @@ public enum ItemTooltipProvider implements IEntityComponentProvider {
 		}
 		List<FormattedText> realLines = lines.stream().map($ -> $.left()).filter(Optional::isPresent).map(Optional::get).skip(1).toList();
 		String modName = ModIdentification.getModName(stack);
+		@SuppressWarnings("resource")
 		Font font = Minecraft.getInstance().font;
 		int maxWidth = 250;
 		for (FormattedText text : realLines) {

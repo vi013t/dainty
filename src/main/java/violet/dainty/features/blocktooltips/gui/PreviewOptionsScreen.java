@@ -2,6 +2,8 @@ package violet.dainty.features.blocktooltips.gui;
 
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.platform.InputConstants;
 
 import net.minecraft.client.Minecraft;
@@ -30,6 +32,7 @@ public abstract class PreviewOptionsScreen extends BaseOptionsScreen {
 		super(parent, title);
 	}
 
+	@SuppressWarnings("resource")
 	public static boolean isAdjustingPosition() {
 		return Minecraft.getInstance().screen instanceof PreviewOptionsScreen screen && screen.adjustingPosition;
 	}
@@ -61,6 +64,7 @@ public abstract class PreviewOptionsScreen extends BaseOptionsScreen {
 	}
 
 	@Override
+	@SuppressWarnings("null")
 	protected void init() {
 		Objects.requireNonNull(minecraft);
 		super.init();
@@ -95,6 +99,7 @@ public abstract class PreviewOptionsScreen extends BaseOptionsScreen {
 		return options.forcePreview.contains(entry);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int p_94697_) {
 		if (adjustingPosition) {
@@ -144,6 +149,7 @@ public abstract class PreviewOptionsScreen extends BaseOptionsScreen {
 		return super.keyPressed(i, j, k);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public boolean keyReleased(int i, int j, int k) {
 		Objects.requireNonNull(minecraft);
@@ -181,7 +187,7 @@ public abstract class PreviewOptionsScreen extends BaseOptionsScreen {
 	}
 
 	@Override
-	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		if (adjustingPosition) {
 			super.render(guiGraphics, Integer.MAX_VALUE, Integer.MAX_VALUE, partialTicks);
 			guiGraphics.fill(0, 0, width, height, 50, 0x80AAAAAA);
@@ -218,7 +224,7 @@ public abstract class PreviewOptionsScreen extends BaseOptionsScreen {
 	}
 
 	@Override
-	protected void updateNarratedWidget(NarrationElementOutput narrationElementOutput) {
+	protected void updateNarratedWidget(@Nonnull NarrationElementOutput narrationElementOutput) {
 		if (adjustingPosition) {
 			narrationElementOutput.add(NarratedElementType.USAGE, Component.translatable("narration.dainty.adjusting_position"));
 			return;

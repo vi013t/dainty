@@ -107,6 +107,7 @@ public class RayTracing {
 		}
 
 		if (mc.hitResult != null && mc.hitResult.getType() == Type.ENTITY) {
+			@SuppressWarnings("null")
 			Entity targetEntity = ((EntityHitResult) mc.hitResult).getEntity();
 			if (canBeTarget(targetEntity, viewEntity)) {
 				target = mc.hitResult;
@@ -125,6 +126,7 @@ public class RayTracing {
 		return target;
 	}
 
+	@SuppressWarnings("null")
 	public HitResult rayTrace(Entity entity, double blockReach, double entityReach) {
 		Camera camera = mc.gameRenderer.getMainCamera();
 		float partialTick = mc.getTimer().getGameTimeDeltaPartialTick(true);
@@ -209,6 +211,7 @@ public class RayTracing {
 		return blockResult;
 	}
 
+	@SuppressWarnings("null")
 	private boolean canBeTarget(Entity target, Entity viewEntity) {
 		if (target.isRemoved()) {
 			return false;

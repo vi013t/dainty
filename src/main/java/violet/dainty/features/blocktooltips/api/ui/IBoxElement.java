@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import violet.dainty.features.blocktooltips.api.ITooltip;
 import violet.dainty.features.blocktooltips.impl.ui.StyledElement;
 
+@SuppressWarnings("unused")
 public interface IBoxElement extends IElement, StyledElement {
 
 	ITooltip getTooltip();

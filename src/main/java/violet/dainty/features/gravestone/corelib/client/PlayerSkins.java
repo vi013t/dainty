@@ -84,7 +84,8 @@ public class PlayerSkins {
             return gameProfile;
         }
         try {
-            GameProfileCache cache = (GameProfileCache) gameProfileCacheField.get(null);
+            @SuppressWarnings("null")
+			GameProfileCache cache = (GameProfileCache) gameProfileCacheField.get(null);
             cache.getAsync(name).thenAccept(p -> {
                 p.ifPresent(value -> PLAYERS.put(uuid, value));
             });
@@ -105,8 +106,9 @@ public class PlayerSkins {
      * @return if the skin is slim
      */
     public static boolean isSlim(UUID uuid) {
-        PlayerInfo networkplayerinfo = Minecraft.getInstance().getConnection().getPlayerInfo(uuid);
-        return networkplayerinfo == null ? (uuid.hashCode() & 1) == 1 : networkplayerinfo.getSkin().model().equals(PlayerSkin.Model.SLIM);
+        @SuppressWarnings("null")
+		PlayerInfo networkPlayerInfo = Minecraft.getInstance().getConnection().getPlayerInfo(uuid);
+        return networkPlayerInfo == null ? (uuid.hashCode() & 1) == 1 : networkPlayerInfo.getSkin().model().equals(PlayerSkin.Model.SLIM);
     }
 
     /**

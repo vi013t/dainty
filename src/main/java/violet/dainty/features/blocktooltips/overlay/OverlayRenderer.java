@@ -39,6 +39,7 @@ public class OverlayRenderer {
 	private static BoxElement lingerTooltip;
 	private static float disappearTicks;
 
+	@SuppressWarnings("resource")
 	public static boolean shouldShow() {
 		if (WailaTickHandler.instance().rootElement == null) {
 			return false;
@@ -54,8 +55,7 @@ public class OverlayRenderer {
 		}
 
 		BossBarOverlapMode mode = Jade.CONFIG.get().getGeneral().getBossBarOverlapMode();
-		if (mode == BossBarOverlapMode.HIDE_TOOLTIP && !(Minecraft.getInstance().screen instanceof BaseOptionsScreen) &&
-				ClientProxy.getBossBarRect() != null) {
+		if (mode == BossBarOverlapMode.HIDE_TOOLTIP && !(Minecraft.getInstance().screen instanceof BaseOptionsScreen) && ClientProxy.getBossBarRect() != null) {
 			return false;
 		}
 

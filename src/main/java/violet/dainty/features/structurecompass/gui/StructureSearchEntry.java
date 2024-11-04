@@ -1,5 +1,7 @@
 package violet.dainty.features.structurecompass.gui;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.Util;
@@ -32,7 +34,7 @@ public class StructureSearchEntry extends ObjectSelectionList.Entry<StructureSea
 	}
 
 	@Override
-	public void render(GuiGraphics guiGraphics, int par1, int par2, int par3, int par4, int par5, int par6, int par7, boolean par8, float par9) {
+	public void render(@Nonnull GuiGraphics guiGraphics, int par1, int par2, int par3, int par4, int par5, int par6, int par7, boolean par8, float par9) {
 		guiGraphics.drawString(mc.font, Component.literal(StructureUtils.getPrettyStructureName(structureKey)), par3 + 1, par2 + 1, 0xffffff);
 		guiGraphics.drawString(mc.font, Component.translatable(("string.dainty.source")).append(Component.literal(": " + StructureUtils.getPrettyStructureSource(structureKey))), par3 + 1, par2 + mc.font.lineHeight + 3, 0x808080);
 		guiGraphics.drawString(mc.font, Component.translatable(("string.dainty.group")).append(Component.literal(": ")).append(Component.translatable(StructureUtils.getPrettyStructureName(StructureCompass.structureKeysToTypeKeys.get(structureKey)))), par3 + 1, par2 + mc.font.lineHeight + 14, 0x808080);

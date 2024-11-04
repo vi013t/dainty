@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -27,6 +29,7 @@ import violet.dainty.features.structurecompass.util.StructureUtils;
 @OnlyIn(Dist.CLIENT)
 public class ExplorersCompassScreen extends Screen {
 
+	@SuppressWarnings("unused")
 	private Level level;
 	private Player player;
 	private List<ResourceLocation> allowedStructureKeys;
@@ -37,6 +40,7 @@ public class ExplorersCompassScreen extends Screen {
 	private Button searchGroupButton;
 	private Button sortByButton;
 	private Button teleportButton;
+	@SuppressWarnings("unused")
 	private Button cancelButton;
 	private TransparentTextField searchTextField;
 	private StructureSearchList selectionList;
@@ -79,7 +83,7 @@ public class ExplorersCompassScreen extends Screen {
 	}
 
 	@Override
-	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		super.render(guiGraphics, mouseX, mouseY, partialTicks);
 		guiGraphics.drawCenteredString(font, title, 65, 15, 0xffffff);
 	}
@@ -110,16 +114,19 @@ public class ExplorersCompassScreen extends Screen {
 		searchGroupButton.active = enable;
 	}
 
+	@SuppressWarnings("null")
 	public void searchForStructure(ResourceLocation key) {
 		PacketDistributor.sendToServer(new SearchPacket(key, List.of(key), player.blockPosition()));
 		minecraft.setScreen(null);
 	}
 	
+	@SuppressWarnings("null")
 	public void searchForGroup(ResourceLocation key) {
 		PacketDistributor.sendToServer(new SearchPacket(key, StructureCompass.typeKeysToStructureKeys.get(key), player.blockPosition()));
 		minecraft.setScreen(null);
 	}
 
+	@SuppressWarnings("null")
 	public void teleport() {
 		PacketDistributor.sendToServer(new TeleportPacket());
 		minecraft.setScreen(null);
@@ -147,6 +154,7 @@ public class ExplorersCompassScreen extends Screen {
 		return structures;
 	}
 
+	@SuppressWarnings("null")
 	private void setupWidgets() {
 		clearWidgets();
 		searchButton = addRenderableWidget(new TransparentButton(10, 40, 110, 20, Component.translatable("string.dainty.search"), (onPress) -> {

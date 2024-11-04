@@ -16,6 +16,7 @@ public class EnumConfigEntry<E extends Enum<E>> extends ConfigEntry<E> {
 		super(id, defaultValue);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isValidValue(Object value) {
 		if (value.getClass() == String.class) {
@@ -29,6 +30,7 @@ public class EnumConfigEntry<E extends Enum<E>> extends ConfigEntry<E> {
 		return value.getClass() == getDefaultValue().getClass();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setValue(Object value) {
 		if (value.getClass() == String.class) {

@@ -1,5 +1,7 @@
 package violet.dainty.features.gravestone.corelib.client;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.Minecraft;
@@ -35,7 +37,7 @@ public class ItemRenderer {
         }
 
         @Override
-        public void renderByItem(ItemStack stack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, int overlay) {
+        public void renderByItem(@Nonnull ItemStack stack, @Nonnull ItemDisplayContext itemDisplayContext, @Nonnull PoseStack poseStack, @Nonnull MultiBufferSource multiBufferSource, int light, int overlay) {
             ItemRenderer.this.renderByItem(stack, itemDisplayContext, poseStack, multiBufferSource, light, overlay);
         }
     }

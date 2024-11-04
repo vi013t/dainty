@@ -84,6 +84,7 @@ public abstract class ItemStorageProvider<T extends Accessor<?>> implements ICom
 		private static final ForEntity INSTANCE = new ForEntity();
 	}
 
+	@SuppressWarnings("resource")
 	public static void append(ITooltip tooltip, Accessor<?> accessor, IPluginConfig config) {
 		if (!accessor.getServerData().contains(JadeIds.UNIVERSAL_ITEM_STORAGE.toString())) {
 			if (accessor.getServerData().getBoolean("Loot")) {

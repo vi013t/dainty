@@ -15,6 +15,7 @@ public class PlayerUtils {
 
 	public static boolean cheatModeEnabled(MinecraftServer server, Player player) {
 		if (server != null && server.isSingleplayer()) {
+			@SuppressWarnings("null")
 			LevelData levelData = server.getLevel(player.level().dimension()).getLevelData();
 			if (levelData instanceof ServerLevelData) {
 				return ((ServerLevelData) levelData).isAllowCommands();
@@ -26,6 +27,7 @@ public class PlayerUtils {
 
 	public static boolean isOp(Player player) {
 		if (player instanceof ServerPlayer) {
+			@SuppressWarnings("null")
 			final ServerOpListEntry userEntry = ((ServerPlayer) player).getServer().getPlayerList().getOps().get(player.getGameProfile());
 			return userEntry != null;
 		}

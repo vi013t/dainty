@@ -1,8 +1,10 @@
 package violet.dainty.features.gravestone.corelib;
 
-import violet.dainty.features.gravestone.corelib.config.ConfigBase;
-import violet.dainty.features.gravestone.corelib.config.DynamicConfig;
-import violet.dainty.features.gravestone.corelib.net.Message;
+import java.nio.file.Path;
+import java.util.function.Consumer;
+
+import javax.annotation.Nonnull;
+
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.PacketFlow;
@@ -23,13 +25,13 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-
-import java.nio.file.Path;
-import java.util.function.Consumer;
+import violet.dainty.features.gravestone.corelib.config.ConfigBase;
+import violet.dainty.features.gravestone.corelib.config.DynamicConfig;
+import violet.dainty.features.gravestone.corelib.net.Message;
 
 public class CommonRegistry {
 
-    private static final LevelResource SERVERCONFIG = new LevelResource("serverconfig");
+    private static final LevelResource SERVER_CONFIG = new LevelResource("serverconfig");
     private static final Path DEFAULT_CONFIG_PATH = FMLPaths.GAMEDIR.get().resolve(FMLConfig.defaultConfigPath());
 
     /**
@@ -44,12 +46,12 @@ public class CommonRegistry {
 
             StreamCodec<RegistryFriendlyByteBuf, T> codec = new StreamCodec<>() {
                 @Override
-                public void encode(RegistryFriendlyByteBuf buf, T packet) {
+                public void encode(@Nonnull RegistryFriendlyByteBuf buf, @Nonnull T packet) {
                     packet.toBytes(buf);
                 }
 
                 @Override
-                public T decode(RegistryFriendlyByteBuf buf) {
+                public T decode(@Nonnull RegistryFriendlyByteBuf buf) {
                     try {
                         T packet = message.getDeclaredConstructor().newInstance();
                         packet.fromBytes(buf);
@@ -97,7 +99,8 @@ public class CommonRegistry {
      * @return the entity type of the registered entity
      */
     public static <T extends Entity> EntityType<T> registerEntity(String modId, String name, MobCategory classification, Class<? extends Entity> entityClass, Consumer<EntityType.Builder<T>> builderConsumer) {
-        EntityType.Builder<T> builder = EntityType.Builder
+        @SuppressWarnings("unchecked")
+		EntityType.Builder<T> builder = EntityType.Builder
                 .of((type, world) -> {
                     try {
                         try {
@@ -111,7 +114,6 @@ public class CommonRegistry {
                 }, classification);
         builderConsumer.accept(builder);
         EntityType<T> type = builder.build(modId + ":" + name);
-//        type.setRegistryName(new ResourceLocation(modId, name)); //TODO
         return type;
     }
 
@@ -183,7 +185,7 @@ public class CommonRegistry {
             String configFileName = configName + ".toml";
             if (type.equals(DynamicConfig.DynamicConfigType.SERVER)) {
                 Consumer<ServerAboutToStartEvent> consumer = event -> {
-                    Path serverConfig = event.getServer().getWorldPath(SERVERCONFIG).resolve(folderName);
+                    Path serverConfig = event.getServer().getWorldPath(SERVER_CONFIG).resolve(folderName);
                     serverConfig.toFile().mkdirs();
                     Path configPath = serverConfig.resolve(configFileName);
                     Path defaultPath = DEFAULT_CONFIG_PATH.resolve(folderName).resolve(configFileName);

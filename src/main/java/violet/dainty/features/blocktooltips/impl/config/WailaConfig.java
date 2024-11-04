@@ -575,6 +575,7 @@ public class WailaConfig implements IWailaConfig {
 		}
 
 		@Override
+		@SuppressWarnings("resource")
 		public float tryFlip(float f) {
 			if (flipMainHand && Minecraft.getInstance().options.mainHand().get() == HumanoidArm.LEFT) {
 				f = 1 - f;

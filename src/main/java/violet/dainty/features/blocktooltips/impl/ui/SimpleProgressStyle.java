@@ -11,8 +11,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.phys.Vec2;
 import violet.dainty.features.blocktooltips.api.config.IWailaConfig.IConfigOverlay;
 import violet.dainty.features.blocktooltips.api.ui.Color;
-import violet.dainty.features.blocktooltips.api.ui.ScreenDirection;
 import violet.dainty.features.blocktooltips.api.ui.ProgressStyle;
+import violet.dainty.features.blocktooltips.api.ui.ScreenDirection;
 import violet.dainty.features.blocktooltips.overlay.DisplayHelper;
 import violet.dainty.features.blocktooltips.overlay.OverlayRenderer;
 
@@ -125,6 +125,7 @@ public class SimpleProgressStyle extends ProgressStyle {
 			}
 		}
 		if (text != null) {
+			@SuppressWarnings("resource")
 			Font font = Minecraft.getInstance().font;
 			if (autoTextColor) {
 				autoTextColor = false;

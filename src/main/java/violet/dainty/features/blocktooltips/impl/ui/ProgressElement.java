@@ -39,6 +39,7 @@ public class ProgressElement extends Element implements StyledElement {
 		float width = 0;
 		width += boxStyle.borderWidth() * 2;
 		if (text != null) {
+			@SuppressWarnings("resource")
 			Font font = Minecraft.getInstance().font;
 			width += font.width(text) + 3;
 		}

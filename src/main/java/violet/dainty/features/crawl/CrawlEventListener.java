@@ -13,6 +13,7 @@ import violet.dainty.registries.DaintyKeyBindings;
 public class CrawlEventListener {
 
 	@SubscribeEvent
+	@SuppressWarnings({ "resource", "null" })
 	public static void onClientTick(ClientTickEvent.Post event) {
 		if (Minecraft.getInstance().player == null) return;
 

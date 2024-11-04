@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.jetbrains.annotations.NotNull;
 
@@ -163,7 +165,7 @@ public class ThemeHelper extends SimpleJsonResourceReloadListener implements ITh
 	}
 
 	@Override
-	protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+	protected void apply(@Nonnull Map<ResourceLocation, JsonElement> map, @Nonnull ResourceManager resourceManager, @Nonnull ProfilerFiller profilerFiller) {
 		Set<ResourceLocation> existingKeys = Set.copyOf(themes.keySet());
 		MutableObject<Theme> enable = new MutableObject<>();
 		WailaConfig.ConfigOverlay config = Jade.CONFIG.get().getOverlay();
@@ -190,8 +192,8 @@ public class ThemeHelper extends SimpleJsonResourceReloadListener implements ITh
 		});
 		fallback = themes.get(Theme.DEFAULT_THEME_ID);
 		if (fallback == null) {
-			CrashReport crashreport = CrashReport.forThrowable(new NullPointerException(), "Missing default theme");
-			throw new ReportedException(crashreport);
+			CrashReport crashReport = CrashReport.forThrowable(new NullPointerException(), "Missing default theme");
+			throw new ReportedException(crashReport);
 		}
 		int hash = 0;
 		for (ResourceLocation id : themes.keySet()) {

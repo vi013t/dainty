@@ -28,10 +28,12 @@ public enum BlockPropertiesProvider implements IBlockComponentProvider {
 		if (properties.speedFactor != 1) {
 			tooltip.add(Component.translatable("dainty.block_speed_factor", themes.info(properties.speedFactor)));
 		}
+		@SuppressWarnings("deprecation")
 		int igniteOdds = ((FireBlock) Blocks.FIRE).getIgniteOdds(accessor.getBlockState());
 		if (igniteOdds != 0) {
 			tooltip.add(Component.translatable("dainty.block_ignite_odds", themes.info(igniteOdds)));
 		}
+		@SuppressWarnings("deprecation")
 		int burnOdds = ((FireBlock) Blocks.FIRE).getBurnOdds(accessor.getBlockState());
 		if (burnOdds != 0) {
 			tooltip.add(Component.translatable("dainty.block_burn_odds", themes.info(burnOdds)));

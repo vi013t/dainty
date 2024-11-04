@@ -2,6 +2,8 @@ package violet.dainty.features.gravestone.tileentity.render;
 
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -32,7 +34,7 @@ public class GravestoneRenderer implements BlockEntityRenderer<GraveStoneTileEnt
     }
 
     @Override
-    public void render(GraveStoneTileEntity grave, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    public void render(@Nonnull GraveStoneTileEntity grave, float partialTicks, @Nonnull PoseStack matrixStack, @Nonnull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         Component name = grave.getGraveName();
         if (name == null) {
             return;
@@ -56,9 +58,11 @@ public class GravestoneRenderer implements BlockEntityRenderer<GraveStoneTileEnt
         font.drawInBatch(name.getString(), left, 0F, GravestoneClientConfig.GRAVE_TEXT_COLOR_SPEC, false, matrixStack.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, combinedLight);
         matrixStack.popPose();
 
-        BlockState state = grave.getLevel().getBlockState(grave.getBlockPos().below());
+        @SuppressWarnings("null")
+		BlockState state = grave.getLevel().getBlockState(grave.getBlockPos().below());
 
-        boolean render = state.isRedstoneConductor(grave.getLevel(), grave.getBlockPos()); //TODO fix with slime block
+        @SuppressWarnings("null")
+		boolean render = state.isRedstoneConductor(grave.getLevel(), grave.getBlockPos()); //TODO fix with slime block
         UUID playerUUID = grave.getDeath().getPlayerUUID();
         if (playerUUID != null && !playerUUID.equals(GraveUtils.EMPTY_UUID) && GravestoneClientConfig.RENDER_SKULL && render) {
             renderSkull(playerUUID, name.getString(), direction, matrixStack, buffer, combinedLight);

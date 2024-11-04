@@ -1,5 +1,13 @@
 package violet.dainty.features.gravestone.corelib.config;
 
+import java.nio.file.Path;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+
+import javax.annotation.Nullable;
+
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.electronwill.nightconfig.core.Config;
 import com.electronwill.nightconfig.core.UnmodifiableConfig;
@@ -8,19 +16,15 @@ import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.file.FileNotFoundAction;
 import com.electronwill.nightconfig.core.file.GenericBuilder;
 
-import javax.annotation.Nullable;
-import java.nio.file.Path;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-
 public abstract class DynamicConfig {
 
     protected CommentedFileConfig config;
-    private ObjectConverter converter;
 
-    public DynamicConfig() {
+    @SuppressWarnings("deprecation")
+	private ObjectConverter converter;
+
+    @SuppressWarnings("deprecation")
+	public DynamicConfig() {
         converter = new ObjectConverter();
     }
 
@@ -82,7 +86,8 @@ public abstract class DynamicConfig {
         return config.<Config>getOrElse(path, null);
     }
 
-    public <T> T getObject(String path, Supplier<T> object, Supplier<T> defaultValue) {
+    @SuppressWarnings("deprecation")
+	public <T> T getObject(String path, Supplier<T> object, Supplier<T> defaultValue) {
         checkLoaded();
         Config subConfig = getSubConfig(path);
         if (subConfig == null) {
@@ -98,7 +103,8 @@ public abstract class DynamicConfig {
 
     public <T> T setObject(String path, T object) {
         checkLoaded();
-        Config config = converter.toConfig(object, Config::inMemoryUniversal);
+        @SuppressWarnings("deprecation")
+		Config config = converter.toConfig(object, Config::inMemoryUniversal);
         set(path, config);
         return object;
     }

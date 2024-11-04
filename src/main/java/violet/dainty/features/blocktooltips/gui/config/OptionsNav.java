@@ -1,6 +1,7 @@
 package violet.dainty.features.blocktooltips.gui.config;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ComponentPath;
@@ -23,7 +24,7 @@ public class OptionsNav extends ObjectSelectionList<OptionsNav.Entry> {
 	}
 
 	@Override
-	protected void renderListItems(GuiGraphics guiGraphics, int i, int j, float f) {
+	protected void renderListItems(@Nonnull GuiGraphics guiGraphics, int i, int j, float f) {
 		super.renderListItems(guiGraphics, i, j, f);
 		if (children().isEmpty()) {
 			return;
@@ -41,11 +42,11 @@ public class OptionsNav extends ObjectSelectionList<OptionsNav.Entry> {
 	}
 
 	@Override
-	protected void renderListSeparators(GuiGraphics guiGraphics) {
+	protected void renderListSeparators(@Nonnull GuiGraphics guiGraphics) {
 	}
 
 	@Override
-	protected void renderSelection(GuiGraphics guiGraphics, int i, int j, int k, int l, int m) {
+	protected void renderSelection(@Nonnull GuiGraphics guiGraphics, int i, int j, int k, int l, int m) {
 	}
 
 	public void addEntry(OptionsList.Title entry) {
@@ -76,7 +77,7 @@ public class OptionsNav extends ObjectSelectionList<OptionsNav.Entry> {
 
 	@Nullable
 	@Override
-	public ComponentPath nextFocusPath(FocusNavigationEvent event) {
+	public ComponentPath nextFocusPath(@Nonnull FocusNavigationEvent event) {
 		if (!isFocused() && event instanceof FocusNavigationEvent.ArrowNavigation nav && nav.direction() == ScreenDirection.LEFT) {
 			for (Entry entry : children()) {
 				if (entry.title == options.currentTitle) {
@@ -107,7 +108,7 @@ public class OptionsNav extends ObjectSelectionList<OptionsNav.Entry> {
 
 		@Override
 		public void render(
-				GuiGraphics guiGraphics,
+				@Nonnull GuiGraphics guiGraphics,
 				int index,
 				int rowTop,
 				int rowLeft,

@@ -3,6 +3,7 @@ package violet.dainty.features.gravestone.tileentity;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -29,12 +30,12 @@ public class GraveStoneTileEntity extends BlockEntity implements Nameable {
     protected Component customName;
 
     public GraveStoneTileEntity(BlockPos pos, BlockState state) {
-        super(Gravestone.GRAVESTONE_TILEENTITY.get(), pos, state); 
+        super(Gravestone.GRAVESTONE_TILE_ENTITY.get(), pos, state); 
         death = new Death.Builder(GraveUtils.EMPTY_UUID, GraveUtils.EMPTY_UUID).build();
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compound, HolderLookup.Provider provider) {
+    protected void saveAdditional(@Nonnull CompoundTag compound, @Nonnull HolderLookup.Provider provider) {
         super.saveAdditional(compound, provider);
         compound.put("Death", death.toNBT(provider));
         if (customName != null) {
@@ -43,7 +44,7 @@ public class GraveStoneTileEntity extends BlockEntity implements Nameable {
     }
 
     @Override
-    protected void loadAdditional(CompoundTag compound, HolderLookup.Provider provider) {
+    protected void loadAdditional(@Nonnull CompoundTag compound, @Nonnull HolderLookup.Provider provider) {
         super.loadAdditional(compound, provider);
 
         if (compound.contains("Death")) {
@@ -81,7 +82,7 @@ public class GraveStoneTileEntity extends BlockEntity implements Nameable {
     }
 
     @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+    public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider provider) {
         CompoundTag compound = new CompoundTag();
         saveAdditional(compound, provider);
         return compound;

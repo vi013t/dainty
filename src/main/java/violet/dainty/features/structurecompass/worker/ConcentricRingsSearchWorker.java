@@ -81,6 +81,7 @@ public class ConcentricRingsSearchWorker extends StructureSearchWorker<Concentri
 	}
 
 	// Non-optimized method to get the closest structure, for testing purposes
+	@SuppressWarnings("unused")
 	private Pair<BlockPos, Structure> getClosest() {
 		List<ChunkPos> list = level.getChunkSource().getGeneratorState().getRingPositionsFor(placement);
 		if (list == null) {

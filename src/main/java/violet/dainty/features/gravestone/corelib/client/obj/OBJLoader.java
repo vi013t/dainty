@@ -47,7 +47,8 @@ public class OBJLoader {
             throw new IOException("Failed to load model '%s'".formatted(model));
         }
 
-        LineReader reader = new LineReader(optionalResource.get());
+        @SuppressWarnings("resource")
+		LineReader reader = new LineReader(optionalResource.get());
 
         List<Vector3f> positions = Lists.newArrayList();
         List<Vec2> texCoords = Lists.newArrayList();

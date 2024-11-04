@@ -1,7 +1,8 @@
 package violet.dainty.features.blocktooltips.test;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,11 +32,11 @@ public class Test {
 			event.registerBlock(Capabilities.ItemHandler.BLOCK, new IBlockCapabilityProvider<>() {
 				@Override
 				public @NotNull IItemHandler getCapability(
-						Level level,
-						BlockPos blockPos,
-						BlockState blockState,
-						@Nullable BlockEntity blockEntity,
-						@Nullable Direction direction) {
+						@Nonnull Level level,
+						@Nonnull BlockPos blockPos,
+						@Nonnull BlockState blockState,
+						@Nonnull BlockEntity blockEntity,
+						@Nonnull Direction direction) {
 					return new ForwardingItemHandler(() -> new SnowItemHandler(level.getBlockState(blockPos), level, blockPos));
 				}
 			}, Blocks.SNOW);
@@ -55,12 +56,12 @@ public class Test {
 		}
 
 		@Override
-		public boolean isItemValid(int slot, ItemStack stack) {
+		public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
 			return stack.is(Items.SNOW);
 		}
 
 		@Override
-		protected int getStackLimit(int slot, ItemStack stack) {
+		protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
 			return 8;
 		}
 

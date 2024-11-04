@@ -10,6 +10,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2i;
 
@@ -130,7 +132,7 @@ public class OptionsList extends ContainerObjectSelectionList<OptionsList.Entry>
 
 	@Nullable
 	@Override
-	public ComponentPath nextFocusPath(FocusNavigationEvent event) {
+	public ComponentPath nextFocusPath(@Nonnull FocusNavigationEvent event) {
 		OptionsNav.Entry navEntry = owner.getOptionsNav().getFocused();
 		if (navEntry != null && event instanceof FocusNavigationEvent.ArrowNavigation nav && nav.direction() == ScreenDirection.RIGHT) {
 			Title title = navEntry.getTitle();
@@ -143,7 +145,7 @@ public class OptionsList extends ContainerObjectSelectionList<OptionsList.Entry>
 	}
 
 	@Override
-	public void ensureVisible(Entry entry) {
+	public void ensureVisible(@Nonnull Entry entry) {
 		super.ensureVisible(entry);
 	}
 
@@ -156,7 +158,7 @@ public class OptionsList extends ContainerObjectSelectionList<OptionsList.Entry>
 	}
 
 	@Override
-	protected void renderListSeparators(GuiGraphics guiGraphics) {
+	protected void renderListSeparators(@Nonnull GuiGraphics guiGraphics) {
 		RenderSystem.enableBlend();
 		ResourceLocation resourceLocation2 = this.minecraft.level == null ? Screen.FOOTER_SEPARATOR : Screen.INWORLD_FOOTER_SEPARATOR;
 		guiGraphics.blit(resourceLocation2, 0, this.getBottom(), 0.0F, 0.0F, owner.width, 2, 32, 2);
@@ -164,12 +166,12 @@ public class OptionsList extends ContainerObjectSelectionList<OptionsList.Entry>
 	}
 
 	@Override
-	protected void renderSelection(GuiGraphics guiGraphics, int i, int j, int k, int l, int m) {
+	protected void renderSelection(@Nonnull GuiGraphics guiGraphics, int i, int j, int k, int l, int m) {
 		guiGraphics.fill(getX(), i - 2, getRight(), i + k + 2, 0x33FFFFFF);
 	}
 
 	@Override
-	public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+	public void renderWidget(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		float deltaTicks = Minecraft.getInstance().getTimer().getRealtimeDeltaTicks();
 		smoothScroll.tick(deltaTicks);
 		super.setScrollAmount(smoothScroll.value);
@@ -419,6 +421,7 @@ public class OptionsList extends ContainerObjectSelectionList<OptionsList.Entry>
 	@Override
 	public boolean keyPressed(int i, int j, int k) {
 		if (selectedKey != null) {
+			@SuppressWarnings("resource")
 			Options options = Minecraft.getInstance().options;
 			if (i == 256) {
 				options.setKey(selectedKey, InputConstants.UNKNOWN);
@@ -435,6 +438,7 @@ public class OptionsList extends ContainerObjectSelectionList<OptionsList.Entry>
 	@Override
 	public boolean mouseClicked(double d, double e, int i) {
 		if (selectedKey != null) {
+			@SuppressWarnings("resource")
 			Options options = Minecraft.getInstance().options;
 			options.setKey(selectedKey, InputConstants.Type.MOUSE.getOrCreate(i));
 			this.selectedKey = null;
@@ -490,7 +494,7 @@ public class OptionsList extends ContainerObjectSelectionList<OptionsList.Entry>
 
 		@Override
 		public void render(
-				GuiGraphics guiGraphics,
+				@Nonnull GuiGraphics guiGraphics,
 				int index,
 				int rowTop,
 				int rowLeft,
@@ -599,7 +603,7 @@ public class OptionsList extends ContainerObjectSelectionList<OptionsList.Entry>
 
 		@Override
 		public void render(
-				GuiGraphics guiGraphics,
+				@Nonnull GuiGraphics guiGraphics,
 				int index,
 				int rowTop,
 				int rowLeft,
@@ -633,7 +637,7 @@ public class OptionsList extends ContainerObjectSelectionList<OptionsList.Entry>
 				}
 
 				@Override
-				public void updateNarration(NarrationElementOutput narrationElementOutput) {
+				public void updateNarration(@Nonnull NarrationElementOutput narrationElementOutput) {
 					narrationElementOutput.add(NarratedElementType.TITLE, narration);
 				}
 			});

@@ -1,5 +1,8 @@
 package violet.dainty.features.structurecompass.client;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -37,9 +40,10 @@ public class ExplorersCompassClient {
 				@OnlyIn(Dist.CLIENT)
 				private long lastUpdateTick;
 	
+				@SuppressWarnings("null")
 				@OnlyIn(Dist.CLIENT)
 				@Override
-				public float unclampedCall(ItemStack stack, ClientLevel world, LivingEntity entityLiving, int seed) {
+				public float unclampedCall(@Nonnull ItemStack stack, @Nullable ClientLevel world, LivingEntity entityLiving, int seed) {
 					if (entityLiving == null && !stack.isFramed()) {
 						return 0.0F;
 					} else {

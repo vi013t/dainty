@@ -9,7 +9,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.world.entity.player.Player;
-import violet.dainty.registries.DaintyDataAttachments;
 import violet.dainty.registries.DaintyKeyBindings;
 
 public class VeinMineSettingsOverlay implements LayeredDraw.Layer {
@@ -30,7 +29,7 @@ public class VeinMineSettingsOverlay implements LayeredDraw.Layer {
 		if (player == null) return;
 		if (!DaintyKeyBindings.VEINMINE.get().isDown()) return;
 
-		VeinMineSettings settings = player.getData(DaintyDataAttachments.VEIN_MINE_SETTINGS_ATTACHMENT_TYPE);
+		// VeinMineSettings _settings = player.getData(DaintyDataAttachments.VEIN_MINE_SETTINGS_ATTACHMENT_TYPE);
 
 		float timePerShift = 0.5f;
 		int lineHeight = 12;

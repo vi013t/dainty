@@ -1,8 +1,17 @@
 package violet.dainty.features.gravestone.corelib.helpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.joml.Matrix4f;
+
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
-import violet.dainty.features.gravestone.corelib.client.RenderUtils;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -16,10 +25,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
-import org.joml.Matrix4f;
-
-import java.util.ArrayList;
-import java.util.List;
+import violet.dainty.features.gravestone.corelib.client.RenderUtils;
 
 public class WrappedFluidStack extends AbstractStack<FluidStack> {
 
@@ -39,7 +45,8 @@ public class WrappedFluidStack extends AbstractStack<FluidStack> {
         fluidBlit(guiGraphics, x, y, 16, 16, texture, color);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @SuppressWarnings("resource")
+	@OnlyIn(Dist.CLIENT)
     @Override
     public List<Component> getTooltip() {
         List<Component> tooltip = new ArrayList<>();

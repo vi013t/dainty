@@ -41,6 +41,7 @@ public class PluginsConfigScreen extends PreviewOptionsScreen {
 	@Override
 	public OptionsList createOptions() {
 		OptionsList options = new OptionsList(this, minecraft, width - 120, height - 32, 0, 26, PluginConfig.INSTANCE::save);
+		@SuppressWarnings("resource")
 		boolean noteServerFeature =
 				Minecraft.getInstance().level == null || IWailaConfig.get().getGeneral().isDebug() || !ObjectDataCenter.serverConnected;
 		BiConsumer<ResourceLocation, Object> setter = (key, value) -> {

@@ -2,6 +2,8 @@ package violet.dainty.features.gravestone.corelib.inventory;
 
 import java.util.function.Function;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
@@ -45,11 +47,11 @@ public class ItemListInventory implements Container {
 
     @Override
     public ItemStack removeItem(int index, int count) {
-        ItemStack itemstack = ContainerHelper.removeItem(items, index, count);
-        if (!itemstack.isEmpty()) {
+        ItemStack itemStack = ContainerHelper.removeItem(items, index, count);
+        if (!itemStack.isEmpty()) {
             setChanged();
         }
-        return itemstack;
+        return itemStack;
     }
 
     @Override
@@ -58,7 +60,7 @@ public class ItemListInventory implements Container {
     }
 
     @Override
-    public void setItem(int index, ItemStack stack) {
+    public void setItem(int index, @Nonnull ItemStack stack) {
         items.set(index, stack);
         if (stack.getCount() > getMaxStackSize()) {
             stack.setCount(getMaxStackSize());
@@ -74,7 +76,7 @@ public class ItemListInventory implements Container {
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@Nonnull Player player) {
         if (onIsUsableByPlayer != null) {
             return onIsUsableByPlayer.apply(player);
         } else {

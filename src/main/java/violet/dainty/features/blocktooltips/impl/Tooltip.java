@@ -104,6 +104,7 @@ public class Tooltip implements ITooltip {
 		return removeInternal(tag, true, null);
 	}
 
+	@SuppressWarnings("null")
 	private boolean removeInternal(ResourceLocation tag, boolean removeFirstLineIfEmpty, @Nullable List<List<IElement>> collector) {
 		boolean removed = false;
 		List<IElement> collected = collector == null ? null : Lists.newArrayList();

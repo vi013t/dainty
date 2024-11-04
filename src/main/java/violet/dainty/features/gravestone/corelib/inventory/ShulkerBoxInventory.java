@@ -1,5 +1,6 @@
 package violet.dainty.features.gravestone.corelib.inventory;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.core.NonNullList;
@@ -59,12 +60,13 @@ public abstract class ShulkerBoxInventory implements Container, MenuProvider {
         if (player == null) {
             return;
         }
-        LootTable loottable = player.getServer().reloadableRegistries().getLootTable(loot.lootTable());
+        @SuppressWarnings("null")
+		LootTable lootTable = player.getServer().reloadableRegistries().getLootTable(loot.lootTable());
 
         LootParams.Builder builder = new LootParams.Builder((ServerLevel) player.level());
         builder.withLuck(player.getLuck()).withParameter(LootContextParams.THIS_ENTITY, player);
 
-        loottable.fill(this, builder.create(LootContextParamSets.CHEST), loot.seed());
+        lootTable.fill(this, builder.create(LootContextParamSets.CHEST), loot.seed());
         setChanged();
     }
 
@@ -80,9 +82,9 @@ public abstract class ShulkerBoxInventory implements Container, MenuProvider {
 
     @Override
     public ItemStack removeItem(int index, int count) {
-        ItemStack itemstack = ContainerHelper.removeItem(items, index, count);
+        ItemStack itemStack = ContainerHelper.removeItem(items, index, count);
         setChanged();
-        return itemstack;
+        return itemStack;
     }
 
     @Override
@@ -93,7 +95,7 @@ public abstract class ShulkerBoxInventory implements Container, MenuProvider {
     }
 
     @Override
-    public void setItem(int index, ItemStack stack) {
+    public void setItem(int index, @Nonnull ItemStack stack) {
         items.set(index, stack);
         setChanged();
     }
@@ -109,12 +111,13 @@ public abstract class ShulkerBoxInventory implements Container, MenuProvider {
     }
 
     @Override
-    public void startOpen(Player player) {
+    public void startOpen(@Nonnull Player player) {
         player.level().playSound(null, player.getX(), player.getY(), player.getZ(), getOpenSound(), SoundSource.BLOCKS, 0.5F, SoundUtils.getVariatedPitch(player.level()));
     }
 
-    @Override
-    public void stopOpen(Player player) {
+	@Override
+    @SuppressWarnings("resource")
+    public void stopOpen(@Nonnull Player player) {
         setChanged();
         player.level().playSound(null, player.getX(), player.getY(), player.getZ(), getCloseSound(), SoundSource.BLOCKS, 0.5F, player.level().random.nextFloat() * 0.1F + 0.9F);
     }
@@ -139,7 +142,7 @@ public abstract class ShulkerBoxInventory implements Container, MenuProvider {
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@Nonnull Player player) {
         for (InteractionHand hand : InteractionHand.values()) {
             if (player.getItemInHand(hand).equals(shulkerBox)) {
                 return true;
@@ -155,6 +158,6 @@ public abstract class ShulkerBoxInventory implements Container, MenuProvider {
 
     @Nullable
     @Override
-    public abstract AbstractContainerMenu createMenu(int id, Inventory inventory, Player player);
+    public abstract AbstractContainerMenu createMenu(int id, @Nonnull Inventory inventory, @Nonnull Player player);
 
 }

@@ -117,6 +117,7 @@ public final class CommonProxy {
 		}
 	}
 
+	@SuppressWarnings("null")
 	public static <T> T getDefaultStorage(
 			Accessor<?> accessor,
 			BlockCapability<T, ?> blockCapability,
@@ -345,6 +346,7 @@ public final class CommonProxy {
 		return storageGroup(storage, accessor, CommonProxy::findItemHandler);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Nullable
 	public static List<ViewGroup<ItemStack>> storageGroup(
 			Object storage,
@@ -365,6 +367,7 @@ public final class CommonProxy {
 		}
 	}
 
+	@SuppressWarnings("null")
 	@Nullable
 	public static IItemHandler findItemHandler(Accessor<?> accessor) {
 		if (accessor instanceof BlockAccessor blockAccessor) {

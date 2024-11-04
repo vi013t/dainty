@@ -84,6 +84,7 @@ public abstract class AccessorImpl<T extends HitResult> implements Accessor<T> {
 		serverData.merge((CompoundTag) tag);
 	}
 
+	@SuppressWarnings("deprecation")
 	private RegistryFriendlyByteBuf buffer() {
 		if (buffer == null) {
 			buffer = new RegistryFriendlyByteBuf(Unpooled.buffer(), level.registryAccess());

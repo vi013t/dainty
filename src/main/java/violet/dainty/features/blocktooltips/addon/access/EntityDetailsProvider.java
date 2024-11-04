@@ -23,6 +23,7 @@ import violet.dainty.features.blocktooltips.api.config.IPluginConfig;
 import violet.dainty.features.blocktooltips.api.theme.IThemeHelper;
 
 public class EntityDetailsProvider implements IEntityComponentProvider {
+	@SuppressWarnings("deprecation")
 	@Override
 	public void appendTooltip(ITooltip tooltip, EntityAccessor accessor, IPluginConfig config) {
 		Entity entity = accessor.getEntity();

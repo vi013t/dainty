@@ -121,7 +121,7 @@ public class GraveStoneBlock extends Block implements EntityBlock, IItemBlock, S
     }
 
     @Override
-    public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (stack.has(DataComponents.CUSTOM_NAME)) {
             BlockEntity tileentity = world.getBlockEntity(pos);
             if (tileentity instanceof GraveStoneTileEntity) {
@@ -246,13 +246,12 @@ public class GraveStoneBlock extends Block implements EntityBlock, IItemBlock, S
         if (!(p instanceof ServerPlayer)) {
             return;
         }
+
         ServerPlayer player = (ServerPlayer) p;
-
         Inventory inv = player.getInventory();
+        List<NonNullList<ItemStack>> inventories = ImmutableList.of(player.getInventory().items, player.getInventory().armor, player.getInventory().offhand);
 
-        List<NonNullList<ItemStack>> invs = ImmutableList.of(player.getInventory().items, player.getInventory().armor, player.getInventory().offhand);
-
-        for (NonNullList<ItemStack> i : invs) {
+        for (NonNullList<ItemStack> i : inventories) {
             for (ItemStack stack : i) {
                 if (stack.getItem().equals(Gravestone.OBITUARY.get())) {
                     Death death = Gravestone.OBITUARY.get().fromStack(player, stack);
@@ -270,7 +269,8 @@ public class GraveStoneBlock extends Block implements EntityBlock, IItemBlock, S
         if (!(entity instanceof ServerPlayer) || !entity.isAlive() || !GravestoneServerConfig.SNEAK_PICKUP) {
             return;
         }
-        ServerPlayer player = (ServerPlayer) entity;
+        @SuppressWarnings("unused")
+		ServerPlayer player = (ServerPlayer) entity;
         if (!player.isShiftKeyDown() || player.getAbilities().instabuild || !GraveUtils.canBreakGrave(world, player, pos)) {
             return;
         }

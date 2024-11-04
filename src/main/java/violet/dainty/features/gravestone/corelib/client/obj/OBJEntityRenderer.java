@@ -2,6 +2,8 @@ package violet.dainty.features.gravestone.corelib.client.obj;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 
@@ -20,12 +22,12 @@ public abstract class OBJEntityRenderer<T extends Entity> extends EntityRenderer
     public abstract List<OBJModelInstance<T>> getModels(T entity);
 
     @Override
-    public ResourceLocation getTextureLocation(T entity) {
+    public ResourceLocation getTextureLocation(@Nonnull T entity) {
         return null;
     }
 
     @Override
-    public void render(T entity, float yaw, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int packedLight) {
+    public void render(@Nonnull T entity, float yaw, float partialTicks, @Nonnull PoseStack matrixStack, @Nonnull MultiBufferSource buffer, int packedLight) {
         renderModels(entity, yaw, partialTicks, matrixStack, buffer, packedLight);
         super.render(entity, yaw, partialTicks, matrixStack, buffer, packedLight);
     }

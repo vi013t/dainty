@@ -22,6 +22,7 @@ public class SpecialTextElement extends TextElement {
 
 	@Override
 	public Vec2 getSize() {
+		@SuppressWarnings("resource")
 		Font font = Minecraft.getInstance().font;
 		return new Vec2(font.width(text) * scale, font.lineHeight * scale + 1);
 	}

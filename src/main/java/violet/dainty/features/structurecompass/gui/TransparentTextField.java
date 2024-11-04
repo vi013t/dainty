@@ -1,5 +1,7 @@
 package violet.dainty.features.structurecompass.gui;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.Util;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -33,7 +35,7 @@ public class TransparentTextField extends EditBox {
 	}
 
 	@Override
-	public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+	public void renderWidget(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		if (isVisible()) {
 			if (pseudoEnableBackgroundDrawing) {
 				guiGraphics.fill(getX(), getY(), getX() + width, getY() + height, 255 / 2 << 24);

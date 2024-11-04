@@ -3,6 +3,8 @@ package violet.dainty.features.structurecompass.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -37,7 +39,7 @@ public class ExplorersCompassItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResultHolder<ItemStack> use(@Nonnull Level level, @Nonnull Player player, @Nonnull InteractionHand hand) {
 		if (!player.isCrouching()) {
 			if (level.isClientSide()) {
 				final ItemStack stack = ItemUtils.getHeldItem(player, StructureCompass.explorersCompass);
@@ -57,7 +59,7 @@ public class ExplorersCompassItem extends Item {
 	}
 	
 	@Override
- 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+ 	public boolean shouldCauseReequipAnimation(@Nonnull ItemStack oldStack, @Nonnull ItemStack newStack, boolean slotChanged) {
  		if (getState(oldStack) == getState(newStack)) {
  			return false;
  		}
@@ -177,6 +179,7 @@ public class ExplorersCompassItem extends Item {
 		}
 	}
 
+	@SuppressWarnings("null")
 	public CompassState getState(ItemStack stack) {
 		if (ItemUtils.isCompass(stack) && stack.has(StructureCompass.COMPASS_STATE_COMPONENT)) {
 			return CompassState.fromID(stack.get(StructureCompass.COMPASS_STATE_COMPONENT));
@@ -185,6 +188,7 @@ public class ExplorersCompassItem extends Item {
 		return null;
 	}
 
+	@SuppressWarnings("null")
 	public int getFoundStructureX(ItemStack stack) {
 		if (ItemUtils.isCompass(stack) && stack.has(StructureCompass.FOUND_X_COMPONENT)) {
 			return stack.get(StructureCompass.FOUND_X_COMPONENT);
@@ -193,6 +197,7 @@ public class ExplorersCompassItem extends Item {
 		return 0;
 	}
 
+	@SuppressWarnings("null")
 	public int getFoundStructureZ(ItemStack stack) {
 		if (ItemUtils.isCompass(stack) && stack.has(StructureCompass.FOUND_Z_COMPONENT)) {
 			return stack.get(StructureCompass.FOUND_Z_COMPONENT);
@@ -201,6 +206,7 @@ public class ExplorersCompassItem extends Item {
 		return 0;
 	}
 
+	@SuppressWarnings("null")
 	public ResourceLocation getStructureKey(ItemStack stack) {
 		if (ItemUtils.isCompass(stack) && stack.has(StructureCompass.STRUCTURE_ID_COMPONENT)) {
 			return ResourceLocation.parse(stack.get(StructureCompass.STRUCTURE_ID_COMPONENT));
@@ -209,6 +215,7 @@ public class ExplorersCompassItem extends Item {
 		return ResourceLocation.fromNamespaceAndPath("", "");
 	}
 
+	@SuppressWarnings("null")
 	public int getSearchRadius(ItemStack stack) {
 		if (ItemUtils.isCompass(stack) && stack.has(StructureCompass.SEARCH_RADIUS_COMPONENT)) {
 			return stack.get(StructureCompass.SEARCH_RADIUS_COMPONENT);
@@ -217,6 +224,7 @@ public class ExplorersCompassItem extends Item {
 		return -1;
 	}
 
+	@SuppressWarnings("null")
 	public int getSamples(ItemStack stack) {
 		if (ItemUtils.isCompass(stack) && stack.has(StructureCompass.SAMPLES_COMPONENT)) {
 			return stack.get(StructureCompass.SAMPLES_COMPONENT);
@@ -229,6 +237,7 @@ public class ExplorersCompassItem extends Item {
 		return StructureUtils.getHorizontalDistanceToLocation(player, getFoundStructureX(stack), getFoundStructureZ(stack));
 	}
 	
+	@SuppressWarnings("null")
 	public boolean shouldDisplayCoordinates(ItemStack stack) {
 		if (ItemUtils.isCompass(stack) && stack.has(StructureCompass.DISPLAY_COORDS_COMPONENT)) {
 			return stack.get(StructureCompass.DISPLAY_COORDS_COMPONENT);

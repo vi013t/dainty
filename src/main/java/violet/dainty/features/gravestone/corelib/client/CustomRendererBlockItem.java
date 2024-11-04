@@ -2,6 +2,8 @@ package violet.dainty.features.gravestone.corelib.client;
 
 import java.util.function.Consumer;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -15,8 +17,9 @@ public class CustomRendererBlockItem extends BlockItem {
         super(block, properties);
     }
 
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+	@Override
+    @SuppressWarnings("removal")
+    public void initializeClient(@Nonnull Consumer<IClientItemExtensions> consumer) {
         super.initializeClient(consumer);
         ItemRenderer renderer = createItemRenderer();
         if (renderer != null) {

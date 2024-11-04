@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableList;
@@ -179,7 +181,7 @@ public class HarvestToolProvider implements IBlockComponentProvider, ResourceMan
 	}
 
 	@Override
-	public void onResourceManagerReload(ResourceManager resourceManager) {
+	public void onResourceManagerReload(@Nonnull ResourceManager resourceManager) {
 		resultCache.invalidateAll();
 	}
 

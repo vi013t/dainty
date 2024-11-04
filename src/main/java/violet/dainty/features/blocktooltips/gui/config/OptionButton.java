@@ -1,5 +1,7 @@
 package violet.dainty.features.blocktooltips.gui.config;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.CommonComponents;
@@ -32,7 +34,7 @@ public class OptionButton extends OptionsList.Entry {
 
 	@Override
 	public void render(
-			GuiGraphics guiGraphics,
+			@Nonnull GuiGraphics guiGraphics,
 			int index,
 			int rowTop,
 			int rowLeft,

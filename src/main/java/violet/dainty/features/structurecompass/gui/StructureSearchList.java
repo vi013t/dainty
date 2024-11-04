@@ -2,6 +2,8 @@ package violet.dainty.features.structurecompass.gui;
 
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -37,7 +39,7 @@ public class StructureSearchList extends ObjectSelectionList<StructureSearchEntr
 	}
 
 	@Override
-	public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+	public void renderWidget(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		guiGraphics.fill(getRowLeft() - 4, getY(), getRowLeft() + getRowWidth() + 4, getY() + getHeight() + 4, 255 / 2 << 24);
 		
 		enableScissor(guiGraphics);
@@ -72,7 +74,7 @@ public class StructureSearchList extends ObjectSelectionList<StructureSearchEntr
 	}
 	
 	@Override
-	protected void enableScissor(GuiGraphics guiGraphics) {
+	protected void enableScissor(@Nonnull GuiGraphics guiGraphics) {
 		guiGraphics.enableScissor(getX(), getY(), getRight(), getBottom());
 	}
 

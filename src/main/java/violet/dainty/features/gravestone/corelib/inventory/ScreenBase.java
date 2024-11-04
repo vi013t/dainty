@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -32,14 +33,14 @@ public class ScreenBase<T extends AbstractContainerMenu> extends AbstractContain
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int x, int y, float partialTicks) {
+    public void render(@Nonnull GuiGraphics guiGraphics, int x, int y, float partialTicks) {
         renderTransparentBackground(guiGraphics);
         super.render(guiGraphics, x, y, partialTicks);
         renderTooltip(guiGraphics, x, y);
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(@Nonnull GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
@@ -47,11 +48,12 @@ public class ScreenBase<T extends AbstractContainerMenu> extends AbstractContain
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+    protected void renderLabels(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY) {
 
     }
 
-    public void drawHoverAreas(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+    @SuppressWarnings("null")
+	public void drawHoverAreas(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         for (HoverArea hoverArea : hoverAreas) {
             if (hoverArea.tooltip != null && hoverArea.isHovered(leftPos, topPos, mouseX, mouseY)) {
                 guiGraphics.renderTooltip(font, hoverArea.tooltip.get(), mouseX, mouseY);

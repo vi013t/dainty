@@ -1,5 +1,6 @@
 package violet.dainty.features.gravestone.items;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.ChatFormatting;
@@ -32,7 +33,7 @@ public class ObituaryItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player p, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(@Nonnull Level world, @Nonnull Player p, @Nonnull InteractionHand hand) {
         if (!(p instanceof ServerPlayer player)) {
             return InteractionResultHolder.success(p.getItemInHand(hand));
         }

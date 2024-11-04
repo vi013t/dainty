@@ -1,13 +1,15 @@
 package violet.dainty.features.gravestone.corelib.item;
 
-import net.minecraft.core.NonNullList;
-
-import java.util.*;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
+
+import net.minecraft.core.NonNullList;
 
 public class NonNullListCollector {
 
@@ -72,7 +74,8 @@ public class NonNullListCollector {
         }
     }
 
-    private static <I, R> Function<I, R> castingIdentity() {
+    @SuppressWarnings("unchecked")
+	private static <I, R> Function<I, R> castingIdentity() {
         return i -> (R) i;
     }
 

@@ -179,6 +179,7 @@ public final class JadeClient {
 		hideModName.put(context, context);
 	}
 
+	@SuppressWarnings("resource")
 	public static void appendModName(List<Component> tooltip, ItemStack stack, Item.TooltipContext tooltipContext, TooltipFlag flag) {
 		if (hideModName.getIfPresent(tooltipContext) != null || !Jade.CONFIG.get().getGeneral().showItemModNameTooltip()) {
 			return;
@@ -235,6 +236,7 @@ public final class JadeClient {
 		return accessor;
 	}
 
+	@SuppressWarnings("null")
 	@Nullable
 	public static Accessor<?> limitMobEffectFog(
 			HitResult hitResult, @Nullable Accessor<?> accessor, @Nullable Accessor<?> originalAccessor) {
@@ -283,6 +285,7 @@ public final class JadeClient {
 			return;
 		}
 		BlockPos pos = playerController.destroyBlockPos;
+		@SuppressWarnings("null")
 		BlockState state = mc.level.getBlockState(pos);
 		if (playerController.isDestroying()) {
 			canHarvest = CommonProxy.isCorrectToolForDrops(state, mc.player, mc.level, pos);
@@ -301,6 +304,7 @@ public final class JadeClient {
 		progressAlpha += mc.getTimer().getGameTimeDeltaTicks() * (playerController.isDestroying() ? 0.1F : -0.1F);
 		if (playerController.isDestroying()) {
 			progressAlpha = Math.min(progressAlpha, 0.6F);
+			@SuppressWarnings("null")
 			float progress = state.getDestroyProgress(mc.player, mc.player.level(), pos);
 			if (playerController.destroyProgress + progress >= 1) {
 				progressAlpha = savedProgress = 1;

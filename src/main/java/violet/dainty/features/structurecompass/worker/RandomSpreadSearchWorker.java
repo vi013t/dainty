@@ -98,6 +98,7 @@ public class RandomSpreadSearchWorker extends StructureSearchWorker<RandomSpread
 	}
 
 	// Non-optimized method to get the closest structure, for testing purposes
+	@SuppressWarnings("unused")
 	private Pair<BlockPos, Structure> getClosest() {
 		for (int x = -length; x <= length; ++x) {
 			boolean shouldSampleX = x == -length || x == length;

@@ -1,5 +1,6 @@
 package violet.dainty.features.gravestone.corelib.inventory;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.world.Container;
@@ -15,7 +16,7 @@ public abstract class ContainerBase extends AbstractContainerMenu {
     protected Container inventory;
     protected Container playerInventory;
 
-    public ContainerBase(MenuType containerType, int id, Container playerInventory, Container inventory) {
+    public ContainerBase(MenuType<?> containerType, int id, Container playerInventory, Container inventory) {
         super(containerType, id);
         this.playerInventory = playerInventory;
         this.inventory = inventory;
@@ -39,7 +40,8 @@ public abstract class ContainerBase extends AbstractContainerMenu {
         return 0;
     }
 
-    public int getInventorySize() {
+    @SuppressWarnings("null")
+	public int getInventorySize() {
         if (inventory == null) {
             return 0;
         }
@@ -52,13 +54,13 @@ public abstract class ContainerBase extends AbstractContainerMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
-        ItemStack itemstack = ItemStack.EMPTY;
+    public ItemStack quickMoveStack(@Nonnull Player playerIn, int index) {
+        ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = slots.get(index);
 
         if (slot != null && slot.hasItem()) {
             ItemStack stack = slot.getItem();
-            itemstack = stack.copy();
+            itemStack = stack.copy();
 
             if (index < getInventorySize()) {
                 if (!moveItemStackTo(stack, getInventorySize(), slots.size(), true)) {
@@ -74,11 +76,12 @@ public abstract class ContainerBase extends AbstractContainerMenu {
                 slot.setChanged();
             }
         }
-        return itemstack;
+        return itemStack;
     }
 
-    @Override
-    public boolean stillValid(Player player) {
+    @SuppressWarnings("null")
+	@Override
+    public boolean stillValid(@Nonnull Player player) {
         if (inventory == null) {
             return true;
         }
@@ -86,7 +89,7 @@ public abstract class ContainerBase extends AbstractContainerMenu {
     }
 
     @Override
-    public void removed(Player player) {
+    public void removed(@Nonnull Player player) {
         super.removed(player);
         if (inventory != null) {
             inventory.stopOpen(player);

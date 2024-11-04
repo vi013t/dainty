@@ -44,6 +44,7 @@ public abstract class ConfigEntry<T> {
 		return value;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setValue(Object value) {
 		if (!Objects.equals(this.value, value)) {
 			this.value = (T) value;

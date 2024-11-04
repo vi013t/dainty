@@ -1,5 +1,7 @@
 package violet.dainty.features.structurecompass.gui;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -15,7 +17,7 @@ public class TransparentButton extends Button {
 	}
 
 	@Override
-	public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+	public void renderWidget(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		if (visible) {
 			Minecraft mc = Minecraft.getInstance();
 			float state = 2;

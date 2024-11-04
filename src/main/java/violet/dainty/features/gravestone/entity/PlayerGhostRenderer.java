@@ -1,8 +1,9 @@
 package violet.dainty.features.gravestone.entity;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
-import violet.dainty.features.gravestone.corelib.client.PlayerSkins;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
@@ -16,13 +17,15 @@ import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.PlayerModelPart;
+import violet.dainty.features.gravestone.corelib.client.PlayerSkins;
 
 public class PlayerGhostRenderer extends LivingEntityRenderer<GhostPlayerEntity, PlayerModel<GhostPlayerEntity>> {
 
     private PlayerModel<GhostPlayerEntity> playerModel;
     private PlayerModel<GhostPlayerEntity> playerModelSmallArms;
 
-    public PlayerGhostRenderer(EntityRendererProvider.Context renderer) {
+    @SuppressWarnings("resource")
+	public PlayerGhostRenderer(EntityRendererProvider.Context renderer) {
         super(renderer, null, 0.5F);
         playerModel = new PlayerModel<>(renderer.bakeLayer(ModelLayers.PLAYER), false);
         playerModelSmallArms = new PlayerModel<>(renderer.bakeLayer(ModelLayers.PLAYER_SLIM), true);
@@ -35,18 +38,18 @@ public class PlayerGhostRenderer extends LivingEntityRenderer<GhostPlayerEntity,
     }
 
     @Override
-    protected void scale(GhostPlayerEntity ghost, PoseStack matrixStack, float partialTickTime) {
+    protected void scale(@Nonnull GhostPlayerEntity ghost, @Nonnull PoseStack matrixStack, float partialTickTime) {
         float scale = 0.9375F;
         matrixStack.scale(scale, scale, scale);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(GhostPlayerEntity entity) {
+    public ResourceLocation getTextureLocation(@Nonnull GhostPlayerEntity entity) {
         return PlayerSkins.getSkin(entity.getPlayerUUID(), entity.getName().getString());
     }
 
     @Override
-    public void render(GhostPlayerEntity entity, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int packedLight) {
+    public void render(@Nonnull GhostPlayerEntity entity, float entityYaw, float partialTicks, @Nonnull PoseStack matrixStack, @Nonnull MultiBufferSource buffer, int packedLight) {
         matrixStack.pushPose();
 
         if (PlayerSkins.isSlim(entity.getPlayerUUID())) {

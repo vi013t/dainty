@@ -3,6 +3,8 @@ package violet.dainty.features.blocktooltips.util;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 
@@ -99,7 +101,7 @@ public class ModIdentification implements ResourceManagerReloadListener {
 	}
 
 	@Override
-	public void onResourceManagerReload(ResourceManager manager) {
+	public void onResourceManagerReload(@Nonnull ResourceManager manager) {
 		invalidateCache();
 	}
 

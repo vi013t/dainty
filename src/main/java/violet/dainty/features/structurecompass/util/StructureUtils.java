@@ -102,6 +102,7 @@ public class StructureUtils {
 		return false;
 	}
 	
+	@SuppressWarnings("null")
 	public static boolean structureIsHidden(ServerLevel level, Structure structure) {
 		final Registry<Structure> structureRegistry = getStructureRegistry(level);
 		if (structureRegistry.getKey(structure) != null && structureRegistry.getHolder(structureRegistry.getKey(structure)).isPresent()) {
@@ -144,6 +145,7 @@ public class StructureUtils {
 		return (int) Mth.sqrt((float) startPos.distSqr(new BlockPos(x, startPos.getY(), z)));
 	}
 
+	@SuppressWarnings("deprecation")
 	@OnlyIn(Dist.CLIENT)
 	public static String getPrettyStructureName(ResourceLocation key) {
 		String name = key.toString();
@@ -182,6 +184,7 @@ public class StructureUtils {
 		return String.join(", ", dimensionNames);
 	}
 
+	@SuppressWarnings("deprecation")
 	@OnlyIn(Dist.CLIENT)
 	private static String getDimensionName(ResourceLocation dimensionKey) {
 		String name = I18n.get(Util.makeDescriptionId("dimension", dimensionKey));

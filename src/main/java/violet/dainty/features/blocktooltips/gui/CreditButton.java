@@ -3,6 +3,8 @@ package violet.dainty.features.blocktooltips.gui;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.lang3.StringUtils;
 
 import net.minecraft.client.Minecraft;
@@ -40,7 +42,7 @@ public class CreditButton extends Button {
 	}
 
 	@Override
-	protected void renderWidget(GuiGraphics guiGraphics, int i, int j, float partialTicks) {
+	protected void renderWidget(@Nonnull GuiGraphics guiGraphics, int i, int j, float partialTicks) {
 		boolean hovered = isHoveredOrFocused();
 		if (!oldHovered && hovered) {
 			progress.target(1);
@@ -73,6 +75,7 @@ public class CreditButton extends Button {
 		float scale = 1 + progress.value * 0.2F;
 		guiGraphics.pose().scale(scale, scale, scale);
 		Component credit = hovered ? hoveredTitle : getMessage();
+		@SuppressWarnings("resource")
 		Font font = Minecraft.getInstance().font;
 		guiGraphics.pose().translate(font.width(credit) * -0.5F, 0, 0);
 		guiGraphics.drawString(font, credit, 0, 0, 0xFFFFFF | (int) alpha << 24);

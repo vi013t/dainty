@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.Lists;
 
 import net.minecraft.ChatFormatting;
@@ -43,7 +45,7 @@ public abstract class OptionValue<T> extends OptionsList.Entry {
 
 	@Override
 	public final void render(
-			GuiGraphics guiGraphics,
+			@Nonnull GuiGraphics guiGraphics,
 			int index,
 			int rowTop,
 			int rowLeft,
@@ -97,7 +99,7 @@ public abstract class OptionValue<T> extends OptionsList.Entry {
 	}
 
 	@Override
-	public void updateNarration(NarrationElementOutput output) {
+	public void updateNarration(@Nonnull NarrationElementOutput output) {
 		super.updateNarration(output);
 		if (!description.isEmpty()) {
 			output.add(NarratedElementType.HINT, NarrationThunk.from(description));

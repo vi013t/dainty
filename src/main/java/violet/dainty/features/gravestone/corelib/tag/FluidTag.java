@@ -1,12 +1,12 @@
 package violet.dainty.features.gravestone.corelib.tag;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluid;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class FluidTag implements Tag<Fluid> {
 
@@ -21,7 +21,8 @@ public class FluidTag implements Tag<Fluid> {
         return holderSet.key().location();
     }
 
-    @Override
+	@Override
+    @SuppressWarnings("deprecation")
     public boolean contains(Fluid block) {
         return block.builtInRegistryHolder().is(holderSet.key());
     }

@@ -41,6 +41,7 @@ public class WailaConfigScreen extends PreviewOptionsScreen {
 	private OptionValue<Boolean> squareEntry;
 	private OptionValue<Float> opacityEntry;
 
+	@SuppressWarnings("resource")
 	public WailaConfigScreen(Screen parent) {
 		super(parent, Component.translatable("gui.dainty.jade_settings"));
 		saver = () -> {
@@ -82,6 +83,7 @@ public class WailaConfigScreen extends PreviewOptionsScreen {
 		return entry;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public OptionsList createOptions() {
 		Objects.requireNonNull(minecraft);
