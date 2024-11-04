@@ -16,6 +16,7 @@
 	"item.dainty.wither_skull_fragment_large": "Large Wither Skeleton Skull Fragment",
 	"item.dainty.explorerscompass": "Structure Compass",
     "item.dainty.naturescompass": "Biome Compass",
+	"item.dainty.cooked_berries": "Cooked Berries",
 
     "item.minecraft.potion.effect.warden_potion": "Potion of the Deep Dark",
     "item.minecraft.potion.effect.warden_potion_long": "Potion of the Deep Dark",
@@ -560,10 +561,5 @@
 	"dainty.block_ignite_odds": "Ignite odds: %s",
 	"dainty.block_burn_odds": "Burn odds: %s",
 	"dainty.ignore_list.comment": "This is an ignore list for the target of Jade. You can add registry ids to the \"values\" list.",
-	"__comment": "Only for testing:",
-	"dainty.modName.cpp": "Crafting++",
-	"mymod.fuel": "Fuel: %d ticks",
-	"config.dainty.plugin_debug.furnace_fuel": "Test Fuel",
-	"config.dainty.plugin_debug.furnace_fuel.str_cfg": "Test Str",
-	"config.dainty.plugin_debug.furnace_fuel.float_cfg": "Test Float"
+	"dainty.modName.cpp": "Crafting++"
 }

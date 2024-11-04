@@ -14,6 +14,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import violet.dainty.Dainty;
 import violet.dainty.features.bag.Bag;
+import violet.dainty.features.friendlyberries.CookedBerries;
 import violet.dainty.features.reinforcer.Reinforcer;
 import violet.dainty.features.wardenheart.WardenHeart;
 import violet.dainty.features.witherskulls.WitherSkullFragmentItem;
@@ -43,6 +44,7 @@ public class DaintyItems {
 	public static final DeferredItem<Bag> NETHERITE_BAG = item("netherite_bag", Bag.create(Bag.Tier.NETHERITE));
 	public static final DeferredItem<WitherSkullFragmentItem> SMALL_WITHER_SKULL_FRAGMENT = item("wither_skull_fragment_small", WitherSkullFragmentItem.create());
 	public static final DeferredItem<WitherSkullFragmentItem> LARGE_WITHER_SKULL_FRAGMENT = item("wither_skull_fragment_large", WitherSkullFragmentItem.create());
+	public static final DeferredItem<CookedBerries> COOKED_BERRIES = item("cooked_berries", CookedBerries::new);
 	
 	/**
 	 * The reinforcer item. This is an item that can be combined with any other item in an anvil to make it unbreakable.
