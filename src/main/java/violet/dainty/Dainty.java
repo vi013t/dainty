@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import violet.dainty.config.DaintyConfig;
 import violet.dainty.features.DaintyFeatures;
 import violet.dainty.registries.DaintyDataAttachments;
 import violet.dainty.registries.DaintyDataComponents;
@@ -22,7 +23,7 @@ public class Dainty {
 	 * The unique mod ID for the Dainty mod. This must match the following exactly:
 	 *
 	 * <ul>
-	 *	<li>The mod_id specified in gradle.properties</li>
+	 *	<li>The mod_id specified in {@code gradle.properties}</li>
 	 * 	<li>The argument passed to the {@code @Mod} annotation on the main mod class</li>
 	 *  <li>The modId specified in {@code /src/main/resources/META-INF/neoforge.mods.toml}</li>
 	 * 	<li>The name of the folder {@code /src/main/resources/assets/<MODID>}</li>
@@ -55,7 +56,7 @@ public class Dainty {
 	 * @param modContainer the mod container passed by Neoforge when constructing the mod
 	 */
     public Dainty(final IEventBus modEventBus, final ModContainer modContainer) {
-		DaintyConfig.register(modContainer);
+		DaintyConfig.register(modEventBus, modContainer);
 		DaintyFeatures.register(modEventBus, modContainer);
 		DaintyDataComponents.register(modEventBus);
 		DaintyDataAttachments.register(modEventBus);

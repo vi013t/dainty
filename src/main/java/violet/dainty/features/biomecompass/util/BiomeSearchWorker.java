@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.neoforge.common.WorldWorkerManager;
 import violet.dainty.Dainty;
-import violet.dainty.features.biomecompass.NaturesCompass;
+import violet.dainty.features.biomecompass.BiomeCompass;
 import violet.dainty.features.biomecompass.items.NaturesCompassItem;
 
 public class BiomeSearchWorker implements WorldWorkerManager.IWorker {
@@ -57,7 +57,7 @@ public class BiomeSearchWorker implements WorldWorkerManager.IWorker {
 	}
 
 	public void start() {
-		if (!stack.isEmpty() && stack.getItem() == NaturesCompass.naturesCompass) {
+		if (!stack.isEmpty() && stack.getItem() == BiomeCompass.naturesCompass) {
 			if (maxRadius > 0 && sampleSpace > 0) {
 				Dainty.LOGGER.info("Starting search: " + sampleSpace + " sample space, " + maxSamples + " max samples, " + maxRadius + " max radius");
 				WorldWorkerManager.addWorker(this);
@@ -111,7 +111,7 @@ public class BiomeSearchWorker implements WorldWorkerManager.IWorker {
 			}
 			int radius = getRadius();
 			if (radius > 500 && radius / 500 > lastRadiusThreshold) {
-				if (!stack.isEmpty() && stack.getItem() == NaturesCompass.naturesCompass) {
+				if (!stack.isEmpty() && stack.getItem() == BiomeCompass.naturesCompass) {
 					((NaturesCompassItem) stack.getItem()).setSearchRadius(stack, roundRadius(radius, 500), player);
 				}
 				lastRadiusThreshold = radius / 500;
@@ -128,7 +128,7 @@ public class BiomeSearchWorker implements WorldWorkerManager.IWorker {
 	
 	private void succeed() {
 		Dainty.LOGGER.info("Search succeeded: " + getRadius() + " radius, " + samples + " samples");
-		if (!stack.isEmpty() && stack.getItem() == NaturesCompass.naturesCompass) {
+		if (!stack.isEmpty() && stack.getItem() == BiomeCompass.naturesCompass) {
 			((NaturesCompassItem) stack.getItem()).succeed(stack, player, x, z, samples, true);
 		} else {
 			Dainty.LOGGER.error("Invalid compass after search");
@@ -138,7 +138,7 @@ public class BiomeSearchWorker implements WorldWorkerManager.IWorker {
 	
 	private void fail() {
 		Dainty.LOGGER.info("Search failed: " + getRadius() + " radius, " + samples + " samples");
-		if (!stack.isEmpty() && stack.getItem() == NaturesCompass.naturesCompass) {
+		if (!stack.isEmpty() && stack.getItem() == BiomeCompass.naturesCompass) {
 			((NaturesCompassItem) stack.getItem()).fail(stack, player, roundRadius(getRadius(), 500), samples);
 		} else {
 			Dainty.LOGGER.error("Invalid compass after search");

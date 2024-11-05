@@ -3,6 +3,26 @@ package violet.dainty.features.zoom;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+/**
+ * {@code ZoomData} is a data attachment applied to the player on the logical client that contains
+ * data about how far they're zooming in. This data is
+ * {@link violet.dainty.features.zoom.ZoomEventHandler#checkForZoom(net.neoforged.neoforge.client.event.ClientTickEvent.Post)
+ * attached when} the player holds {@link violet.dainty.registries.DaintyKeyBindings#ZOOM the zoom keybinding}, modified
+ * {@link violet.dainty.features.zoom.ZoomEventHandler#adjustZoom(net.neoforged.neoforge.client.event.InputEvent.MouseScrollingEvent)
+ * when the player scrolls their mouse while zooming}, and read 
+ * {@link violet.dainty.features.zoom.ZoomEventHandler#zoom(net.neoforged.neoforge.client.event.ComputeFovModifierEvent)
+ * when the game calculates the player's field of view}. All of these things happen only on the logical client, so this
+ * data attachment never needs to be applied on the logical server. For that reason there exists no packet or packet
+ * handler for this data, and you should never try to read or attach it from the logical server. This is also why this record
+ * doesn't have a {@link net.minecraft.network.codec.StreamCodec StreamCodec}; So don't try to synchronize it between
+ * logical sides or interact with it in any way from the logical server.
+ * 
+ * <br/><br/>
+ * 
+ * To attach or read this data, use {@link violet.dainty.registries.DaintyDataAttachments#ZOOM the zoom data attachment}. See
+ * {@link violet.dainty.features.zoom.ZoomEventHandler#checkForZoom(net.neoforged.neoforge.client.event.ClientTickEvent.Post)
+ * the logic in the event handler} for an example.
+ */
 public record ZoomData(float zoomFactor) {
 
 	/**

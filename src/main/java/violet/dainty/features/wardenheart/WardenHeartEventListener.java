@@ -18,7 +18,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import violet.dainty.Dainty;
-import violet.dainty.DaintyConfig;
+import violet.dainty.config.DaintyConfig;
 import violet.dainty.registries.DaintyDataComponents;
 import violet.dainty.registries.DaintyItems;
 
@@ -27,7 +27,7 @@ public class WardenHeartEventListener {
 
 	@SubscribeEvent
 	public static void dropWardenHeart(LivingDropsEvent event) {
-		if (event.getEntity() instanceof Warden && Math.random() < DaintyConfig.wardenHeartDropChance()) {
+		if (event.getEntity() instanceof Warden && Math.random() < DaintyConfig.WARDEN_HEART_DROP_CHANCE.get()) {
 			event.getDrops().add(new ItemEntity(event.getEntity().level(), event.getEntity().position().x, event.getEntity().position().y, event.getEntity().position().z, new ItemStack(DaintyItems.WARDEN_HEART.get())));
 		}
 	}

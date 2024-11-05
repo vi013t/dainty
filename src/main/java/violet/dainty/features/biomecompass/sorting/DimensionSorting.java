@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
-import violet.dainty.features.biomecompass.NaturesCompass;
+import violet.dainty.features.biomecompass.BiomeCompass;
 import violet.dainty.features.biomecompass.util.BiomeUtils;
 
 public class DimensionSorting implements ISorting<String> {
@@ -23,7 +23,7 @@ public class DimensionSorting implements ISorting<String> {
 		if (mc.level != null) {
 			Optional<ResourceLocation> optionalBiomeKey = BiomeUtils.getKeyForBiome(mc.level, biome);
 			if (optionalBiomeKey.isPresent()) {
-				return BiomeUtils.dimensionKeysToString(NaturesCompass.dimensionKeysForAllowedBiomeKeys.get(optionalBiomeKey.get()));
+				return BiomeUtils.dimensionKeysToString(BiomeCompass.dimensionKeysForAllowedBiomeKeys.get(optionalBiomeKey.get()));
 			}
 		}
 		return "";

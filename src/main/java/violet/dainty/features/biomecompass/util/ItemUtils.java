@@ -3,12 +3,12 @@ package violet.dainty.features.biomecompass.util;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import violet.dainty.features.biomecompass.NaturesCompass;
+import violet.dainty.features.biomecompass.BiomeCompass;
 
 public class ItemUtils {
 
 	public static ItemStack getHeldNatureCompass(Player player) {
-		return getHeldItem(player, NaturesCompass.naturesCompass);
+		return getHeldItem(player, BiomeCompass.naturesCompass);
 	}
 
 	public static ItemStack getHeldItem(Player player, Item item) {

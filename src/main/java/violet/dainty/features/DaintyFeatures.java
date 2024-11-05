@@ -2,7 +2,7 @@ package violet.dainty.features;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
-import violet.dainty.features.biomecompass.NaturesCompass;
+import violet.dainty.features.biomecompass.BiomeCompass;
 import violet.dainty.features.carryon.CarryOn;
 import violet.dainty.features.gravestone.Gravestone;
 import violet.dainty.features.structurecompass.StructureCompass;
@@ -17,11 +17,12 @@ public class DaintyFeatures {
 	 * such as CarryOn and Nature's Compass. This should be called in the constructor of the main mod class at the time of mod construction, just
 	 * like all other registries.
 	 * 
+	 * @param modEventBus The event bus passed by Neoforge at the time of the mod's construction.
 	 * @param modContainer The mod's container supplied by Neoforge at the time of the mod's construction.
 	 */
 	public static void register(IEventBus modEventBus, ModContainer modContainer) {
 		new CarryOn(modContainer);
-		new NaturesCompass(modContainer);
+		new BiomeCompass(modContainer);
 		new StructureCompass(modContainer);
 		new Gravestone(modEventBus);
 	}

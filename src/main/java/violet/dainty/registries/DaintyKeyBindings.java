@@ -23,6 +23,16 @@ public class DaintyKeyBindings {
 
 	public static final Lazy<KeyMapping> VEINMINE = key("veinmine", GLFW.GLFW_KEY_GRAVE_ACCENT, KeyConflictContext.IN_GAME);
 	public static final Lazy<KeyMapping> CRAWL = key("crawl", GLFW.GLFW_KEY_LEFT_ALT, KeyConflictContext.IN_GAME);
+
+	/**
+	 * The zoom keybinding. Holding this will "zoom in" on the player's client. The logic for this is handled in
+	 * {@link violet.dainty.features.zoom.ZoomEventHandler#checkForZoom(net.neoforged.neoforge.client.event.ClientTickEvent.Post)
+	 * the corresponding part of the zoom event handler}.
+	 * 
+	 * <br/><br/>
+	 * 
+	 * The default key for this binding is {@code Z}, and this is an "in-game" (not GUI) keybinding.
+	 */
 	public static final Lazy<KeyMapping> ZOOM = key("zoom", GLFW.GLFW_KEY_Z, KeyConflictContext.IN_GAME);
 
 	private static Lazy<KeyMapping> key(String name, int defaultKey, KeyConflictContext context) {

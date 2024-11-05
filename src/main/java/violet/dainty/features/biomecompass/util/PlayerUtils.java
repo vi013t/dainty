@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.level.storage.ServerLevelData;
 import net.neoforged.neoforge.server.permission.PermissionAPI;
-import violet.dainty.features.biomecompass.NaturesCompass;
+import violet.dainty.features.biomecompass.BiomeCompass;
 
 public class PlayerUtils {
 
@@ -39,7 +39,7 @@ public class PlayerUtils {
 
 	public static boolean hasPermission(Player player) {
 		if (player instanceof ServerPlayer) {
-			return PermissionAPI.getPermission((ServerPlayer) player, NaturesCompass.TELEPORT_PERMISSION);
+			return PermissionAPI.getPermission((ServerPlayer) player, BiomeCompass.TELEPORT_PERMISSION);
 		}
 		
 		return false;

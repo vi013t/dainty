@@ -1,4 +1,10 @@
 {
+	"neoforge:conditions": [
+		{
+			"type": "dainty:config",
+			"value": "enableCookedBerries"
+		}
+	],
 	"type": "minecraft:smelting",
 	"cookingtime": 200,
 	"experience": 0.1,

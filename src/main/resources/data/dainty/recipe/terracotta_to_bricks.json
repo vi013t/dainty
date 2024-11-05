@@ -1,4 +1,10 @@
 {
+	"neoforge:conditions": [
+		{
+			"type": "dainty:config",
+			"value": "enableCraftingTerracottaIntoBricks"
+		}
+	],
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
 		{

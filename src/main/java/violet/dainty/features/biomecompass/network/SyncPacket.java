@@ -12,7 +12,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import violet.dainty.Dainty;
-import violet.dainty.features.biomecompass.NaturesCompass;
+import violet.dainty.features.biomecompass.BiomeCompass;
 
 public record SyncPacket(boolean canTeleport, List<ResourceLocation> allowedBiomes, ListMultimap<ResourceLocation, ResourceLocation> dimensionKeysForAllowedBiomeKeys) implements CustomPacketPayload {
 
@@ -59,9 +59,9 @@ public record SyncPacket(boolean canTeleport, List<ResourceLocation> allowedBiom
 	public static void handle(SyncPacket packet, IPayloadContext context) {
 		if (context.flow().isClientbound()) {
 			context.enqueueWork(() -> {
-				NaturesCompass.canTeleport = packet.canTeleport;
-				NaturesCompass.allowedBiomes = packet.allowedBiomes;
-				NaturesCompass.dimensionKeysForAllowedBiomeKeys = packet.dimensionKeysForAllowedBiomeKeys;
+				BiomeCompass.canTeleport = packet.canTeleport;
+				BiomeCompass.allowedBiomes = packet.allowedBiomes;
+				BiomeCompass.dimensionKeysForAllowedBiomeKeys = packet.dimensionKeysForAllowedBiomeKeys;
 			});
 		}
 	}

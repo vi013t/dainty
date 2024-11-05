@@ -21,7 +21,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import violet.dainty.Dainty;
-import violet.dainty.features.biomecompass.NaturesCompass;
+import violet.dainty.features.biomecompass.BiomeCompass;
 import violet.dainty.features.biomecompass.items.NaturesCompassItem;
 import violet.dainty.features.biomecompass.util.CompassState;
 
@@ -31,7 +31,7 @@ public class NaturesCompassClient {
 	@SubscribeEvent
 	public static void clientInit(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
-			ItemProperties.register(NaturesCompass.naturesCompass, ResourceLocation.fromNamespaceAndPath(Dainty.MODID, "angle"), new ClampedItemPropertyFunction() {
+			ItemProperties.register(BiomeCompass.naturesCompass, ResourceLocation.fromNamespaceAndPath(Dainty.MODID, "angle"), new ClampedItemPropertyFunction() {
 				@OnlyIn(Dist.CLIENT)
 				private double rotation;
 				@OnlyIn(Dist.CLIENT)
@@ -89,7 +89,7 @@ public class NaturesCompassClient {
 
 				@OnlyIn(Dist.CLIENT)
 				private double getAngle(ClientLevel world, Entity entity, ItemStack stack) {
-					if (stack.getItem() == NaturesCompass.naturesCompass) {
+					if (stack.getItem() == BiomeCompass.naturesCompass) {
 						NaturesCompassItem compassItem = (NaturesCompassItem) stack.getItem();
 						BlockPos pos;
 						if (compassItem.getState(stack) == CompassState.FOUND) {

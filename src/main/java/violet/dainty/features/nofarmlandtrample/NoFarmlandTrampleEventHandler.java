@@ -5,7 +5,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.BlockEvent.FarmlandTrampleEvent;
 import violet.dainty.Dainty;
-import violet.dainty.DaintyConfig;
+import violet.dainty.config.DaintyConfig;
 
 @EventBusSubscriber(modid=Dainty.MODID)
 public class NoFarmlandTrampleEventHandler {
@@ -17,7 +17,7 @@ public class NoFarmlandTrampleEventHandler {
 	 */
 	@SubscribeEvent
 	public static void removeFarmlandTrampling(BlockEvent.FarmlandTrampleEvent event) {
-		if (DaintyConfig.enableNoFarmlandTrampling()) {
+		if (DaintyConfig.DISABLE_FARMLAND_TRAMPLING.get()) {
 			event.setCanceled(true);
 		}
 	}

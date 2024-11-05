@@ -16,7 +16,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import violet.dainty.features.biomecompass.NaturesCompass;
+import violet.dainty.features.biomecompass.BiomeCompass;
 import violet.dainty.features.biomecompass.sorting.DimensionSorting;
 import violet.dainty.features.biomecompass.sorting.NameSorting;
 import violet.dainty.features.biomecompass.sorting.SourceSorting;
@@ -49,7 +49,7 @@ public class BiomeSearchEntry extends ObjectSelectionList.Entry<BiomeSearchEntry
 			title = I18n.get("string.naturescompass.dimension");
 			Optional<ResourceLocation> biomeKey = BiomeUtils.getKeyForBiome(parentScreen.level, biome);
 			if (biomeKey.isPresent()) {
-				value = BiomeUtils.dimensionKeysToString(NaturesCompass.dimensionKeysForAllowedBiomeKeys.get(biomeKey.get()));
+				value = BiomeUtils.dimensionKeysToString(BiomeCompass.dimensionKeysForAllowedBiomeKeys.get(biomeKey.get()));
 			} else {
 				value = "";
 			}

@@ -15,7 +15,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import violet.dainty.Dainty;
-import violet.dainty.DaintyConfig;
+import violet.dainty.config.DaintyConfig;
 
 /**
  * The event handler for the "jump on fences" feature, which allows players to jump on fences; See {@link FenceJumpEventHandler#jumpOnFences(LivingJumpEvent)}. 
@@ -31,7 +31,7 @@ public class FenceJumpEventHandler {
 	 */
 	@SubscribeEvent
 	public static void jumpOnFences(LivingJumpEvent event) {
-		if (!DaintyConfig.allowJumpingOnFences()) return;
+		if (!DaintyConfig.ALLOW_JUMPING_ON_FENCES.get()) return;
 
 		if (event.getEntity() instanceof LocalPlayer player && player.input.jumping && isPlayerNextToFence(player)) {
 			player.setDeltaMovement(player.getDeltaMovement().add(0.0D, 0.05D, 0.0D));

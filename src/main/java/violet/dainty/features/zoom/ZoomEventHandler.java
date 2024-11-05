@@ -8,9 +8,17 @@ import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.client.event.InputEvent.MouseScrollingEvent;
 import net.neoforged.neoforge.client.event.RenderHandEvent;
 import violet.dainty.Dainty;
+import violet.dainty.config.DaintyConfig;
 import violet.dainty.registries.DaintyDataAttachments;
 import violet.dainty.registries.DaintyKeyBindings;
 
+/**
+ * The event handler for the zoom feature. This handles the logic for {@link #checkForZoom(net.neoforged.neoforge.client.event.ClientTickEvent.Post)
+ * checking if the zoom keybinding is pressed} (and attaching the appropriate {@link DaintyDataAttachments#ZOOM data attachment}),
+ * {@link #zoom(ComputeFovModifierEvent) rendering the zoom effect}, {@link #adjustZoom(MouseScrollingEvent) handling scrolling to zoom further},
+ * and {@link #renderHand(RenderHandEvent) disabling hand rendering}. Zooming is purely a client-side feature, and all functionality in
+ * this class only runs on the logical client.
+ */
 @EventBusSubscriber(modid = Dainty.MODID)
 public class ZoomEventHandler {
 	
@@ -30,7 +38,7 @@ public class ZoomEventHandler {
 	@SubscribeEvent
 	@SuppressWarnings("resource")
 	public static void zoom(ComputeFovModifierEvent event) {
-		if (Minecraft.getInstance().player == null) return;
+		if (Minecraft.getInstance().player == null || !DaintyConfig.ENABLE_ZOOMING.get()) return;
 
 		@SuppressWarnings("null")
 		ZoomData zoomData = Minecraft.getInstance().player.getData(DaintyDataAttachments.ZOOM);

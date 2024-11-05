@@ -10,8 +10,13 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerSpawnPhantomsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerSpawnPhantomsEvent.Result;
 import violet.dainty.Dainty;
-import violet.dainty.DaintyConfig;
+import violet.dainty.config.DaintyConfig;
 
+/**
+ * The "no phantoms" feature event handler. This handles the logic for {@link #disablePhantomSpawns(PlayerSpawnPhantomsEvent)
+ * disabling phantom spawning}, as well as {@link #makeEndermanDropPhantomMembrane(LivingDropsEvent) making enderman drop
+ * phantom membrane}.
+ */
 @EventBusSubscriber(modid=Dainty.MODID)
 public class NoPhantomsEventHandler {
 
@@ -22,7 +27,7 @@ public class NoPhantomsEventHandler {
 	 */
 	@SubscribeEvent
 	public static void makeEndermanDropPhantomMembrane(LivingDropsEvent event) {
-		if (event.getEntity() instanceof EnderMan enderman && !enderman.level().isClientSide() && Math.random() < DaintyConfig.endermanPhantomMembraneDropChance()) {
+		if (event.getEntity() instanceof EnderMan enderman && !enderman.level().isClientSide() && Math.random() < DaintyConfig.ENDERMAN_PHANTOM_MEMBRANE_DROP_CHANCE.get()) {
 			event.getDrops().add(new ItemEntity(enderman.level(), enderman.getX(), enderman.getY(), enderman.getZ(), new ItemStack(Items.PHANTOM_MEMBRANE)));
 		}
 	}

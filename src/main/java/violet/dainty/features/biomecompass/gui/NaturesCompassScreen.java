@@ -18,7 +18,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
-import violet.dainty.features.biomecompass.NaturesCompass;
+import violet.dainty.features.biomecompass.BiomeCompass;
 import violet.dainty.features.biomecompass.items.NaturesCompassItem;
 import violet.dainty.features.biomecompass.network.SearchPacket;
 import violet.dainty.features.biomecompass.network.TeleportPacket;
@@ -72,10 +72,10 @@ public class NaturesCompassScreen extends Screen {
 		teleportButton.active = natureCompass.getState(stack) == CompassState.FOUND;
 		
 		// Check if the sync packet has been received
-		if (allowedBiomes.size() != NaturesCompass.allowedBiomes.size()) {
-			teleportButton.visible = NaturesCompass.canTeleport;
+		if (allowedBiomes.size() != BiomeCompass.allowedBiomes.size()) {
+			teleportButton.visible = BiomeCompass.canTeleport;
 			removeWidget(selectionList);
-			loadAllowedBiomes(NaturesCompass.allowedBiomes);
+			loadAllowedBiomes(BiomeCompass.allowedBiomes);
 			biomesMatchingSearch = new ArrayList<Biome>(allowedBiomes);
 			selectionList = new BiomeSearchList(this, minecraft, width + 110, height - 40, 40, 45);
 			addRenderableWidget(selectionList);
@@ -180,7 +180,7 @@ public class NaturesCompassScreen extends Screen {
 
 		startSearchButton.active = false;
 
-		teleportButton.visible = NaturesCompass.canTeleport;
+		teleportButton.visible = BiomeCompass.canTeleport;
 		
 		searchTextField = addRenderableWidget(new TransparentTextField(font, 130, 10, 140, 20, Component.translatable("string.naturescompass.search")));
 		

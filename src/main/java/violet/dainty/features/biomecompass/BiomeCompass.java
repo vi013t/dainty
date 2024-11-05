@@ -28,7 +28,7 @@ import violet.dainty.features.biomecompass.network.SyncPacket;
 import violet.dainty.features.biomecompass.network.TeleportPacket;
 import violet.dainty.registries.DaintyItems;
 
-public class NaturesCompass {
+public class BiomeCompass {
 
 	public static final PermissionNode<Boolean> TELEPORT_PERMISSION = new PermissionNode<>(Dainty.MODID, "dainty.teleport", PermissionTypes.BOOLEAN, (player, playerUUID, context) -> false);
 
@@ -46,9 +46,9 @@ public class NaturesCompass {
 	public static List<ResourceLocation> allowedBiomes;
 	public static ListMultimap<ResourceLocation, ResourceLocation> dimensionKeysForAllowedBiomeKeys;
 
-	public static NaturesCompass instance;
+	public static BiomeCompass instance;
 
-	public NaturesCompass(ModContainer modContainer) {
+	public BiomeCompass(ModContainer modContainer) {
 		instance = this;
 
 		modContainer.getEventBus().addListener(this::preInit);

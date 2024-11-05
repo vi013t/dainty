@@ -23,7 +23,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import violet.dainty.Dainty;
-import violet.dainty.DaintyConfig;
+import violet.dainty.config.DaintyConfig;
 
 /**
  * The event handler for the right-click crop harvesting feature. This will listen for player right-clicking on blocks and handle crop harvesting
@@ -43,7 +43,7 @@ public class CropHarvestEventHandler {
 	public static void rightClickHarvest(PlayerInteractEvent.RightClickBlock event) {
 
 		// Guard checks
-		if (!DaintyConfig.rightClickCropHarvestIsEnabled() || event.getLevel().isClientSide() || event.getEntity().isSpectator() || event.getEntity().isCrouching() || event.getHand() != InteractionHand.MAIN_HAND) return;
+		if (!DaintyConfig.ENABLE_RIGHT_CLICK_CROP_HARVEST.get() || event.getLevel().isClientSide() || event.getEntity().isSpectator() || event.getEntity().isCrouching() || event.getHand() != InteractionHand.MAIN_HAND) return;
 
 		// Define variables
         BlockState state = event.getLevel().getBlockState(event.getPos());

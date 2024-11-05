@@ -55,7 +55,7 @@ public class DaintyItems {
 	public static final DeferredItem<Reinforcer> REINFORCER = item("reinforcer", Reinforcer::new);
 
 	/**
-	 * The "warden heart" item. This is an item dropped by wardens, with its drop chance configurable via {@link violet.dainty.DaintyConfig#wardenHeartDropChance()}
+	 * The "warden heart" item. This is an item dropped by wardens, with its drop chance configurable via {@link violet.dainty.config.DaintyConfig#wardenHeartDropChance()}
 	 * (guaranteed by default). The item itself does nothing; It's just a crafting ingredient for later-game items.
 	 * 
 	 * <br/><br/>
