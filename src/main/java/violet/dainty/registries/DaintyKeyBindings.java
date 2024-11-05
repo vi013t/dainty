@@ -23,6 +23,7 @@ public class DaintyKeyBindings {
 
 	public static final Lazy<KeyMapping> VEINMINE = key("veinmine", GLFW.GLFW_KEY_GRAVE_ACCENT, KeyConflictContext.IN_GAME);
 	public static final Lazy<KeyMapping> CRAWL = key("crawl", GLFW.GLFW_KEY_LEFT_ALT, KeyConflictContext.IN_GAME);
+	public static final Lazy<KeyMapping> ZOOM = key("zoom", GLFW.GLFW_KEY_Z, KeyConflictContext.IN_GAME);
 
 	private static Lazy<KeyMapping> key(String name, int defaultKey, KeyConflictContext context) {
 		var keybinding = Lazy.of(() -> new KeyMapping(

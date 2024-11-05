@@ -11,6 +11,7 @@ import violet.dainty.Dainty;
 import violet.dainty.features.inventorysorting.SortBy;
 import violet.dainty.features.inventorysorting.SortPosition;
 import violet.dainty.features.veinmine.VeinMineSettings;
+import violet.dainty.features.zoom.ZoomData;
 
 /**
  * Class for creating and registering custom data attachments added by the Dainty mod. Data attachments are a system added by Neoforge
@@ -49,6 +50,10 @@ public class DaintyDataAttachments {
 
 	public static final DeferredHolder<AttachmentType<?>, AttachmentType<SortBy>> SORT_ORDER = DATA_ATTACHMENTS.register(
 		"sort_order", () -> AttachmentType.builder(SortBy::defaultSorting).serialize(SortBy.CODEC).build()
+	);
+
+	public static final DeferredHolder<AttachmentType<?>, AttachmentType<ZoomData>> ZOOM = DATA_ATTACHMENTS.register(
+		"zoom", () -> AttachmentType.builder(ZoomData::none).serialize(ZoomData.CODEC).build()
 	);
 
 	/**
