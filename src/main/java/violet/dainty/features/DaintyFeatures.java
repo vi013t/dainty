@@ -4,6 +4,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import violet.dainty.features.biomecompass.BiomeCompass;
 import violet.dainty.features.carryon.CarryOn;
+import violet.dainty.features.foodinfo.FoodInfo;
 import violet.dainty.features.gravestone.Gravestone;
 import violet.dainty.features.structurecompass.StructureCompass;
 
@@ -25,5 +26,6 @@ public class DaintyFeatures {
 		new BiomeCompass(modContainer);
 		new StructureCompass(modContainer);
 		new Gravestone(modEventBus);
+		new FoodInfo(modEventBus, modContainer);
 	}
 }
