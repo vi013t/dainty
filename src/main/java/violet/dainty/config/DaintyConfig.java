@@ -53,6 +53,7 @@ public class DaintyConfig {
 	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_CRAFTING_BRICKS_INTO_TERRACOTTA = configValue("enableCraftingBricksIntoTerracotta", true, "Enables crafting one brick block into one terracotta block.");
 	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_CRAFTING_TERRACOTTA_INTO_BRICKS = configValue("enableCraftingTerracottaIntoBricks", true, "Enables crafting one terracotta block into one brick block.");
 	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_COOKED_BERRIES = configValue("enableCookedBerries", true, "Enables smelting sweet berry bushes into cooked berries.");
+	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_OPENING_BLOCKED_CHESTS = configValue("enableOpeningBlockedChests", true, "Enable opening chests that have a solid block on them or a cat sitting on them.");
 
 	/**
 	 * The configuration value for the percent drop chance of {@link violet.dainty.registries.DaintyItems#WARDEN_HEART warden hearts} from wardens. 

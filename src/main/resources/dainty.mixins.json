@@ -11,7 +11,8 @@
 		"blocktooltips.AbstractFurnaceBlockEntityAccess",
 		"blocktooltips.CanItemPerformAbilityAccess",
 		"blocktooltips.EntityAccess",
-		"friendlyberries.BerryBushMixin"
+		"friendlyberries.BerryBushMixin",
+		"unblockedchests.ChestMixin"
   	],
   	"client": [
 		"carryon.HumanoidModelMixin",
