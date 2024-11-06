@@ -28,12 +28,12 @@ public class HUDHandlerGraveStone implements IBlockComponentProvider, IServerDat
             iTooltip.add(grave.getName().copy().withStyle(ChatFormatting.WHITE));
             Component time = GraveUtils.getDate(grave.getDeath().getTimestamp());
             if (time != null) {
-                iTooltip.add(Component.translatable("message.gravestone.date_of_death", time));
+                iTooltip.add(Component.translatable("message.dainty.date_of_death", time));
             }
 
             CompoundTag data = blockAccessor.getServerData();
             if (data.contains("ItemCount")) {
-                iTooltip.add(Component.translatable("message.gravestone.item_count", data.getInt("ItemCount")));
+                iTooltip.add(Component.translatable("message.dainty.item_count", data.getInt("ItemCount")));
             }
         }
     }

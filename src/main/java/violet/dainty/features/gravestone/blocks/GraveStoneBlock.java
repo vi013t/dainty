@@ -179,7 +179,7 @@ public class GraveStoneBlock extends Block implements EntityBlock, IItemBlock, S
             if (time == null) {
                 player.sendSystemMessage(name);
             } else {
-                player.sendSystemMessage(Component.translatable("message.gravestone.died", name, time));
+                player.sendSystemMessage(Component.translatable("message.dainty.died", name, time));
             }
         }
 

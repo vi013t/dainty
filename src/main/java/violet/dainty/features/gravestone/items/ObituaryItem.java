@@ -43,22 +43,22 @@ public class ObituaryItem extends Item {
         Death death = fromStack(player, itemInHand);
 
         if (death == null) {
-            player.displayClientMessage(Component.translatable("message.gravestone.death_not_found"), true);
+            player.displayClientMessage(Component.translatable("message.dainty.death_not_found"), true);
         } else if (player.isShiftKeyDown()) {
             if (player.hasPermissions(player.server.getOperatorUserPermissionLevel())) {
-                Component replace = ComponentUtils.wrapInSquareBrackets(Component.translatable("message.gravestone.restore.replace"))
+                Component replace = ComponentUtils.wrapInSquareBrackets(Component.translatable("message.dainty.restore.replace"))
                         .withStyle((style) -> style
                                 .applyFormat(ChatFormatting.GREEN)
                                 .withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/restore @s " + death.getId().toString() + " replace"))
-                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("message.gravestone.restore.replace.description")))
+                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("message.dainty.restore.replace.description")))
                         );
-                Component add = ComponentUtils.wrapInSquareBrackets(Component.translatable("message.gravestone.restore.add"))
+                Component add = ComponentUtils.wrapInSquareBrackets(Component.translatable("message.dainty.restore.add"))
                         .withStyle((style) -> style
                                 .applyFormat(ChatFormatting.GREEN)
                                 .withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/restore @s " + death.getId().toString() + " add"))
-                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("message.gravestone.restore.add.description")))
+                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("message.dainty.restore.add.description")))
                         );
-                player.sendSystemMessage(Component.translatable("message.gravestone.restore").append(" ").append(replace).append(" ").append(add));
+                player.sendSystemMessage(Component.translatable("message.dainty.restore").append(" ").append(replace).append(" ").append(add));
             }
         } else {
             PacketDistributor.sendToPlayer(player, new MessageOpenObituary(death));

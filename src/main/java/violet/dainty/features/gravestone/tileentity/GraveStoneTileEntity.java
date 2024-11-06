@@ -123,7 +123,7 @@ public class GraveStoneTileEntity extends BlockEntity implements Nameable {
         if (name == null || name.isEmpty()) {
             return Component.translatable(Gravestone.GRAVESTONE.get().getDescriptionId());
         }
-        return Component.translatable("message.gravestone.grave_of", name);
+        return Component.translatable("message.dainty.grave_of", name);
     }
 
     @Nullable

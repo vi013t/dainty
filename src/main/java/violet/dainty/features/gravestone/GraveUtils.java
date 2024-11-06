@@ -56,7 +56,7 @@ public class GraveUtils {
         if (timestamp <= 0L) {
             return null;
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat(Component.translatable("gui.gravestone.date_format").getString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Component.translatable("gui.dainty.date_format").getString());
         return Component.literal(dateFormat.format(new Date(timestamp)));
     }
 

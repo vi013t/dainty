@@ -66,7 +66,7 @@ public class ObituaryScreen extends Screen {
         guiTop = (height - TEXTURE_Y) / 2;
 
         int left = (width - TEXTURE_X) / 2;
-        buttonPrev = addRenderableWidget(Button.builder(Component.translatable("button.gravestone.prev"), button -> {
+        buttonPrev = addRenderableWidget(Button.builder(Component.translatable("button.dainty.prev"), button -> {
             page--;
             if (page < 0) {
                 page = 0;
@@ -74,7 +74,7 @@ public class ObituaryScreen extends Screen {
             checkButtons();
         }).bounds(left, 190, 75, 20).build());
 
-        buttonNext = addRenderableWidget(Button.builder(Component.translatable("button.gravestone.next"), button -> {
+        buttonNext = addRenderableWidget(Button.builder(Component.translatable("button.dainty.next"), button -> {
             page++;
             if (page > pageList.getPages()) {
                 page = pageList.getPages();
@@ -176,13 +176,13 @@ public class ObituaryScreen extends Screen {
         if (minecraft.options.advancedItemTooltips && page == 0) {
             if (x >= guiLeft + 7 && x <= guiLeft + TEXTURE_X - 7 && y >= 50 && y <= 50 + font.lineHeight) {
                 minecraft.keyboardHandler.setClipboard(death.getId().toString());
-                Component deathID = ComponentUtils.wrapInSquareBrackets(Component.translatable("message.gravestone.death_id"))
+                Component deathID = ComponentUtils.wrapInSquareBrackets(Component.translatable("message.dainty.death_id"))
                         .withStyle((style) -> style
                                 .applyFormat(ChatFormatting.GREEN)
                                 .withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/restore @s " + death.getId().toString() + " replace"))
                                 .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal(death.getId().toString())))
                         );
-                minecraft.player.sendSystemMessage(Component.translatable("message.gravestone.copied", deathID));
+                minecraft.player.sendSystemMessage(Component.translatable("message.dainty.copied", deathID));
                 minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1F));
                 minecraft.setScreen(null);
             }

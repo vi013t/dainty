@@ -29,7 +29,7 @@ public class RestoreCommand {
             ServerPlayer player = EntityArgument.getPlayer(commandSource, "target");
             Death death = DeathManager.getDeath(player.serverLevel(), deathID);
             if (death == null) {
-                commandSource.getSource().sendFailure(Component.translatable("message.gravestone.death_id_not_found", deathID.toString()));
+                commandSource.getSource().sendFailure(Component.translatable("message.dainty.death_id_not_found", deathID.toString()));
                 return 0;
             }
             for (ItemStack stack : death.getAllItems()) {
@@ -37,7 +37,7 @@ public class RestoreCommand {
                     player.drop(stack, false);
                 }
             }
-            commandSource.getSource().sendSuccess(() -> Component.translatable("message.gravestone.restore.success", player.getDisplayName()), true);
+            commandSource.getSource().sendSuccess(() -> Component.translatable("message.dainty.restore.success", player.getDisplayName()), true);
             return 1;
         };
 
@@ -46,7 +46,7 @@ public class RestoreCommand {
             ServerPlayer player = EntityArgument.getPlayer(commandSource, "target");
             Death death = DeathManager.getDeath(player.serverLevel(), deathID);
             if (death == null) {
-                commandSource.getSource().sendFailure(Component.translatable("message.gravestone.death_id_not_found", deathID.toString()));
+                commandSource.getSource().sendFailure(Component.translatable("message.dainty.death_id_not_found", deathID.toString()));
                 return 0;
             }
             player.getInventory().clearContent();
@@ -54,7 +54,7 @@ public class RestoreCommand {
             for (ItemStack stack : itemStacks) {
                 player.drop(stack, false);
             }
-            commandSource.getSource().sendSuccess(() -> Component.translatable("message.gravestone.restore.success", player.getDisplayName()), true);
+            commandSource.getSource().sendSuccess(() -> Component.translatable("message.dainty.restore.success", player.getDisplayName()), true);
             return 1;
         };
 
