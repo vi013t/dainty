@@ -14,67 +14,73 @@ import violet.dainty.features.playerspecificloot.api.data.entity.ILootrCart;
 
 
 public class ClientHandlers {
-  public static void handleCloseCart(int entityId) {
-    Level level = Minecraft.getInstance().level;
-    if (level == null) {
-      Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as closed as level is null.");
-      return;
-    }
-    Entity cart = level.getEntity(entityId);
-    if (cart == null) {
-      Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as closed as entity is null.");
-      return;
-    }
+	public static void handleCloseCart(int entityId) {
+		@SuppressWarnings("resource")
+		Level level = Minecraft.getInstance().level;
+		if (level == null) {
+			Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as closed as level is null.");
+			return;
+		}
+		Entity cart = level.getEntity(entityId);
+		if (cart == null) {
+			Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as closed as entity is null.");
+			return;
+		}
 
-    if (!(cart instanceof ILootrCart lootrCart)) {
-      Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as closed as entity is not a Lootr minecart.");
-      return;
-    }
+		if (!(cart instanceof ILootrCart lootrCart)) {
+			Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as closed as entity is not a Lootr minecart.");
+			return;
+		}
 
-    lootrCart.setClientOpened(false);
-  }
+		lootrCart.setClientOpened(false);
+	}
 
-  public static void handleOpenCart(int entityId) {
-    Level level = Minecraft.getInstance().level;
-    if (level == null) {
-      Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as opened as level is null.");
-      return;
-    }
-    Entity cart = level.getEntity(entityId);
-    if (cart == null) {
-      Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as opened as entity is null.");
-      return;
-    }
+	public static void handleOpenCart(int entityId) {
+		@SuppressWarnings("resource")
+		Level level = Minecraft.getInstance().level;
+		if (level == null) {
+			Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as opened as level is null.");
+			return;
+		}
+		Entity cart = level.getEntity(entityId);
+		if (cart == null) {
+			Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as opened as entity is null.");
+			return;
+		}
 
-    if (!(cart instanceof ILootrCart lootrCart)) {
-      Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as opened as entity is not a Lootr minecart.");
-      return;
-    }
+		if (!(cart instanceof ILootrCart lootrCart)) {
+			Dainty.LOGGER.info("Unable to mark entity with id '" + entityId + "' as opened as entity is not a Lootr minecart.");
+			return;
+		}
 
-    lootrCart.setClientOpened(true);
-  }
+		lootrCart.setClientOpened(true);
+	}
 
-  public static void handleOpenContainer(BlockPos pos) {
-    if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof ILootrBlockEntity provider) {
-      provider.setClientOpened(true);
-    }
-    refreshModel(pos);
-  }
+	@SuppressWarnings({ "null", "resource" })
+	public static void handleOpenContainer(BlockPos pos) {
+		if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof ILootrBlockEntity provider) {
+			provider.setClientOpened(true);
+		}
+		refreshModel(pos);
+	}
 
-  public static void handleCloseContainer(BlockPos pos) {
-    if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof ILootrBlockEntity provider) {
-      provider.setClientOpened(false);
-    }
-    refreshModel(pos);
-  }
+	@SuppressWarnings({ "null", "resource" })
+	public static void handleCloseContainer(BlockPos pos) {
+		if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof ILootrBlockEntity provider) {
+			provider.setClientOpened(false);
+		}
+		refreshModel(pos);
+	}
 
-  public static void refreshModel(BlockPos pos) {
-    SectionPos sPos = SectionPos.of(pos);
-    Minecraft.getInstance().levelRenderer.setSectionDirty(sPos.x(), sPos.y(), sPos.z());
-  }
+	@SuppressWarnings("resource")
+	public static void refreshModel(BlockPos pos) {
+		SectionPos sPos = SectionPos.of(pos);
+		Minecraft.getInstance().levelRenderer.setSectionDirty(sPos.x(), sPos.y(), sPos.z());
+	}
 
-  @Nullable
-  public static Player getPlayer() {
-    return Minecraft.getInstance().player;
-  }
+	@SuppressWarnings("resource")
+	@Nullable
+	public static Player getPlayer() {
+		return Minecraft.getInstance().player;
+	}
 }

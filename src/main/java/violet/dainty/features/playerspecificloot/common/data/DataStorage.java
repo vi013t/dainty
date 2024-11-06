@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
@@ -281,7 +283,7 @@ public class DataStorage {
     }
 
     @Override
-    public CompoundTag save(CompoundTag p_77763_, HolderLookup.Provider p_323640_) {
+    public CompoundTag save(@Nonnull CompoundTag p_77763_, @Nonnull HolderLookup.Provider p_323640_) {
       return null;
     }
   }

@@ -71,7 +71,8 @@ public class BlockEntityTicker {
     }
   }
 
-  public static void onServerTick() {
+  @SuppressWarnings("null")
+public static void onServerTick() {
     if (LootrAPI.isDisabled()) {
       return;
     }

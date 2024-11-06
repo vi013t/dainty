@@ -33,9 +33,9 @@ public class DaintyItems {
 	 * 
 	 * See <a href="https://docs.neoforged.net/docs/items/">The corresponding section of the Neoforge docs</a> for more information.
 	 */
-	private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Dainty.MODID);
+	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Dainty.MODID);
 	private static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Dainty.MODID);
-	private static final List<DeferredItem<?>> CREATIVE_TAB_ITEMS = new ArrayList<>();
+	public static final List<DeferredItem<?>> CREATIVE_TAB_ITEMS = new ArrayList<>();
 
 	public static final DeferredItem<Bag> BAG = item("bag", Bag.create(Bag.Tier.BASIC));
 	public static final DeferredItem<Bag> IRON_BAG = item("iron_bag", Bag.create(Bag.Tier.IRON));

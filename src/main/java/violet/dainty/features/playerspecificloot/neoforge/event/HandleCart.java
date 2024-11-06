@@ -13,29 +13,28 @@ import violet.dainty.features.playerspecificloot.common.entity.LootrChestMinecar
 
 @EventBusSubscriber(modid = Dainty.MODID)
 public class HandleCart {
-  @SubscribeEvent
-  public static void onEntityJoin(EntityJoinLevelEvent event) {
-    if (!(event.getLevel() instanceof ServerLevel level)) {
-      return;
-    }
-    if (LootrAPI.isDimensionBlocked(level.dimension()) || LootrAPI.isDisabled()) {
-      return;
-    }
-    // TODO: Conversion tag
-    if (event.getEntity().getType() == EntityType.CHEST_MINECART && event.getEntity() instanceof MinecartChest chest) {
-      if (!level.isClientSide() && chest.getLootTable() != null && LootrAPI.shouldConvertMineshafts() && !LootrAPI.isLootTableBlacklisted(chest.getLootTable())) {
-        LootrChestMinecartEntity lootrCart = new LootrChestMinecartEntity(chest.level(), chest.getX(), chest.getY(), chest.getZ());
-        lootrCart.setLootTable(chest.getLootTable(), chest.getLootTableSeed());
-        lootrCart.getPersistentData().merge(chest.getPersistentData());
-        event.setCanceled(true);
-        if (!level.getServer().isSameThread()) {
-          // TODO: If this is actually triggering, we need to ticket the chunk. The only instance I can think of this happening is if a mod is manually creating this event, as the Forge defaults only fire it in the main thread.
-          Dainty.LOGGER.error("Minecart with Loot table created off main thread. Falling back on EntityTicker.");
-          EntityTicker.addEntity(lootrCart);
-        } else {
-          level.addFreshEntity(lootrCart);
-        }
-      }
-    } 
-  }
+	@SuppressWarnings("null")
+	@SubscribeEvent
+	public static void onEntityJoin(EntityJoinLevelEvent event) {
+		if (!(event.getLevel() instanceof ServerLevel level)) {
+			return;
+		}
+		if (LootrAPI.isDimensionBlocked(level.dimension()) || LootrAPI.isDisabled()) {
+			return;
+		}
+		if (event.getEntity().getType() == EntityType.CHEST_MINECART && event.getEntity() instanceof MinecartChest chest) {
+			if (!level.isClientSide() && chest.getLootTable() != null && LootrAPI.shouldConvertMineshafts() && !LootrAPI.isLootTableBlacklisted(chest.getLootTable())) {
+				LootrChestMinecartEntity lootrCart = new LootrChestMinecartEntity(chest.level(), chest.getX(), chest.getY(), chest.getZ());
+				lootrCart.setLootTable(chest.getLootTable(), chest.getLootTableSeed());
+				lootrCart.getPersistentData().merge(chest.getPersistentData());
+				event.setCanceled(true);
+				if (!level.getServer().isSameThread()) {
+					Dainty.LOGGER.error("Minecart with Loot table created off main thread. Falling back on EntityTicker.");
+					EntityTicker.addEntity(lootrCart);
+				} else {
+					level.addFreshEntity(lootrCart);
+				}
+			}
+		} 
+	}
 }

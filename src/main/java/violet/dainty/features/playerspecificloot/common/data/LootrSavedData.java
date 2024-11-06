@@ -1,5 +1,16 @@
 package violet.dainty.features.playerspecificloot.common.data;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.function.Supplier;
+
+import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.Nullable;
+
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -11,15 +22,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedData;
-import violet.dainty.features.playerspecificloot.api.data.*;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.function.Supplier;
+import violet.dainty.features.playerspecificloot.api.data.BaseLootrInfo;
+import violet.dainty.features.playerspecificloot.api.data.ILootrInfo;
+import violet.dainty.features.playerspecificloot.api.data.ILootrInfoProvider;
+import violet.dainty.features.playerspecificloot.api.data.ILootrSavedData;
+import violet.dainty.features.playerspecificloot.api.data.LootFiller;
 
 public class LootrSavedData extends SavedData implements ILootrSavedData {
   private boolean hasBeenOpened;
@@ -154,7 +161,7 @@ public class LootrSavedData extends SavedData implements ILootrSavedData {
   }
 
   @Override
-  public CompoundTag save(CompoundTag compound, HolderLookup.Provider provider) {
+  public CompoundTag save(@Nonnull CompoundTag compound, @Nonnull HolderLookup.Provider provider) {
     this.info.saveInfoToTag(compound, provider);
 
     ListTag compounds = new ListTag();
@@ -223,7 +230,7 @@ public class LootrSavedData extends SavedData implements ILootrSavedData {
   }
 
   @Override
-  public void save(File pFile, HolderLookup.Provider provider) {
+  public void save(@Nonnull File pFile, @Nonnull HolderLookup.Provider provider) {
     if (isDirty()) {
       pFile.getParentFile().mkdirs();
     }

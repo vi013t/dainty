@@ -40,8 +40,8 @@ public enum SortBy {
 		return this.comparator;
 	}
 
-	public ResourceLocation buttonTexture() {
-		return ResourceLocation.fromNamespaceAndPath(Dainty.MODID, "textures/gui/" + "sort_by_" + this.name().toLowerCase() + ".png");
+	public ResourceLocation buttonTexture(boolean isHovering) {
+		return ResourceLocation.fromNamespaceAndPath(Dainty.MODID, "textures/gui/" + "sort_by_" + this.name().toLowerCase() + (isHovering ? "_hovered" : "") + ".png");
 	}
 
 	public SortBy next() {

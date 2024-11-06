@@ -1,5 +1,9 @@
 package violet.dainty.features.playerspecificloot.common.block.entity;
 
+import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -12,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import violet.dainty.features.playerspecificloot.api.LootrAPI;
 import violet.dainty.features.playerspecificloot.api.data.LootrBlockType;
 import violet.dainty.features.playerspecificloot.api.registry.LootrRegistry;
-import org.jetbrains.annotations.Nullable;
 
 public class LootrInventoryBlockEntity extends LootrChestBlockEntity {
   private NonNullList<ItemStack> customInventory;
@@ -50,7 +53,7 @@ public class LootrInventoryBlockEntity extends LootrChestBlockEntity {
   }
 
   @Override
-  protected void signalOpenCount(Level level, BlockPos pos, BlockState state, int p_155868_, int p_155869_) {
+  protected void signalOpenCount(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, int p_155868_, int p_155869_) {
     super.signalOpenCount(level, pos, state, p_155868_, p_155869_);
     if (LootrAPI.isCustomTrapped() && p_155868_ != p_155869_) {
       Block block = state.getBlock();

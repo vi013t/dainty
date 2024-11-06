@@ -17,6 +17,7 @@
 	"item.dainty.explorerscompass": "Structure Compass",
     "item.dainty.naturescompass": "Biome Compass",
 	"item.dainty.cooked_berries": "Cooked Berries",
+	"block.dainty.stone_furnace": "Crusher",
 
     "item.minecraft.potion.effect.warden_potion": "Potion of the Deep Dark",
     "item.minecraft.potion.effect.warden_potion_long": "Potion of the Deep Dark",
@@ -562,6 +563,10 @@
 	"dainty.block_burn_odds": "Burn odds: %s",
 	"dainty.ignore_list.comment": "This is an ignore list for the target of Jade. You can add registry ids to the \"values\" list.",
 	"dainty.modName.cpp": "Crafting++",
+	"mymod.fuel": "Fuel: %d ticks",
+	"config.jade.plugin_debug.furnace_fuel": "Test Fuel",
+	"config.jade.plugin_debug.furnace_fuel.str_cfg": "Test Str",
+	"config.jade.plugin_debug.furnace_fuel.float_cfg": "Test Float",
 
 	"dainty.message.should_sneak": "Breaking the chest will delete your unique loot and all items in the chest! In order to break, you must sneak while doing so.",
 	"dainty.message.should_sneak2": "As loot is %s, only break if really needed.",

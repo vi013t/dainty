@@ -23,9 +23,9 @@ import violet.dainty.registries.DaintyDataAttachments;
 @Mixin(AbstractContainerScreen.class)
 public class ScreenMixin {
 
-	private static final int BUTTON_WIDTH = 10;
-	private static final int BUTTON_HEIGHT = 9;
-	private static final int BUTTON_PADDING = 5;
+	private static final int BUTTON_WIDTH = 12;
+	private static final int BUTTON_HEIGHT = 12;
+	private static final int BUTTON_PADDING = 4;
 
 	@Shadow
 	private int imageWidth;
@@ -41,7 +41,7 @@ public class ScreenMixin {
 			// Inventory
 			if (isPlayerInventory()) {
 				SortBy ordering = Minecraft.getInstance().player.getData(DaintyDataAttachments.SORT_ORDER);
-				guiGraphics.blit(ordering.buttonTexture(), this.buttonX(screen), this.buttonY(screen), 0, 0, BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
+				guiGraphics.blit(ordering.buttonTexture(this.isButtonHovered(screen, mouseX, mouseY)), this.buttonX(screen), this.buttonY(screen), 0, 0, BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
 				return;
 			}
 
@@ -51,7 +51,7 @@ public class ScreenMixin {
 			BlockEntity blockEntity = Minecraft.getInstance().level.getBlockEntity(sortPosition.position());
 			if (blockEntity == null) return;
 			SortBy ordering = blockEntity.getData(DaintyDataAttachments.SORT_ORDER);
-			guiGraphics.blit(ordering.buttonTexture(), this.buttonX(screen), this.buttonY(screen), 0, 0, BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
+			guiGraphics.blit(ordering.buttonTexture(this.isButtonHovered(screen, mouseX, mouseY)), this.buttonX(screen), this.buttonY(screen), 0, 0, BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
 		}
     }
 	
@@ -59,7 +59,7 @@ public class ScreenMixin {
 	@Inject(method = "mouseClicked", at = @At("HEAD"))
     public void mouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> callbackInfo) {
 		AbstractContainerScreen<?> screen = (AbstractContainerScreen<?>) (Object) this;
-		if (isButtonFocused(screen, mouseX, mouseY)) {
+		if (isButtonHovered(screen, mouseX, mouseY)) {
 			Minecraft.getInstance().player.playSound(SoundEvents.UI_BUTTON_CLICK.value());
 
 			// Left click - Perform sort
@@ -102,7 +102,7 @@ public class ScreenMixin {
 		}
     }
 
-	private boolean isButtonFocused(AbstractContainerScreen<?> screen, double mouseX, double mouseY) {
+	private boolean isButtonHovered(AbstractContainerScreen<?> screen, double mouseX, double mouseY) {
 		int buttonX = this.buttonX(screen);
 		int buttonY = this.buttonY(screen);
 

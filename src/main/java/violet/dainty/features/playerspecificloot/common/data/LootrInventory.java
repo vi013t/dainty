@@ -1,5 +1,7 @@
 package violet.dainty.features.playerspecificloot.common.data;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.HolderLookup;
@@ -88,7 +90,7 @@ public class LootrInventory implements ILootrInventory {
   }
 
   @Override
-  public void setItem(int index, ItemStack stack) {
+  public void setItem(int index, @Nonnull ItemStack stack) {
     this.contents.set(index, stack);
     if (stack.getCount() > this.getMaxStackSize()) {
       stack.setCount(this.getMaxStackSize());
@@ -103,7 +105,7 @@ public class LootrInventory implements ILootrInventory {
   }
 
   @Override
-  public boolean stillValid(Player player) {
+  public boolean stillValid(@Nonnull Player player) {
     if (!player.level().dimension().equals(info.getInfoDimension())) {
       return false;
     }
@@ -147,7 +149,7 @@ public class LootrInventory implements ILootrInventory {
 
   @Nullable
   @Override
-  public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+  public AbstractContainerMenu createMenu(int id, @Nonnull Inventory inventory, @Nonnull Player player) {
     if (menuBuilder != null) {
       return menuBuilder.build(id, inventory, this, getContainerSize() / 9);
     }
@@ -162,7 +164,7 @@ public class LootrInventory implements ILootrInventory {
   }
 
   @Override
-  public void startOpen(Player player) {
+  public void startOpen(@Nonnull Player player) {
     Container container = info.getInfoContainer();
     if (container != null) {
       container.startOpen(player);
@@ -170,7 +172,7 @@ public class LootrInventory implements ILootrInventory {
   }
 
   @Override
-  public void stopOpen(Player player) {
+  public void stopOpen(@Nonnull Player player) {
     setChanged();
     Container container = info.getInfoContainer();
     if (container != null) {

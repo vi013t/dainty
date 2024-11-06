@@ -1,5 +1,7 @@
 package violet.dainty.features.playerspecificloot.common.client.entity;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -20,7 +22,7 @@ public class LootrChestCartRenderer<T extends LootrChestMinecartEntity> extends 
   }
 
   @Override
-  public void render(T pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
+  public void render(@Nonnull T pEntity, float pEntityYaw, float pPartialTicks, @Nonnull PoseStack pMatrixStack, @Nonnull MultiBufferSource pBuffer, int pPackedLight) {
     super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
     pMatrixStack.pushPose();
     long i = (long) pEntity.getId() * 493286711L;

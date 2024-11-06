@@ -1,5 +1,7 @@
 package violet.dainty.features.playerspecificloot.common.client.block;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
@@ -10,7 +12,7 @@ import violet.dainty.features.playerspecificloot.api.data.blockentity.ILootrBloc
 import violet.dainty.features.playerspecificloot.api.registry.LootrRegistry;
 import violet.dainty.features.playerspecificloot.common.block.entity.LootrChestBlockEntity;
 
-@SuppressWarnings({"NullableProblems", "deprecation"})
+@SuppressWarnings("NullableProblems")
 public class LootrChestBlockRenderer<T extends LootrChestBlockEntity & ILootrBlockEntity> extends ChestRenderer<T> {
   public static final Material MATERIAL = new Material(Sheets.CHEST_SHEET, LootrAPI.rl("chest"));
   public static final Material MATERIAL2 = new Material(Sheets.CHEST_SHEET, LootrAPI.rl("chest_opened"));
@@ -25,7 +27,7 @@ public class LootrChestBlockRenderer<T extends LootrChestBlockEntity & ILootrBlo
 
   // TODO: NeoForge injection
   @Override
-  protected Material getMaterial(T blockEntity, ChestType type) {
+  protected Material getMaterial(@Nonnull T blockEntity, @Nonnull ChestType type) {
     if (LootrAPI.isVanillaTextures()) {
       return Sheets.chooseMaterial(blockEntity, type, false);
     }

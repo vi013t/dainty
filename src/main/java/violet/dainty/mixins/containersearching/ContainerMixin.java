@@ -7,6 +7,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.mojang.blaze3d.platform.InputConstants;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
@@ -32,18 +34,27 @@ public class ContainerMixin {
 	private EditBox searchBox;
 
 	private static final int WIDTH = 100;
-	private static final int HEIGHT = 10;
-	private static final int PADDING = 5;
+	private static final int HEIGHT = 12;
+	private static final int VERTICAL_PADDING = 6;
+	private static final int HORIZONTAL_PADDING = 4;
+	private static final int OFFSET = 2;
+	private static final int INNER_LEFT_PADDING = 2;
 
     @SuppressWarnings("resource")
 	@Inject(method = "render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At("RETURN"))
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo callbackInfo) {
 		if ((Object) this instanceof AbstractContainerScreen screen && DaintyConfig.ENABLE_CONTAINER_SEARCHING.get()) {
-			if (this.searchBox == null) {
-				this.searchBox = new EditBox(Minecraft.getInstance().font, screen.width / 2 - WIDTH / 2, screen.height / 2 - this.imageHeight / 2 + PADDING, WIDTH, HEIGHT, Component.literal("Search"));
-			}
-			searchBox.render(guiGraphics, mouseX, mouseY, partialTick);
 
+			// Create search box
+			if (this.searchBox == null) {
+				this.searchBox = new EditBox(Minecraft.getInstance().font, screen.width / 2 - WIDTH / 2 + HORIZONTAL_PADDING, screen.height / 2 - this.imageHeight / 2 + VERTICAL_PADDING, WIDTH, HEIGHT, Component.literal("Search"));
+				this.searchBox.setBordered(false);
+			}
+
+			// Render search box
+			this.drawSearchBox(guiGraphics, mouseX, mouseY, partialTick);
+
+			// Darken filtered slots
 			if (this.searchBox.isFocused()) {
 				for (int slotIndex = 0; slotIndex < this.menu.slots.size(); slotIndex++) {
 					Slot slot = this.menu.slots.get(slotIndex);
@@ -70,12 +81,61 @@ public class ContainerMixin {
 	@Inject(method = "keyPressed", at = @At("HEAD"), cancellable = true)
 	public void keyPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> callbackInfo) {
 		if (this.searchBox.isFocused()) {
+
+			// Letter
 			if (keyCode >= 'A' && keyCode <= 'Z') {
 				this.searchBox.setValue(this.searchBox.getValue() + Character.toLowerCase((char) keyCode));
 				callbackInfo.cancel();
+			} 
+			
+			// Backspace
+			else if (keyCode == InputConstants.KEY_BACKSPACE && !this.searchBox.getValue().isEmpty()) {
+				this.searchBox.setValue(this.searchBox.getValue().substring(0, this.searchBox.getValue().length() - 1));
 			}
 		}
     }
+
+	private void drawSearchBox(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+
+		// Bottom while line
+		guiGraphics.fill(
+			this.searchBox.getX() - INNER_LEFT_PADDING, 
+			this.searchBox.getY() - OFFSET, 
+			this.searchBox.getX() + this.searchBox.getWidth() - INNER_LEFT_PADDING,
+			this.searchBox.getY() + this.searchBox.getHeight() - OFFSET, 
+			translucent(0xFFFFFF, 1)
+		);
+
+		// Middle gray portion
+		guiGraphics.fill(
+			this.searchBox.getX() + 1 - INNER_LEFT_PADDING,
+			this.searchBox.getY() + 1 - OFFSET, 
+			this.searchBox.getX() + this.searchBox.getWidth() - 1 - INNER_LEFT_PADDING,
+			this.searchBox.getY() + this.searchBox.getHeight() - 1 - OFFSET, 
+			translucent(0xAAAAAA, 1)
+		);
+		
+		// Top dark line
+		guiGraphics.fill(
+			this.searchBox.getX() - INNER_LEFT_PADDING,
+			this.searchBox.getY() - OFFSET, 
+			this.searchBox.getX() + this.searchBox.getWidth() - INNER_LEFT_PADDING,
+			this.searchBox.getY() + 1 - OFFSET,
+			translucent(0x555555, 1)
+		);
+
+		// Left dark line
+		guiGraphics.fill(
+			this.searchBox.getX() - INNER_LEFT_PADDING,
+			this.searchBox.getY() - OFFSET, 
+			this.searchBox.getX() + 1 - INNER_LEFT_PADDING, 
+			this.searchBox.getY() + this.searchBox.getHeight() - OFFSET,
+			translucent(0x555555, 1)
+		);
+
+		// Text itself
+		searchBox.render(guiGraphics, mouseX, mouseY, partialTick);
+	}
 
 	private static int translucent(int color, float opacity) {
 		return ((int) (opacity * 255f) << 24) | (color & 0x00ffffff);

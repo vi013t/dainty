@@ -1,5 +1,9 @@
 package violet.dainty.features.playerspecificloot.common.block;
 
+import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,20 +23,20 @@ import violet.dainty.features.playerspecificloot.api.LootrAPI;
 import violet.dainty.features.playerspecificloot.api.data.ILootrInfoProvider;
 import violet.dainty.features.playerspecificloot.api.data.blockentity.ILootrBlockEntity;
 import violet.dainty.features.playerspecificloot.common.block.entity.LootrBarrelBlockEntity;
-import org.jetbrains.annotations.Nullable;
 
 public class LootrBarrelBlock extends BarrelBlock {
   public LootrBarrelBlock(Properties p_49046_) {
     super(p_49046_);
   }
 
-  @Override
+  @SuppressWarnings("deprecation")
+@Override
   public float getExplosionResistance() {
     return LootrAPI.getExplosionResistance(this, super.getExplosionResistance());
   }
 
   @Override
-  public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+  public void onRemove(@Nonnull BlockState pState, @Nonnull Level pLevel, @Nonnull BlockPos pPos, @Nonnull BlockState pNewState, boolean pIsMoving) {
     if (!pState.is(pNewState.getBlock())) {
       BlockEntity blockentity = pLevel.getBlockEntity(pPos);
       if (blockentity instanceof Container) {
@@ -46,7 +50,7 @@ public class LootrBarrelBlock extends BarrelBlock {
   }
 
   @Override
-  public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult trace) {
+  public InteractionResult useWithoutItem(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull BlockHitResult trace) {
     if (level.isClientSide() || player.isSpectator() || !(player instanceof ServerPlayer serverPlayer)) {
       return InteractionResult.CONSUME;
     }
@@ -60,13 +64,12 @@ public class LootrBarrelBlock extends BarrelBlock {
 
   @Nullable
   @Override
-  public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+  public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
     return new LootrBarrelBlockEntity(pos, state);
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int id, int param) {
+  public boolean triggerEvent(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, int id, int param) {
     super.triggerEvent(state, world, pos, id, param);
     BlockEntity blockEntity = world.getBlockEntity(pos);
     return blockEntity != null && blockEntity.triggerEvent(id, param);
@@ -74,12 +77,12 @@ public class LootrBarrelBlock extends BarrelBlock {
 
   @Override
   @Nullable
-  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
     return ILootrBlockEntity::ticker;
   }
 
   @Override
-  public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
+  public void tick(@Nonnull BlockState pState, @Nonnull ServerLevel pLevel, @Nonnull BlockPos pPos, @Nonnull RandomSource pRandom) {
     BlockEntity blockentity = pLevel.getBlockEntity(pPos);
     if (blockentity instanceof LootrBarrelBlockEntity barrel) {
       barrel.recheckOpen();
@@ -87,17 +90,17 @@ public class LootrBarrelBlock extends BarrelBlock {
   }
 
   @Override
-  public boolean hasAnalogOutputSignal(BlockState pState) {
+  public boolean hasAnalogOutputSignal(@Nonnull BlockState pState) {
     return true;
   }
 
   @Override
-  public float getDestroyProgress(BlockState p_60466_, Player p_60467_, BlockGetter p_60468_, BlockPos p_60469_) {
+  public float getDestroyProgress(@Nonnull BlockState p_60466_, @Nonnull Player p_60467_, @Nonnull BlockGetter p_60468_, @Nonnull BlockPos p_60469_) {
     return LootrAPI.getDestroyProgress(p_60466_, p_60467_, p_60468_, p_60469_, super.getDestroyProgress(p_60466_, p_60467_, p_60468_, p_60469_));
   }
 
   @Override
-  public int getAnalogOutputSignal(BlockState pBlockState, Level pLevel, BlockPos pPos) {
+  public int getAnalogOutputSignal(@Nonnull BlockState pBlockState, @Nonnull Level pLevel, @Nonnull BlockPos pPos) {
     return LootrAPI.getAnalogOutputSignal(pBlockState, pLevel, pPos, 0);
   }
 }

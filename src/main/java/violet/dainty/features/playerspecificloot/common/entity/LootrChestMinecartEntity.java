@@ -3,8 +3,10 @@ package violet.dainty.features.playerspecificloot.common.entity;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.minecraft.core.BlockPos;
@@ -73,8 +75,9 @@ public class LootrChestMinecartEntity extends AbstractMinecartContainer implemen
     this.opened = opened;
   }
 
-  @Override
-  public boolean isInvulnerableTo(DamageSource source) {
+  @SuppressWarnings("null")
+@Override
+  public boolean isInvulnerableTo(@Nonnull DamageSource source) {
     if (this.isInvulnerable() && source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
       return true;
     }
@@ -136,12 +139,12 @@ public class LootrChestMinecartEntity extends AbstractMinecartContainer implemen
   }
 
   @Override
-  public AbstractContainerMenu createMenu(int id, Inventory playerInventoryIn) {
+  public AbstractContainerMenu createMenu(int id, @Nonnull Inventory playerInventoryIn) {
     return ChestMenu.threeRows(id, playerInventoryIn, this);
   }
 
   @Override
-  public void remove(RemovalReason reason) {
+  public void remove(@Nonnull RemovalReason reason) {
     this.setRemoved(reason);
     if (reason == Entity.RemovalReason.KILLED) {
       this.gameEvent(GameEvent.ENTITY_DIE);
@@ -149,7 +152,7 @@ public class LootrChestMinecartEntity extends AbstractMinecartContainer implemen
   }
 
   @Override
-  public InteractionResult interact(Player player, InteractionHand hand) {
+  public InteractionResult interact(@Nonnull Player player, @Nonnull InteractionHand hand) {
     if (level().isClientSide() || player.isSpectator() || !(player instanceof ServerPlayer serverPlayer)) {
       return InteractionResult.CONSUME;
     }
@@ -163,21 +166,20 @@ public class LootrChestMinecartEntity extends AbstractMinecartContainer implemen
   }
 
   @Override
-  public void startOpen(Player player) {
+  public void startOpen(@Nonnull Player player) {
     if (!player.isSpectator()) {
       performOpen((ServerPlayer) player);
     }
   }
 
   @Override
-  public void stopOpen(Player player) {
+  public void stopOpen(@Nonnull Player player) {
     if (!player.isSpectator()) {
-      // TODO: Does this need anything?
     }
   }
 
   @Override
-  public void startSeenByPlayer(ServerPlayer pPlayer) {
+  public void startSeenByPlayer(@Nonnull ServerPlayer pPlayer) {
     super.startSeenByPlayer(pPlayer);
 
     if (hasVisualOpened(pPlayer)) {

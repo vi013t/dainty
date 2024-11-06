@@ -5,6 +5,8 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -29,7 +31,7 @@ public class LootrLootTableProvider {
 		}
 
 		@Override
-		public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> p_249643_) {
+		public void generate(@Nonnull BiConsumer<ResourceKey<LootTable>, LootTable.Builder> p_249643_) {
 		p_249643_.accept(
 			LootrAPI.ELYTRA_CHEST,
 			LootTable.lootTable().withPool(LootPool

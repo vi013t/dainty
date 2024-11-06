@@ -8,10 +8,14 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import violet.dainty.config.DaintyConfig;
 import violet.dainty.features.DaintyFeatures;
+import violet.dainty.registries.DaintyBlockEntities;
+import violet.dainty.registries.DaintyBlocks;
 import violet.dainty.registries.DaintyDataAttachments;
 import violet.dainty.registries.DaintyDataComponents;
 import violet.dainty.registries.DaintyItems;
+import violet.dainty.registries.DaintyMenus;
 import violet.dainty.registries.DaintyPotions;
+import violet.dainty.registries.DaintyRecipes;
 
 /**
  * The main mod class for Dainty. A new instance of this is automatically constructed by Neoforge when the mod is loaded.
@@ -60,6 +64,10 @@ public class Dainty {
 		DaintyFeatures.register(modEventBus, modContainer);
 		DaintyDataComponents.register(modEventBus);
 		DaintyDataAttachments.register(modEventBus);
+		DaintyRecipes.register(modEventBus);
+		DaintyBlockEntities.register(modEventBus);
+		DaintyMenus.register(modEventBus);
+		DaintyBlocks.register(modEventBus);
 		DaintyItems.register(modEventBus);
 		DaintyPotions.register(modEventBus);
     }

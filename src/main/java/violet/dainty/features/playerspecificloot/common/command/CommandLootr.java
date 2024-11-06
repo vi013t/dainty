@@ -73,7 +73,8 @@ public class CommandLootr {
     return tables;
   }
 
-  private static List<String> getProfiles() {
+  @SuppressWarnings("null")
+private static List<String> getProfiles() {
     return Lists.newArrayList(LootrAPI.getServer().getProfileCache().profilesByName.keySet());
   }
 
@@ -187,7 +188,8 @@ public class CommandLootr {
       return 1;
     }).then(suggestProfiles().executes(c -> {
       String playerName = StringArgumentType.getString(c, "profile");
-      Optional<GameProfile> opt_profile = c.getSource().getServer().getProfileCache().get(playerName);
+      @SuppressWarnings("null")
+	Optional<GameProfile> opt_profile = c.getSource().getServer().getProfileCache().get(playerName);
       if (!opt_profile.isPresent()) {
         c.getSource().sendFailure(Component.literal("Invalid player name: " + playerName + ", profile not found in the cache."));
         return 0;
@@ -296,7 +298,8 @@ public class CommandLootr {
         if (openers != null) {
           c.getSource().sendSuccess(() -> Component.literal("BlockEntity at location " + position + " has " + openers.size() + " openers. UUIDs as follows:"), true);
           for (UUID uuid : openers) {
-            Optional<GameProfile> prof = c.getSource().getServer().getProfileCache().get(uuid);
+            @SuppressWarnings("null")
+			Optional<GameProfile> prof = c.getSource().getServer().getProfileCache().get(uuid);
             c.getSource().sendSuccess(() -> Component.literal("UUID: " + uuid + ", user profile: " + (prof.isPresent() ? prof.get().getName() : "null")), true);
           }
         }

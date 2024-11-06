@@ -3,8 +3,9 @@ package violet.dainty.features.playerspecificloot.neoforge.client.block;
 import java.util.List;
 import java.util.function.Function;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
@@ -53,7 +54,7 @@ public class BarrelModel implements IUnbakedGeometry<BarrelModel> {
   }
 
   @Override
-  public BakedModel bake(IGeometryBakingContext context, ModelBaker bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ItemOverrides overrides) {
+  public BakedModel bake(@Nonnull IGeometryBakingContext context, @Nonnull ModelBaker bakery, @Nonnull Function<Material, TextureAtlasSprite> spriteGetter, @Nonnull ModelState modelTransform, @Nonnull ItemOverrides overrides) {
     return new BarrelBakedModel(context.useAmbientOcclusion(), context.isGui3d(), context.useBlockLight(),
         spriteGetter.apply(context.getMaterial("particle")), overrides,
         buildModel(opened, modelTransform, bakery, spriteGetter),
@@ -66,7 +67,7 @@ public class BarrelModel implements IUnbakedGeometry<BarrelModel> {
   }
 
   @Override
-  public void resolveParents(Function<ResourceLocation, UnbakedModel> modelGetter, IGeometryBakingContext context) {
+  public void resolveParents(@Nonnull Function<ResourceLocation, UnbakedModel> modelGetter, @Nonnull IGeometryBakingContext context) {
     opened.resolveParents(modelGetter);
     unopened.resolveParents(modelGetter);
     vanilla.resolveParents(modelGetter);
@@ -104,7 +105,7 @@ public class BarrelModel implements IUnbakedGeometry<BarrelModel> {
 
     @NotNull
     @Override
-    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData extraData, @NotNull RenderType renderType) {
+    public List<BakedQuad> getQuads(@Nonnull BlockState state, @Nonnull Direction side, @Nonnull RandomSource rand, @Nonnull ModelData extraData, @Nonnull RenderType renderType) {
       BakedModel model;
       if (LootrAPI.isVanillaTextures()) {
         model = vanilla;
@@ -147,16 +148,17 @@ public class BarrelModel implements IUnbakedGeometry<BarrelModel> {
       return particle;
     }
 
-    @Override
-    public TextureAtlasSprite getParticleIcon(@NotNull ModelData data) {
-      if (LootrAPI.isVanillaTextures()) {
-        return vanilla.getParticleIcon();
-      }
-      if (data.get(ModBlockProperties.OPENED) == Boolean.TRUE) {
-        return LootrAPI.isOldTextures() ? old_opened.getParticleIcon() : opened.getParticleIcon();
-      } else {
-        return LootrAPI.isOldTextures() ? old_unopened.getParticleIcon() : unopened.getParticleIcon();
-      }
+    @SuppressWarnings("deprecation")
+	@Override
+    public TextureAtlasSprite getParticleIcon(@Nonnull ModelData data) {
+		if (LootrAPI.isVanillaTextures()) {
+			return vanilla.getParticleIcon();
+		}
+		if (data.get(ModBlockProperties.OPENED) == Boolean.TRUE) {
+			return LootrAPI.isOldTextures() ? old_opened.getParticleIcon() : opened.getParticleIcon();
+		} else {
+			return LootrAPI.isOldTextures() ? old_unopened.getParticleIcon() : unopened.getParticleIcon();
+		}
     }
 
     @Override
@@ -177,7 +179,7 @@ public class BarrelModel implements IUnbakedGeometry<BarrelModel> {
     }
 
     @Override
-    public BarrelModel read(JsonObject modelContents, JsonDeserializationContext deserializationContext) {
+    public BarrelModel read(@Nonnull JsonObject modelContents, @Nonnull JsonDeserializationContext deserializationContext) {
       UnbakedModel unopened = deserializationContext.deserialize(GsonHelper.getAsJsonObject(modelContents, "unopened"), BlockModel.class);
       UnbakedModel opened = deserializationContext.deserialize(GsonHelper.getAsJsonObject(modelContents, "opened"), BlockModel.class);
       UnbakedModel vanilla = deserializationContext.deserialize(GsonHelper.getAsJsonObject(modelContents, "vanilla"), BlockModel.class);

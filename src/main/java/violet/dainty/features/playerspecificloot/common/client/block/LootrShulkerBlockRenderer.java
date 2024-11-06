@@ -1,7 +1,10 @@
 package violet.dainty.features.playerspecificloot.common.client.block;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+
 import net.minecraft.client.model.ShulkerModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
@@ -17,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import violet.dainty.features.playerspecificloot.api.LootrAPI;
 import violet.dainty.features.playerspecificloot.common.block.entity.LootrShulkerBlockEntity;
 
-@SuppressWarnings({"deprecation", "ConstantConditions", "NullableProblems"})
+@SuppressWarnings({"ConstantConditions", "NullableProblems"})
 public class LootrShulkerBlockRenderer implements BlockEntityRenderer<LootrShulkerBlockEntity> {
   public static final Material MATERIAL = new Material(Sheets.SHULKER_SHEET, LootrAPI.rl("shulker"));
   public static final Material MATERIAL2 = new Material(Sheets.SHULKER_SHEET, LootrAPI.rl("shulker_opened"));
@@ -41,10 +44,11 @@ public class LootrShulkerBlockRenderer implements BlockEntityRenderer<LootrShulk
   }
 
   @Override
-  public void render(LootrShulkerBlockEntity pBlockEntity, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pCombinedLight, int pCombinedOverlay) {
+  public void render(@Nonnull LootrShulkerBlockEntity pBlockEntity, float pPartialTicks, @Nonnull PoseStack pMatrixStack, @Nonnull MultiBufferSource pBuffer, int pCombinedLight, int pCombinedOverlay) {
     Direction direction = Direction.UP;
     if (pBlockEntity.hasLevel()) {
-      BlockState blockstate = pBlockEntity.getLevel().getBlockState(pBlockEntity.getBlockPos());
+      @SuppressWarnings("null")
+	BlockState blockstate = pBlockEntity.getLevel().getBlockState(pBlockEntity.getBlockPos());
       if (blockstate.getBlock() instanceof ShulkerBoxBlock) {
         direction = blockstate.getValue(ShulkerBoxBlock.FACING);
       }

@@ -73,7 +73,8 @@ public record LootCount(List<Operation> operations) implements LootItemCondition
     LESS_THAN_EQUALS((a, b) -> (a <= b), 1),
     GREATER_THAN_EQUALS((a, b) -> (a >= b), 1);
 
-    public static final StringRepresentable.EnumCodec<Operand> CODEC = StringRepresentable.fromEnum(Operand::values);
+    @SuppressWarnings("deprecation")
+	public static final StringRepresentable.EnumCodec<Operand> CODEC = StringRepresentable.fromEnum(Operand::values);
 
     private final BiPredicate<Integer, Integer> predicate;
     private final int precedence;
