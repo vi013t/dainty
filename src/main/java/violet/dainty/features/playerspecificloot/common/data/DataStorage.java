@@ -31,9 +31,9 @@ import violet.dainty.mixins.playerspecificloot.MixinDimensionDataStorage;
 
 @SuppressWarnings("unused")
 public class DataStorage {
-  public static final String ADVANCEMENTS = "dainty/Lootr-AdvancementData";
-  public static final String DECAYS = "dainty/Lootr-DecayData";
-  public static final String REFRESHES = "dainty/Lootr-RefreshData";
+  public static final String ADVANCEMENTS = "dainty/Dainty-AdvancementData";
+  public static final String DECAYS = "dainty/Dainty-DecayData";
+  public static final String REFRESHES = "dainty/Dainty-RefreshData";
 
   @ApiStatus.Internal
   @Nullable
@@ -233,7 +233,7 @@ public class DataStorage {
       paths.forEach(path -> {
         if (Files.isRegularFile(path)) {
           String fileName = path.getFileName().toString();
-          if (fileName.startsWith("Lootr-")) {
+          if (fileName.startsWith("-Dainty")) {
             return;
           }
           files.add("dainty/" + fileName.charAt(0) + "/" + fileName.substring(0, 2) + "/" + fileName.replace(".dat", ""));

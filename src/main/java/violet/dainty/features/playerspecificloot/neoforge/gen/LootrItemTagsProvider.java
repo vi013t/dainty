@@ -29,6 +29,6 @@ public class LootrItemTagsProvider extends ItemTagsProvider {
 
   @Override
   public String getName() {
-    return "Lootr Item Tags";
+    return "Dainty Item Tags";
   }
 }

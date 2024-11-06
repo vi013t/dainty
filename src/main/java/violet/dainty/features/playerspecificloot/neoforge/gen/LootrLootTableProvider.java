@@ -1,5 +1,10 @@
 package violet.dainty.features.playerspecificloot.neoforge.gen;
 
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
+
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -14,29 +19,24 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import violet.dainty.features.playerspecificloot.api.LootrAPI;
 
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.BiConsumer;
-
 public class LootrLootTableProvider {
-  public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
-    return new LootTableProvider(output, Set.of(LootrAPI.ELYTRA_CHEST), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST)), provider);
-  }
+	public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+		return new LootTableProvider(output, Set.of(LootrAPI.ELYTRA_CHEST), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST)), provider);
+	}
 
-  public static class ChestLootTables implements LootTableSubProvider {
-    public ChestLootTables(HolderLookup.Provider provider) {
-    }
+	public static class ChestLootTables implements LootTableSubProvider {
+		public ChestLootTables(HolderLookup.Provider provider) {
+		}
 
-    @Override
-    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> p_249643_) {
-      p_249643_.accept(
-          LootrAPI.ELYTRA_CHEST,
-          LootTable.lootTable()
-              .withPool(
-                  LootPool.lootPool()
-                      .setRolls(ConstantValue.exactly(1))
-                      .add(LootItem.lootTableItem(Items.ELYTRA).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))));
-    }
-  }
+		@Override
+		public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> p_249643_) {
+		p_249643_.accept(
+			LootrAPI.ELYTRA_CHEST,
+			LootTable.lootTable().withPool(LootPool
+				.lootPool()
+				.setRolls(ConstantValue.exactly(1))
+				.add(LootItem.lootTableItem(Items.ELYTRA).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+			));
+		}
+	}
 }

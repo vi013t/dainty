@@ -55,6 +55,6 @@ public class LootrBlockTagProvider extends BlockTagsProvider {
 
 	@Override
 	public String getName() {
-		return "Lootr Block Tags";
+		return "Dainty Block Tags";
 	}
 }

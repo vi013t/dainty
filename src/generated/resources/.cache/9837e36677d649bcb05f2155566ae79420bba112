@@ -1,0 +1,19 @@
+// 1.21.1	2024-11-06T00:27:45.1225899	Dainty Block Tags
+1d25a78059b3cddef9d046a8761ab565538538fb data/c/tags/block/barrels.json
+da975cbcdbf39c6f941ee79b41828f11ec075ece data/c/tags/block/chests/trapped.json
+313c6569a4c90627a09b923e68b7edbfd9f19abc data/c/tags/block/chests/wooden.json
+1d25a78059b3cddef9d046a8761ab565538538fb data/dainty/tags/block/barrels.json
+313c6569a4c90627a09b923e68b7edbfd9f19abc data/dainty/tags/block/chests.json
+671ec03251c90319a58b009d4129c80c8581f0d5 data/dainty/tags/block/containers.json
+fe6cf034f70caab0e5779b83cc0771fe934f077a data/dainty/tags/block/convert/barrels.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/dainty/tags/block/convert/blacklist.json
+022ace4eefe5ea5cd5eff4facdc728e40524d631 data/dainty/tags/block/convert/blocks.json
+b221fc80e595e4526894509c077c52e4e553aec7 data/dainty/tags/block/convert/chests.json
+3ae9f87200eda9255e9f974c3c16e48dd11322e1 data/dainty/tags/block/convert/shulkers.json
+52015e498cd31c44d25b4b48018ac24461ecbc91 data/dainty/tags/block/convert/trapped_chests.json
+5594acddd52a85e7b87607e80614775796569c94 data/dainty/tags/block/shulkers.json
+da975cbcdbf39c6f941ee79b41828f11ec075ece data/dainty/tags/block/trapped_chests.json
+5143da2447fc52b3fe7a8f6472e7c5e9e0f0f1b3 data/minecraft/tags/block/guarded_by_piglins.json
+5143da2447fc52b3fe7a8f6472e7c5e9e0f0f1b3 data/minecraft/tags/block/mineable/axe.json
+109f79f66cdabc4ffef3dc94053cffc003b9c9b3 data/minecraft/tags/block/mineable/pickaxe.json
+5594acddd52a85e7b87607e80614775796569c94 data/minecraft/tags/block/shulker_boxes.json

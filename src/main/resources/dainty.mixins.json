@@ -21,7 +21,7 @@
 		"playerspecificloot.MixinPoiType",
 		"playerspecificloot.MixinPoiTypes",
 		"playerspecificloot.MixinStructureTemplate",
-		"playerspecificloot.MixinVehicleEntity"
+		"playerspecificloot.MixinVehicleEntity"  
   	],
   	"client": [
 		"carryon.HumanoidModelMixin",
