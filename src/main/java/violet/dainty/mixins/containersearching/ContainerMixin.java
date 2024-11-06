@@ -13,6 +13,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
@@ -33,10 +35,9 @@ public class ContainerMixin {
 
 	private EditBox searchBox;
 
-	private static final int WIDTH = 100;
 	private static final int HEIGHT = 12;
 	private static final int VERTICAL_PADDING = 6;
-	private static final int HORIZONTAL_PADDING = 4;
+	private static final int HORIZONTAL_PADDING = 18;
 	private static final int OFFSET = 2;
 	private static final int INNER_LEFT_PADDING = 2;
 
@@ -45,9 +46,19 @@ public class ContainerMixin {
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo callbackInfo) {
 		if ((Object) this instanceof AbstractContainerScreen screen && DaintyConfig.ENABLE_CONTAINER_SEARCHING.get()) {
 
+			// Blacklisted screens
+			if (this.isBlacklistedScreen()) return;
+
 			// Create search box
 			if (this.searchBox == null) {
-				this.searchBox = new EditBox(Minecraft.getInstance().font, screen.width / 2 - WIDTH / 2 + HORIZONTAL_PADDING, screen.height / 2 - this.imageHeight / 2 + VERTICAL_PADDING, WIDTH, HEIGHT, Component.literal("Search"));
+				this.searchBox = new EditBox(
+					Minecraft.getInstance().font, 
+					screen.width / 2 + this.imageWidth / 2 - this.width() - HORIZONTAL_PADDING, 
+					screen.height / 2 - this.imageHeight / 2 + VERTICAL_PADDING, 
+					this.width(), 
+					HEIGHT, 
+					Component.literal("Search")
+				);
 				this.searchBox.setBordered(false);
 			}
 
@@ -75,11 +86,18 @@ public class ContainerMixin {
 	
 	@Inject(method = "mouseClicked", at = @At("HEAD"))
     public void mouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> callbackInfo) {
+		// Blacklisted screens
+		if (this.isBlacklistedScreen()) return;
+
 		this.searchBox.setFocused(this.searchBox.isHovered());
     }    
 	
 	@Inject(method = "keyPressed", at = @At("HEAD"), cancellable = true)
 	public void keyPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> callbackInfo) {
+
+		// Blacklisted screens
+		if (this.isBlacklistedScreen()) return;
+
 		if (this.searchBox.isFocused()) {
 
 			// Letter
@@ -139,5 +157,20 @@ public class ContainerMixin {
 
 	private static int translucent(int color, float opacity) {
 		return ((int) (opacity * 255f) << 24) | (color & 0x00ffffff);
+	}
+
+	private boolean isBlacklistedScreen() {
+		return ((Object) this instanceof CreativeModeInventoryScreen);
+	}
+
+	@SuppressWarnings("resource")
+	public int width() {
+		String title = ((AbstractContainerScreen<?>) (Object) this).getTitle().getString();
+		return isPlayerInventory() ? 75 : this.imageWidth - Minecraft.getInstance().font.width(title) - HORIZONTAL_PADDING - 12;
+	}
+
+	@SuppressWarnings("resource")
+	private static boolean isPlayerInventory() {
+		return Minecraft.getInstance().screen instanceof InventoryScreen;
 	}
 }

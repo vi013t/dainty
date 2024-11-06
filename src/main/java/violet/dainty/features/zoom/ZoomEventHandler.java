@@ -47,6 +47,7 @@ public class ZoomEventHandler {
 		if (zoomData.isZooming()) {
 			event.setNewFovModifier(zoomData.zoomFactor());
 		}
+
 	}
 
 	/**

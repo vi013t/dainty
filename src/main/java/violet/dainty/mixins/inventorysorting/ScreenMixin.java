@@ -10,14 +10,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.PacketDistributor;
 import violet.dainty.features.inventorysorting.SortBy;
 import violet.dainty.features.inventorysorting.SortPacket;
 import violet.dainty.features.inventorysorting.SortPosition;
+import violet.dainty.features.playerspecificloot.neoforge.init.ModBlocks;
 import violet.dainty.registries.DaintyDataAttachments;
 
 @Mixin(AbstractContainerScreen.class)
@@ -37,6 +40,12 @@ public class ScreenMixin {
     @Inject(method = "render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At("RETURN"))
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo callbackInfo) {
 		if ((Object) this instanceof AbstractContainerScreen screen) {
+
+			// Blacklisted screens
+			if (this.isBlacklisted()) return;
+
+			// Blacklisted screens
+			if (screen instanceof CreativeModeInventoryScreen) return;
 
 			// Inventory
 			if (isPlayerInventory()) {
@@ -58,6 +67,10 @@ public class ScreenMixin {
     @SuppressWarnings({ "null", "resource" })
 	@Inject(method = "mouseClicked", at = @At("HEAD"))
     public void mouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> callbackInfo) {
+
+		// Blacklisted screens
+		if (this.isBlacklisted()) return;
+
 		AbstractContainerScreen<?> screen = (AbstractContainerScreen<?>) (Object) this;
 		if (isButtonHovered(screen, mouseX, mouseY)) {
 			Minecraft.getInstance().player.playSound(SoundEvents.UI_BUTTON_CLICK.value());
@@ -129,5 +142,27 @@ public class ScreenMixin {
 	@SuppressWarnings("resource")
 	private static boolean isPlayerInventory() {
 		return Minecraft.getInstance().screen instanceof InventoryScreen;
+	}
+
+	@SuppressWarnings({ "resource", "null" })
+	private boolean isBlacklisted() {
+		if (Minecraft.getInstance().player == null) return false;
+
+		// Lootr doesn't work for now...
+		if (hasPositionData()) {
+			SortPosition sortPosition = Minecraft.getInstance().player.getData(DaintyDataAttachments.SORT_INVENTORY_ATTACHMENT_TYPE);
+			Block block = Minecraft.getInstance().level.getBlockState(sortPosition.position()).getBlock();
+
+			if (block == ModBlocks.CHEST.get()) return true;
+			if (block == ModBlocks.BARREL.get()) return true;
+			if (block == ModBlocks.SHULKER.get()) return true;
+			if (block == ModBlocks.TRAPPED_CHEST.get()) return true;
+		}
+
+		// No creative mode inventory
+		if ((Object) this instanceof CreativeModeInventoryScreen) return true;
+
+		// Otherwise, we're fine (probably...)
+		return false;
 	}
 }

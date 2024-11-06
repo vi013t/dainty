@@ -1,4 +1,10 @@
 {
+	"neoforge:conditions": [
+		{
+			"type": "dainty:config",
+			"value": "enableBagItems"
+		}
+	],
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"DDD",

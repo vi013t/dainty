@@ -55,6 +55,7 @@ public class DaintyConfig {
 	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_COOKED_BERRIES = configValue("enableCookedBerries", true, "Enables smelting sweet berry bushes into cooked berries.");
 	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_OPENING_BLOCKED_CHESTS = configValue("enableOpeningBlockedChests", true, "Enable opening chests that have a solid block on them or a cat sitting on them.");
 	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_CONTAINER_SEARCHING = configValue("enableContainerSearching", true, "Enable searching containers for specific items.");
+	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_BAG_ITEMS = configValue("enableBagItems", true, "Enable the bag items.");
 
 	/**
 	 * The configuration value for the percent drop chance of {@link violet.dainty.registries.DaintyItems#WARDEN_HEART warden hearts} from wardens. 

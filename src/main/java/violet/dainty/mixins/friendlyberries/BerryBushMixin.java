@@ -30,8 +30,9 @@ public class BerryBushMixin {
 	 * @param entity The entity that's in the berry bush
 	 * @param callbackInfo The callback info provided by the mixin library
 	 */
-	@Inject(method = "entityInside", at = @At("HEAD"))
+	@Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo callbackInfo) {
+		callbackInfo.cancel();
         if (entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
 
 			// Slow entity

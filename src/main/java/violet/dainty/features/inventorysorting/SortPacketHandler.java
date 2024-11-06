@@ -3,11 +3,14 @@ package violet.dainty.features.inventorysorting;
 import java.util.Set;
 import java.util.TreeSet;
 
+import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
+import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
+import violet.dainty.Dainty;
 
 public class SortPacketHandler implements IPayloadHandler<SortPacket> {
 
@@ -24,40 +27,48 @@ public class SortPacketHandler implements IPayloadHandler<SortPacket> {
 		else {
 			BlockEntity blockEntity = context.player().level().getBlockEntity(payload.position());
 			if (blockEntity instanceof Container blockContainer) container = blockContainer;
+			if (context.player().containerMenu instanceof ChestMenu chestMenu) {
+				if (chestMenu.getContainer() instanceof CompoundContainer compound) {
+					container = compound;
+				}
+			}
 		}
 		if (container == null) return;
 
 		// Get items
-		Set<ItemStack> items = new TreeSet<>(payload.ordering().comparator());
+		Set<ItemStack> sortedItems = new TreeSet<>(payload.ordering().comparator());
 		for (int slotIndex = startSlotIndex; slotIndex < container.getContainerSize(); slotIndex++) {
 			try { 
 				ItemStack stack = container.getItem(slotIndex); 
 				if (!stack.isEmpty()) {
 					boolean wasAdded = false;
-					for (ItemStack otherStack : items) {
-						if (ItemStack.isSameItemSameComponents(stack, otherStack)) {
-							otherStack.setCount(otherStack.getCount() + stack.getCount());
+					for (ItemStack alreadySortedStack : sortedItems) {
+						if (ItemStack.isSameItemSameComponents(stack, alreadySortedStack)) {
+							alreadySortedStack.setCount(alreadySortedStack.getCount() + stack.getCount());
 							wasAdded = true;
 							break;
 						}
 					}
 
 					if (!wasAdded) {
-						items.add(stack);
+						sortedItems.add(stack);
 					}
 				}
 			}
-			catch (Exception e) {}
+			catch (Exception e) {
+				Dainty.LOGGER.warn("Exception caught while sorting inventory:");
+				e.printStackTrace();
+			}
 		}
 
 		// Empty container
 		for (int slotIndex = startSlotIndex; slotIndex < container.getContainerSize(); slotIndex++) {
 			container.removeItemNoUpdate(slotIndex);
 		}
-		
+
 		// Set items
 		int slot = startSlotIndex;
-		for (var itemStack : items) {
+		for (var itemStack : sortedItems) {
 			int itemsLeft = itemStack.getCount();
 			while (itemsLeft > 0) {
 				int amountToAdd = Math.min(itemsLeft, itemStack.getMaxStackSize());

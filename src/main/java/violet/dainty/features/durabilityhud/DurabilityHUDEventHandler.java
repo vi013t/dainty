@@ -1,10 +1,10 @@
 package violet.dainty.features.durabilityhud;
 
-import net.neoforged.bus.api.Event;
+import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
 
 public class DurabilityHUDEventHandler {
 	
-	public static void showOnHUD(Event event) {
-
+	public static void showArmor(ArmorHurtEvent event) {
+		
 	}
 }
