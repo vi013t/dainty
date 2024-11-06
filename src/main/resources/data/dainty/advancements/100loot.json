@@ -1,0 +1,34 @@
+{
+  "parent": "dainty:50loot",
+  "display": {
+    "icon": {
+      "item": "minecraft:netherite_block"
+    },
+    "title": {
+      "translate": "dainty.advancements.100loot.title"
+    },
+    "description": {
+      "translate": "dainty.advancements.100loot.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "loot_stat": {
+      "trigger": "dainty:score",
+      "conditions": {
+        "score": {
+          "min": 100,
+          "max": 100
+        }
+      }
+    }
+  },
+  "rewards": {
+    "loot": [
+      "dainty:trophy"
+    ]
+  }
+}

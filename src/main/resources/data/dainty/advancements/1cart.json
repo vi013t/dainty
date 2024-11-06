@@ -1,0 +1,29 @@
+{
+  "parent": "dainty:root",
+  "display": {
+    "icon": {
+      "item": "minecraft:chest_minecart"
+    },
+    "title": {
+      "translate": "dainty.advancements.1cart.title"
+    },
+    "description": {
+      "translate": "dainty.advancements.1cart.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "opened_cart": {
+      "trigger": "dainty:cart_opened",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "opened_cart"
+    ]
+  ]
+}

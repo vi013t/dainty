@@ -3,6 +3,7 @@ package violet.dainty.features.wardenheart;
 import com.mojang.datafixers.util.Either;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -33,11 +34,13 @@ public class WardenHeartEventListener {
 	}
 
 	@SubscribeEvent
+	@SuppressWarnings({ "null", "resource" })
 	public static void placeSculkShrieker(BlockEvent.EntityPlaceEvent event) {
 		if (event.getEntity() instanceof Player player) {
 			ItemStack blockStack = player.getMainHandItem();
 			if (blockStack.getOrDefault(DaintyDataComponents.CAN_SUMMON_WARDEN_DATA_COMPONENT, new CanSummonWardenDataComponent(false)).canSummonWarden()) {
 				event.getPlacedBlock().setValue(BlockStateProperties.CAN_SUMMON, true);
+				Minecraft.getInstance().level.getBlockState(event.getPos()).setValue(BlockStateProperties.CAN_SUMMON, true);
 			}
 		}
 	}

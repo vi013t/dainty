@@ -3,6 +3,7 @@ package violet.dainty.registries;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.PatchedDataComponentMap;
@@ -102,6 +103,11 @@ public class DaintyDataComponents {
 		Codec.BOOL.fieldOf("canSummonWarden").forGetter(CanSummonWardenDataComponent::canSummonWarden)
 	).apply(instance, CanSummonWardenDataComponent::new));
 
+	private static final StreamCodec<ByteBuf, CanSummonWardenDataComponent> CAN_SUMMON_WARDEN_STREAM_CODEC = StreamCodec.composite(
+		ByteBufCodecs.BOOL, CanSummonWardenDataComponent::canSummonWarden,
+		CanSummonWardenDataComponent::new
+	);
+
 	/**
 	 * The "can summon warden" data component. This data component is attached to item stacks of 
 	 * {@link net.minecraft.world.level.block.Blocks#SCULK_SHRIEKER sculk shriekers} that have been crafted to indicate 
@@ -114,7 +120,7 @@ public class DaintyDataComponents {
 	 */
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<CanSummonWardenDataComponent>> CAN_SUMMON_WARDEN_DATA_COMPONENT = DATA_COMPONENTS.registerComponentType(
 		"can_summon_warden",
-		builder -> builder.persistent(CAN_SUMMON_WARDEN_DATA_CODEC)
+		builder -> builder.persistent(CAN_SUMMON_WARDEN_DATA_CODEC).networkSynchronized(CAN_SUMMON_WARDEN_STREAM_CODEC)
 	);	
 
 	/**

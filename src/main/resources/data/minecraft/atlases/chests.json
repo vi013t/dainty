@@ -1,0 +1,28 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "dainty:chest"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "dainty:chest_opened"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "dainty:chest_trapped"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "dainty:chest_trapped_opened"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "dainty:old_chest"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "dainty:old_chest_opened"
+    }
+  ]
+}

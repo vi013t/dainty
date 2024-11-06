@@ -120,7 +120,6 @@ public class ScreenMixin {
 	@SuppressWarnings({ "null", "resource" })
 	private static boolean hasPositionData() {
 		if (!Minecraft.getInstance().player.hasData(DaintyDataAttachments.SORT_INVENTORY_ATTACHMENT_TYPE)) {
-			System.out.println("Internal error: Client-side player doesn't have sort inventory position data attached.");
 			return false;
 		}
 

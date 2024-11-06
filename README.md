@@ -18,6 +18,7 @@ For a full feature list, see [the feature spreadsheet](https://airtable.com/invi
 - Block tooltip functionality provided by [Jade](https://github.com/Snownee/Jade/tree/1.21-neoforge) under [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)
 - Gravestones functionality provided by [Gravestone](https://github.com/henkelmax/gravestone/tree/1.21.1)
 - Food info functionality provided by [AppleSkin](https://github.com/squeek502/AppleSkin/tree/1.21-neoforge?tab=License-1-ov-file) under [The Unlicense](https://github.com/squeek502/AppleSkin/blob/1.21-neoforge/LICENSE)
+- Player-specific loot functionality added by [Lootr](https://github.com/LootrMinecraft/Lootr/tree/1.21) under [MIT](https://opensource.org/license/mit)
 
 ## Contributing
 

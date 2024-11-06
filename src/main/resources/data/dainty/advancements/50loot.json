@@ -1,0 +1,29 @@
+{
+  "parent": "dainty:25loot",
+  "display": {
+    "icon": {
+      "item": "minecraft:diamond_block"
+    },
+    "title": {
+      "translate": "dainty.advancements.50loot.title"
+    },
+    "description": {
+      "translate": "dainty.advancements.50loot.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "loot_stat": {
+      "trigger": "dainty:score",
+      "conditions": {
+        "score": {
+          "min": 50,
+          "max": 50
+        }
+      }
+    }
+  }
+}

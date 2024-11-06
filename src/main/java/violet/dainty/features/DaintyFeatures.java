@@ -7,6 +7,7 @@ import violet.dainty.features.carryon.CarryOn;
 import violet.dainty.features.foodinfo.FoodInfo;
 import violet.dainty.features.gravestone.Gravestone;
 import violet.dainty.features.structurecompass.StructureCompass;
+import violet.dainty.features.playerspecificloot.neoforge.Lootr;
 
 /**
  * Registry-style class (similar to those found in {@code violet.dainty.registries}) for registering features.
@@ -27,5 +28,6 @@ public class DaintyFeatures {
 		new StructureCompass(modContainer);
 		new Gravestone(modEventBus);
 		new FoodInfo(modEventBus, modContainer);
+		new Lootr(modContainer, modEventBus); 
 	}
 }

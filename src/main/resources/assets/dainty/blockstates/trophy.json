@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "dainty:block/trophy"
+    },
+    "facing=south": {
+      "model": "dainty:block/trophy",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "dainty:block/trophy",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "dainty:block/trophy",
+      "y": 90
+    }
+  }
+}

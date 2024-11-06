@@ -1,0 +1,29 @@
+{
+  "parent": "dainty:1chest",
+  "display": {
+    "icon": {
+      "item": "minecraft:gold_block"
+    },
+    "title": {
+      "translate": "dainty.advancements.10loot.title"
+    },
+    "description": {
+      "translate": "dainty.advancements.10loot.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "loot_stat": {
+      "trigger": "dainty:score",
+      "conditions": {
+        "score": {
+          "min": 10,
+          "max": 10
+        }
+      }
+    }
+  }
+}

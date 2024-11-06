@@ -1,0 +1,22 @@
+{
+  "parent": "block/block",
+  "loader": "dainty:barrel",
+  "textures": {
+    "particle": "dainty:block/opened_barrel_side"
+  },
+  "unopened": {
+    "parent": "dainty:block/lootr_barrel_unopened"
+  },
+  "opened": {
+    "parent": "dainty:block/lootr_opened_barrel"
+  },
+  "vanilla": {
+    "parent": "minecraft:block/barrel_open"
+  },
+  "old_opened": {
+    "parent": "dainty:block/old_lootr_opened_barrel_open"
+  },
+  "old_unopened": {
+    "parent": "dainty:block/old_lootr_barrel_unopened_open"
+  }
+}

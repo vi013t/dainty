@@ -11,7 +11,11 @@ import violet.dainty.Dainty;
 import violet.dainty.features.wardenpotion.WardenPotionEffect;
 
 /**
- * Class for creating and registering custom potions and effects added by the Dainty mod.
+ * Class for creating and registering custom potions and effects added by the Dainty mod. Potions are split into two objects -
+ * {@link MobEffect "mob effects"}, and {@link Potion "potions"}. Mob effects are the actual effect's themselves, they simply store things like
+ * the name of the effect, what it does when applied, etc. Potions, on the other hand, are a combination of a mob effect, as well as a duration
+ * and amplifier (think "speed" as a mob effect, and "speed II 3:00 potion" as a potion). All potions have both a mob effect and potion itself
+ * that are registered.
  * 
  * <br/><br/>
  * 

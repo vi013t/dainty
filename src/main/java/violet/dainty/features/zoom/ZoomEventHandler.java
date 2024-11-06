@@ -105,6 +105,7 @@ public class ZoomEventHandler {
 
 	/**
 	 * Adjusts the zoom to zoom in our out further when the player scrolls their scroll wheel.
+	 * 
 	 * <br/><br/>
 	 * 
 	 * As with all event listener methods, this will automatically be called by Neoforge when the event is fired, and this shouldn't

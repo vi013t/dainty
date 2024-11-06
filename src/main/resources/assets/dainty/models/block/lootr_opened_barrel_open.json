@@ -1,0 +1,9 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "dainty:block/opened_barrel_top_open",
+    "top": "dainty:block/opened_barrel_top_open",
+    "side": "dainty:block/opened_barrel_side",
+    "bottom": "dainty:block/opened_barrel_bottom"
+  }
+}

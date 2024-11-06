@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "dainty:shulker"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "dainty:shulker_opened"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "dainty:old_shulker"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "dainty:old_shulker_opened"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "dainty:root",
+  "display": {
+    "icon": {
+      "item": "dainty:lootr_chest"
+    },
+    "title": {
+      "translate": "dainty.advancements.1chest.title"
+    },
+    "description": {
+      "translate": "dainty.advancements.1chest.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "opened_chest": {
+      "trigger": "dainty:chest_opened",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "opened_chest"
+    ]
+  ]
+}

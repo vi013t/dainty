@@ -1,0 +1,44 @@
+{
+  "parent": "dainty:1chest",
+  "display": {
+    "icon": {
+      "item": "minecraft:enchanted_golden_apple"
+    },
+    "title": {
+      "translate": "dainty.advancements.social.title"
+    },
+    "description": {
+      "translate": "dainty.advancements.social.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "opened_chest": {
+      "trigger": "dainty:advancement",
+      "conditions": {
+        "advancement": "dainty:1chest"
+      }
+    },
+    "opened_barrel": {
+      "trigger": "dainty:advancement",
+      "conditions": {
+        "advancement": "dainty:1barrel"
+      }
+    },
+    "opened_cart": {
+      "trigger": "dainty:advancement",
+      "conditions": {
+        "advancement": "dainty:1cart"
+      }
+    },
+    "opened_shulker": {
+      "trigger": "dainty:advancement",
+      "conditions": {
+        "advancement": "dainty:1shulker"
+      }
+    }
+  }
+}

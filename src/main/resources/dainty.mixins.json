@@ -12,7 +12,16 @@
 		"blocktooltips.CanItemPerformAbilityAccess",
 		"blocktooltips.EntityAccess",
 		"friendlyberries.BerryBushMixin",
-		"unblockedchests.ChestMixin"
+		"unblockedchests.ChestMixin",
+		"playerspecificloot.MixinBaseContainerBlockEntity",
+		"playerspecificloot.MixinCatSitOnBlockGoal",
+		"playerspecificloot.MixinDimensionDataStorage",
+		"playerspecificloot.MixinEndCityPieces$EndCityPiece",
+		"playerspecificloot.MixinLevelChunk",
+		"playerspecificloot.MixinPoiType",
+		"playerspecificloot.MixinPoiTypes",
+		"playerspecificloot.MixinStructureTemplate",
+		"playerspecificloot.MixinVehicleEntity"
   	],
   	"client": [
 		"carryon.HumanoidModelMixin",
@@ -20,7 +29,8 @@
 		"inventorysorting.ScreenMixin",
 		"blocktooltips.FontMixin",
 		"blocktooltips.SessionSearchTreesMixin",
-		"blocktooltips.StringRenderOutputMixin"
+		"blocktooltips.StringRenderOutputMixin",
+		"containersearching.ContainerMixin"
   	],
   	"server": [
   	],

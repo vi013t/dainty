@@ -1,0 +1,29 @@
+{
+  "parent": "dainty:root",
+  "display": {
+    "icon": {
+      "item": "dainty:lootr_barrel"
+    },
+    "title": {
+      "translate": "dainty.advancements.1barrel.title"
+    },
+    "description": {
+      "translate": "dainty.advancements.1barrel.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "opened_barrel": {
+      "trigger": "dainty:barrel_opened",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "opened_barrel"
+    ]
+  ]
+}

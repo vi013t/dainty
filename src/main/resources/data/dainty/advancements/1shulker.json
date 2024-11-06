@@ -1,0 +1,29 @@
+{
+  "parent": "dainty:root",
+  "display": {
+    "icon": {
+      "item": "dainty:lootr_shulker"
+    },
+    "title": {
+      "translate": "dainty.advancements.1shulker.title"
+    },
+    "description": {
+      "translate": "dainty.advancements.1shulker.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "opened_shulker": {
+      "trigger": "dainty:shulker_opened",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "opened_shulker"
+    ]
+  ]
+}
