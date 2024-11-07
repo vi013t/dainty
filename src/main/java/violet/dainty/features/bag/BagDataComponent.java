@@ -102,7 +102,7 @@ public record BagDataComponent(int capacity, int types, ItemStack[] items) {
 	 * item is already in the bag or the bag has a spare type slot. Also, the item stack cannot have any data components
 	 * attached to it. This prevents things like other bags, items with NBT, etc. from being added.
 	 * 
-	 * @param item The item to check if it can be added to this bag
+	 * @param helmet The item to check if it can be added to this bag
 	 * 
 	 * @return Whether the given item can be added to this bag
 	 */

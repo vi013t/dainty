@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.core.HolderLookup;
@@ -48,7 +50,7 @@ public class AdvancementData extends SavedData {
   }
 
   @Override
-  public CompoundTag save(CompoundTag pCompound, HolderLookup.Provider provider) {
+  public CompoundTag save(@Nonnull CompoundTag pCompound, @Nonnull HolderLookup.Provider provider) {
     ListTag result = new ListTag();
     for (UUIDPair pair : this.data) {
       result.add(pair.serializeNBT(provider));
@@ -58,7 +60,7 @@ public class AdvancementData extends SavedData {
   }
 
   @Override
-  public void save(File pFile, HolderLookup.Provider provider) {
+  public void save(@Nonnull File pFile, @Nonnull HolderLookup.Provider provider) {
     if (isDirty()) {
       pFile.getParentFile().mkdirs();
     }

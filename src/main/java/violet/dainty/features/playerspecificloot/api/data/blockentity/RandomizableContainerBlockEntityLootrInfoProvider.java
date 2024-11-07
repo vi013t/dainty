@@ -1,5 +1,11 @@
 package violet.dainty.features.playerspecificloot.api.data.blockentity;
 
+import java.util.Set;
+import java.util.UUID;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -15,11 +21,6 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import violet.dainty.features.playerspecificloot.api.LootrAPI;
 import violet.dainty.features.playerspecificloot.api.data.ILootrSavedData;
 import violet.dainty.features.playerspecificloot.api.data.LootrBlockType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
-import java.util.UUID;
 
 public record RandomizableContainerBlockEntityLootrInfoProvider(
     @NotNull RandomizableContainerBlockEntity blockEntity, UUID id,
@@ -74,7 +75,8 @@ public record RandomizableContainerBlockEntityLootrInfoProvider(
     return blockEntity.getDisplayName();
   }
 
-  @Override
+  @SuppressWarnings("null")
+@Override
   public @NotNull ResourceKey<Level> getInfoDimension() {
     return blockEntity.getLevel().dimension();
   }

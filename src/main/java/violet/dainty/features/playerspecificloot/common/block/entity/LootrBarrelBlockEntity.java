@@ -1,6 +1,15 @@
 package violet.dainty.features.playerspecificloot.common.block.entity;
 
+import java.util.Set;
+import java.util.UUID;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.jetbrains.annotations.NotNull;
+
 import com.google.common.collect.Sets;
+
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -38,11 +47,6 @@ import violet.dainty.features.playerspecificloot.api.registry.LootrRegistry;
 import violet.dainty.features.playerspecificloot.neoforge.block.entity.ILootrNeoForgeBlockEntity;
 import violet.dainty.features.playerspecificloot.neoforge.init.ModBlockProperties;
 import violet.dainty.features.playerspecificloot.neoforge.network.client.ClientHandlers;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
-import java.util.UUID;
 
 public class LootrBarrelBlockEntity extends RandomizableContainerBlockEntity implements ILootrNeoForgeBlockEntity {
   private final NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
@@ -50,23 +54,23 @@ public class LootrBarrelBlockEntity extends RandomizableContainerBlockEntity imp
   protected UUID infoId = null;
   private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
     @Override
-    protected void onOpen(Level level, BlockPos pos, BlockState state) {
+    protected void onOpen(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state) {
       LootrBarrelBlockEntity.this.playSound(state, SoundEvents.BARREL_OPEN);
       LootrBarrelBlockEntity.this.updateBlockState(state, true);
     }
 
     @Override
-    protected void onClose(Level level, BlockPos pos, BlockState state) {
+    protected void onClose(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state) {
       LootrBarrelBlockEntity.this.playSound(state, SoundEvents.BARREL_CLOSE);
       LootrBarrelBlockEntity.this.updateBlockState(state, false);
     }
 
     @Override
-    protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int p_155069_, int p_155070_) {
+    protected void openerCountChanged(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, int p_155069_, int p_155070_) {
     }
 
     @Override
-    protected boolean isOwnContainer(Player player) {
+    protected boolean isOwnContainer(@Nonnull Player player) {
       if (player.containerMenu instanceof ChestMenu chestMenu && chestMenu.getContainer() instanceof ILootrInventory data) {
         return data.getInfo().getInfoUUID().equals(LootrBarrelBlockEntity.this.getInfoUUID());
       }
@@ -119,7 +123,7 @@ public class LootrBarrelBlockEntity extends RandomizableContainerBlockEntity imp
   }
 
   @Override
-  protected void setItems(NonNullList<ItemStack> pItems) {
+  protected void setItems(@Nonnull NonNullList<ItemStack> pItems) {
   }
 
   @Override
@@ -128,7 +132,7 @@ public class LootrBarrelBlockEntity extends RandomizableContainerBlockEntity imp
 
   @SuppressWarnings("Duplicates")
   @Override
-  public void loadAdditional(CompoundTag compound, HolderLookup.Provider provider) {
+  public void loadAdditional(@Nonnull CompoundTag compound, @Nonnull HolderLookup.Provider provider) {
     super.loadAdditional(compound, provider);
     this.tryLoadLootTable(compound);
     if (compound.hasUUID("LootrId")) {
@@ -147,14 +151,14 @@ public class LootrBarrelBlockEntity extends RandomizableContainerBlockEntity imp
   }
 
   @Override
-  public void saveToItem(ItemStack itemstack, HolderLookup.Provider provider) {
+  public void saveToItem(@Nonnull ItemStack itemStack, @Nonnull HolderLookup.Provider provider) {
     savingToItem = true;
-    super.saveToItem(itemstack, provider);
+    super.saveToItem(itemStack, provider);
     savingToItem = false;
   }
 
   @Override
-  protected void saveAdditional(CompoundTag compound, HolderLookup.Provider provider) {
+  protected void saveAdditional(@Nonnull CompoundTag compound, @Nonnull HolderLookup.Provider provider) {
     super.saveAdditional(compound, provider);
     this.trySaveLootTable(compound);
     if (!LootrAPI.shouldDiscard() && !savingToItem) {
@@ -168,7 +172,7 @@ public class LootrBarrelBlockEntity extends RandomizableContainerBlockEntity imp
   }
 
   @Override
-  protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
+  protected AbstractContainerMenu createMenu(int pContainerId, @Nonnull Inventory pInventory) {
     return null;
   }
 
@@ -177,31 +181,36 @@ public class LootrBarrelBlockEntity extends RandomizableContainerBlockEntity imp
     return 27;
   }
 
-  @Override
-  public void startOpen(Player pPlayer) {
+  @SuppressWarnings("null")
+@Override
+  public void startOpen(@Nonnull Player pPlayer) {
     if (!this.remove && !pPlayer.isSpectator()) {
       this.openersCounter.incrementOpeners(pPlayer, this.getLevel(), this.getBlockPos(), this.getBlockState());
     }
   }
 
-  @Override
+  @SuppressWarnings("null")
+@Override
   public void stopOpen(Player pPlayer) {
     if (!this.remove && !pPlayer.isSpectator()) {
       this.openersCounter.decrementOpeners(pPlayer, this.getLevel(), this.getBlockPos(), this.getBlockState());
     }
   }
 
-  public void recheckOpen() {
+  @SuppressWarnings("null")
+public void recheckOpen() {
     if (!this.remove) {
       this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());
     }
   }
 
-  protected void updateBlockState(BlockState pState, boolean pOpen) {
+  @SuppressWarnings("null")
+protected void updateBlockState(BlockState pState, boolean pOpen) {
     this.level.setBlock(this.getBlockPos(), pState.setValue(BarrelBlock.OPEN, pOpen), 3);
   }
 
-  protected void playSound(BlockState pState, SoundEvent pSound) {
+  @SuppressWarnings("null")
+protected void playSound(BlockState pState, SoundEvent pSound) {
     Vec3i vec3i = pState.getValue(BarrelBlock.FACING).getNormal();
     double d0 = (double) this.worldPosition.getX() + 0.5D + (double) vec3i.getX() / 2.0D;
     double d1 = (double) this.worldPosition.getY() + 0.5D + (double) vec3i.getY() / 2.0D;
@@ -232,7 +241,7 @@ public class LootrBarrelBlockEntity extends RandomizableContainerBlockEntity imp
 
   @Override
   @NotNull
-  public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+  public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider provider) {
     CompoundTag result = super.getUpdateTag(provider);
     saveAdditional(result, provider);
     Set<UUID> currentOpeners = getVisualOpeners();
@@ -254,9 +263,8 @@ public class LootrBarrelBlockEntity extends RandomizableContainerBlockEntity imp
     return ClientboundBlockEntityDataPacket.create(this, BlockEntity::getUpdateTag);
   }
 
-  // TODO:
   @Override
-  public void onDataPacket(@NotNull Connection net, @NotNull ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider provider) {
+  public void onDataPacket(@Nonnull Connection net, @Nonnull ClientboundBlockEntityDataPacket pkt, @Nonnull HolderLookup.Provider provider) {
     super.onDataPacket(net, pkt, provider);
     requestModelDataUpdate();
     ClientHandlers.refreshModel(getBlockPos());
@@ -277,7 +285,8 @@ public class LootrBarrelBlockEntity extends RandomizableContainerBlockEntity imp
     return getDisplayName();
   }
 
-  @Override
+  @SuppressWarnings("null")
+@Override
   public @NotNull ResourceKey<Level> getInfoDimension() {
     return getLevel().dimension();
   }

@@ -1,5 +1,7 @@
 package violet.dainty.features.playerspecificloot.common.block;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -30,14 +32,14 @@ import violet.dainty.features.playerspecificloot.api.data.blockentity.ILootrBloc
 import violet.dainty.features.playerspecificloot.api.registry.LootrRegistry;
 import violet.dainty.features.playerspecificloot.common.block.entity.LootrChestBlockEntity;
 import violet.dainty.features.playerspecificloot.common.block.entity.LootrInventoryBlockEntity;
-import org.jetbrains.annotations.Nullable;
 
 public class LootrInventoryBlock extends ChestBlock {
   public LootrInventoryBlock(Properties properties) {
     super(properties, LootrRegistry::getInventoryBlockEntity);
   }
 
-  @Override
+  @SuppressWarnings("deprecation")
+@Override
   public float getExplosionResistance() {
     return LootrAPI.getExplosionResistance(this, super.getExplosionResistance());
   }

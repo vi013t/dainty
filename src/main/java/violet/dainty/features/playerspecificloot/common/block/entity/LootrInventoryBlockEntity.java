@@ -25,7 +25,7 @@ public class LootrInventoryBlockEntity extends LootrChestBlockEntity {
   }
 
   @Override
-  public void loadAdditional(CompoundTag compound, HolderLookup.Provider provider) {
+  public void loadAdditional(@Nonnull CompoundTag compound, @Nonnull HolderLookup.Provider provider) {
     super.loadAdditional(compound, provider);
     if (compound.contains("customInventory") && compound.contains("customSize")) {
       int size = compound.getInt("customSize");
@@ -35,7 +35,7 @@ public class LootrInventoryBlockEntity extends LootrChestBlockEntity {
   }
 
   @Override
-  protected void saveAdditional(CompoundTag compound, HolderLookup.Provider provider) {
+  protected void saveAdditional(@Nonnull CompoundTag compound, @Nonnull HolderLookup.Provider provider) {
     super.saveAdditional(compound, provider);
     if (this.customInventory != null) {
       compound.putInt("customSize", this.customInventory.size());

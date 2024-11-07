@@ -1,5 +1,9 @@
 package violet.dainty.features.playerspecificloot.common.block;
 
+import java.util.List;
+
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -32,9 +36,6 @@ import violet.dainty.features.playerspecificloot.api.LootrAPI;
 import violet.dainty.features.playerspecificloot.api.data.ILootrInfoProvider;
 import violet.dainty.features.playerspecificloot.api.data.blockentity.ILootrBlockEntity;
 import violet.dainty.features.playerspecificloot.common.block.entity.LootrShulkerBlockEntity;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class LootrShulkerBlock extends ShulkerBoxBlock {
   public LootrShulkerBlock(Properties pProperties) {
@@ -51,7 +52,8 @@ public class LootrShulkerBlock extends ShulkerBoxBlock {
     }
   }
 
-  @Override
+  @SuppressWarnings("deprecation")
+@Override
   public float getExplosionResistance() {
     return LootrAPI.getExplosionResistance(this, super.getExplosionResistance());
   }

@@ -40,7 +40,8 @@ public interface ILootrBlockEntity extends ILootrInfoProvider {
     }
   }
 
-  default void updatePacketViaForce(BlockEntity entity) {
+  @SuppressWarnings("resource")
+default void updatePacketViaForce(BlockEntity entity) {
     if (entity.getLevel() instanceof ServerLevel level) {
       Packet<?> packet = entity.getUpdatePacket();
       if (packet != null) {

@@ -1,5 +1,9 @@
 package violet.dainty.features.playerspecificloot.common.block;
 
+import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -28,14 +32,14 @@ import violet.dainty.features.playerspecificloot.api.data.ILootrInfoProvider;
 import violet.dainty.features.playerspecificloot.api.data.blockentity.ILootrBlockEntity;
 import violet.dainty.features.playerspecificloot.api.registry.LootrRegistry;
 import violet.dainty.features.playerspecificloot.common.block.entity.LootrChestBlockEntity;
-import org.jetbrains.annotations.Nullable;
 
 public class LootrChestBlock extends ChestBlock {
   public LootrChestBlock(Properties properties) {
     super(properties, LootrRegistry::getChestBlockEntity);
   }
 
-  @Override
+  @SuppressWarnings("deprecation")
+@Override
   public float getExplosionResistance() {
     return LootrAPI.getExplosionResistance(this, super.getExplosionResistance());
   }
@@ -73,7 +77,7 @@ public class LootrChestBlock extends ChestBlock {
   }
 
   @Override
-  public BlockState getStateForPlacement(BlockPlaceContext context) {
+  public BlockState getStateForPlacement(@Nonnull BlockPlaceContext context) {
     Direction direction = context.getHorizontalDirection().getOpposite();
     FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
     return this.defaultBlockState().setValue(FACING, direction).setValue(TYPE, ChestType.SINGLE).setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);

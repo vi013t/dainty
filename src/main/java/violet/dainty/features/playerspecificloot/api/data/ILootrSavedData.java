@@ -24,6 +24,7 @@ import violet.dainty.features.playerspecificloot.api.data.inventory.ILootrInvent
 // The info providers are always *instances* of something (even if it
 // is a custom class), whereas the SavedData never has an associated
 // level, block entity, etc.
+@SuppressWarnings("unused")
 public interface ILootrSavedData extends IRedirect<ILootrInfo>, ILootrInfo, IOpeners, IMarkChanged {
 
   boolean shouldUpdate ();

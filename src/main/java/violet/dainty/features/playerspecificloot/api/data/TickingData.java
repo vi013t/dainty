@@ -1,5 +1,10 @@
 package violet.dainty.features.playerspecificloot.api.data;
 
+import java.io.File;
+import java.util.UUID;
+
+import javax.annotation.Nonnull;
+
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.HolderLookup;
@@ -7,9 +12,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.level.saveddata.SavedData;
-
-import java.io.File;
-import java.util.UUID;
 
 public class TickingData extends SavedData {
   public static final SavedData.Factory<TickingData> FACTORY = new Factory<>(TickingData::new, TickingData::load);
@@ -78,7 +80,7 @@ public class TickingData extends SavedData {
   }
 
   @Override
-  public CompoundTag save(CompoundTag pCompound, HolderLookup.Provider provider) {
+  public CompoundTag save(@Nonnull CompoundTag pCompound, @Nonnull HolderLookup.Provider provider) {
     ListTag decayList = new ListTag();
     for (Object2IntMap.Entry<UUID> entry : tickMap.object2IntEntrySet()) {
       CompoundTag thisTag = new CompoundTag();
@@ -91,7 +93,7 @@ public class TickingData extends SavedData {
   }
 
   @Override
-  public void save(File pFile, HolderLookup.Provider provider) {
+  public void save(@Nonnull File pFile, @Nonnull HolderLookup.Provider provider) {
     if (isDirty()) {
       pFile.getParentFile().mkdirs();
     }

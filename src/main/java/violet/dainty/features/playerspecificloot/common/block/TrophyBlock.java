@@ -33,7 +33,6 @@ public class TrophyBlock extends Block {
   }
 
   @Override
-  @SuppressWarnings("deprecation")
   public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
     Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
     if (facing == Direction.EAST || facing == Direction.WEST) {
@@ -48,7 +47,8 @@ public class TrophyBlock extends Block {
     return p_60530_.setValue(HorizontalDirectionalBlock.FACING, p_60531_.rotate(p_60530_.getValue(HorizontalDirectionalBlock.FACING)));
   }
 
-  @Override
+  @SuppressWarnings("deprecation")
+@Override
   public BlockState mirror(BlockState p_60528_, Mirror p_60529_) {
     return p_60528_.rotate(p_60529_.getRotation(p_60528_.getValue(HorizontalDirectionalBlock.FACING)));
   }
