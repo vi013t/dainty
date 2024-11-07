@@ -58,6 +58,13 @@ public class DaintyConfig {
 	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_BAG_ITEMS = configValue("enableBagItems", true, "Enable the bag items.");
 	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_BIOME_COMPASS = configValue("enableBiomeCompass", true, "Enable the biome compass item.");
 	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_STRUCTURE_COMPASS = configValue("enableStructureCompass", true, "Enable the structure compass item.");
+	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_ARMOR_ON_HUD_WHEN_DAMAGED = configValue("enableArmorOnHudWhenDamaged", true, "Enable showing armor durability on the HUD when it's damaged.");
+	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_TOOL_ON_HUD_WHEN_DAMAGED = configValue("enableToolOnHudWhenDamaged", true, "Enable showing tool durability on the HUD when it's damaged.");
+	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_INVENTORY_SORT_BUTTON = configValue("enableInventorySortButton", true, "Enable the sort button for inventories and containers.");
+	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_INVENTORY_SEARCHING = configValue("enableInventorySearching", true, "Enable searching inventories and containers.");
+	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_UNSTRIPPING_LOGS = configValue("enableUnstrippingLogs", true, "Enable right-clicking on stripped log with an axe to un-strip it.");
+	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_UNTILLING_FARMLAND = configValue("enableUntillingFarmland", true, "Enable right-clicking on farmland with a hoe to un-till it.");
+	public static final ModConfigSpec.ConfigValue<Boolean> ENABLE_UNPATHING_DIRT = configValue("enableUnpathingDirt", true, "Enable right-clicking on grass paths with a shovel to un-path it.");
 
 	/**
 	 * The configuration value for the percent drop chance of {@link violet.dainty.registries.DaintyItems#WARDEN_HEART warden hearts} from wardens. 

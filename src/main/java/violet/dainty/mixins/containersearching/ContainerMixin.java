@@ -44,6 +44,8 @@ public class ContainerMixin {
     @SuppressWarnings("resource")
 	@Inject(method = "render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At("RETURN"))
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo callbackInfo) {
+		if (!DaintyConfig.ENABLE_INVENTORY_SEARCHING.get()) return;
+
 		if ((Object) this instanceof AbstractContainerScreen screen && DaintyConfig.ENABLE_CONTAINER_SEARCHING.get()) {
 
 			// Blacklisted screens

@@ -22,6 +22,7 @@ import violet.dainty.features.inventorysorting.SortPacket;
 import violet.dainty.features.inventorysorting.SortPosition;
 import violet.dainty.features.playerspecificloot.neoforge.init.ModBlocks;
 import violet.dainty.registries.DaintyDataAttachments;
+import violet.dainty.config.DaintyConfig;
 
 @Mixin(AbstractContainerScreen.class)
 public class ScreenMixin {
@@ -39,6 +40,7 @@ public class ScreenMixin {
 	@SuppressWarnings({ "null", "resource" })
     @Inject(method = "render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At("RETURN"))
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo callbackInfo) {
+		if (!DaintyConfig.ENABLE_INVENTORY_SORT_BUTTON.get()) return; 
 		if ((Object) this instanceof AbstractContainerScreen screen) {
 
 			// Blacklisted screens

@@ -2,15 +2,18 @@ package violet.dainty.features.blockreverting;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public interface ConversionTool<T extends Item> {
-	public abstract Map<BlockState, BlockState> getReverseConversions();	
+	public abstract Map<BlockState, ImmutablePair<BlockState, ModConfigSpec.ConfigValue<Boolean>>> getReverseConversions();	
 	public abstract Class<T> getToolClass();
 	public abstract SoundEvent getConversionSound();
 

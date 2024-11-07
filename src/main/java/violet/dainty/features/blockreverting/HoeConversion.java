@@ -2,6 +2,8 @@ package violet.dainty.features.blockreverting;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -12,15 +14,17 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import violet.dainty.config.DaintyConfig;
 
 public class HoeConversion implements ConversionTool<HoeItem> {
 	
-	private static final Map<BlockState, BlockState> CONVERSIONS = Map.ofEntries(
-		Map.entry(Blocks.FARMLAND.defaultBlockState(), Blocks.DIRT.defaultBlockState())
+	private static final Map<BlockState, ImmutablePair<BlockState, ModConfigSpec.ConfigValue<Boolean>>> CONVERSIONS = Map.ofEntries(
+		Map.entry(Blocks.FARMLAND.defaultBlockState(), ImmutablePair.of(Blocks.DIRT.defaultBlockState(), DaintyConfig.ENABLE_UNTILLING_FARMLAND))
 	);
 
 	@Override
-	public Map<BlockState, BlockState> getReverseConversions() {
+	public Map<BlockState, ImmutablePair<BlockState, ModConfigSpec.ConfigValue<Boolean>>> getReverseConversions() {
 		return CONVERSIONS;
 	}
 

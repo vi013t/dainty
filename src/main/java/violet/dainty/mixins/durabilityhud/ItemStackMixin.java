@@ -13,6 +13,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import violet.dainty.config.DaintyConfig;
 import violet.dainty.features.durabilityhud.DurabilityHudOverlay;
 
 @Mixin(ItemStack.class)
@@ -21,6 +22,8 @@ public class ItemStackMixin {
 	@SuppressWarnings({ "null", "resource" })
 	@Inject(method = "hurtAndBreak(ILnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)V", at = @At("RETURN"))
 	public void hurtAndBreak(int damage, ServerLevel level, LivingEntity entity, Consumer<Item> itemConsumer, CallbackInfo CallbackInfo) {
+		if (!DaintyConfig.ENABLE_TOOL_ON_HUD_WHEN_DAMAGED.get()) return;
+
 		if ((Object) this instanceof ItemStack stack && Minecraft.getInstance().player != null) {
 			if (Minecraft.getInstance().player.getItemInHand(InteractionHand.MAIN_HAND).getItem().equals(stack.getItem()) || Minecraft.getInstance().player.getItemInHand(InteractionHand.OFF_HAND).getItem().equals(stack.getItem())) {
 				if (!DurabilityHudOverlay.containsItem(stack.getItem())) {

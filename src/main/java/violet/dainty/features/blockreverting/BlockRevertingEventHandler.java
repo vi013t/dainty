@@ -24,8 +24,17 @@ public class BlockRevertingEventHandler {
 
 		for (ConversionTool<?> conversionTool : CONVERSION_TOOLS) {
 			if (conversionTool.getToolClass().isInstance(event.getHeldItemStack().getItem())) {
-				BlockState convertTo = conversionTool.getReverseConversions().get(event.getState());
+				var convertData = conversionTool.getReverseConversions().get(event.getState());
+				BlockState convertTo = convertData.getLeft();
+
+				// Un-conversion mapping exists
 				if (convertTo != null) {
+
+					// If it's disabled in the config, exit
+					boolean isEnabledInConfig = convertData.getRight().get();
+					if (!isEnabledInConfig) return;
+
+					// Otherwise, perform conversion
 					if (!event.getLevel().isClientSide()) event.getLevel().setBlock(event.getPos(), convertTo, 1 | 2);
 					conversionTool.performExtraConversionSteps((Level) event.getLevel(), event.getPlayer(), event.getState(), event.getPos());
 					event.getPlayer().playSound(conversionTool.getConversionSound());

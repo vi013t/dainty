@@ -1,12 +1,17 @@
 package violet.dainty.features.blockreverting;
 
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import violet.dainty.config.DaintyConfig;
 
 public class AxeConversion implements ConversionTool<AxeItem> {
 
@@ -35,8 +40,8 @@ public class AxeConversion implements ConversionTool<AxeItem> {
 	);
 
 	@Override
-	public Map<BlockState, BlockState> getReverseConversions() {
-		return CONVERSIONS;
+	public Map<BlockState, ImmutablePair<BlockState, ModConfigSpec.ConfigValue<Boolean>>> getReverseConversions() {
+		return CONVERSIONS.entrySet().stream().collect(Collectors.<Map.Entry<BlockState, BlockState>, BlockState, ImmutablePair<BlockState, ModConfigSpec.ConfigValue<Boolean>>>toMap(Map.Entry::getKey, entry -> ImmutablePair.of(entry.getValue(), DaintyConfig.ENABLE_UNSTRIPPING_LOGS)));
 	}
 
 	@Override
