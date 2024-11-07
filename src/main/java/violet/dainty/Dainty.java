@@ -3,6 +3,7 @@ package violet.dainty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -59,9 +60,9 @@ public class Dainty {
 	 * @param modEventBus the event bus passed by Neoforge when constructing the mod
 	 * @param modContainer the mod container passed by Neoforge when constructing the mod
 	 */
-    public Dainty(final IEventBus modEventBus, final ModContainer modContainer) {
+    public Dainty(final IEventBus modEventBus, final ModContainer modContainer, final Dist dist) {
 		DaintyConfig.register(modEventBus, modContainer);
-		DaintyFeatures.register(modEventBus, modContainer);
+		DaintyFeatures.register(modEventBus, modContainer, dist);
 		DaintyDataComponents.register(modEventBus);
 		DaintyDataAttachments.register(modEventBus);
 		DaintyRecipes.register(modEventBus);

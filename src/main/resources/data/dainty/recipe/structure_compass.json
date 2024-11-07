@@ -1,4 +1,10 @@
 {
+	"neoforge:conditions": [
+		{
+			"type": "dainty:config",
+			"value": "enableStructureCompass"
+		}
+	],
 	"type": "crafting_shaped",
 	"group": "tools",
 	"pattern": [

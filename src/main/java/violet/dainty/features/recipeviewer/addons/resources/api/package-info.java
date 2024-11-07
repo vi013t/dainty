@@ -1,0 +1,2 @@
+//@API(owner = "violet.dainty.features.recipeviewer.addons.resources.common", apiVersion = "@VERSION@", provides = "violet.dainty.features.recipeviewer.addons.resources.common|API")
+package violet.dainty.features.recipeviewer.addons.resources.api;
